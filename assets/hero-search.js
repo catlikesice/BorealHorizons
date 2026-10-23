@@ -3,10 +3,12 @@
  * Persists booking dates and guests from the homepage search so hotel pages
  * can price the stay. Destination suggestions come from GET /api/search/destinations
  * when the API is available, including places that have no HTML page.
- * Accommodation is the default. Choosing Tours asks for tour names instead
- * and always continues to search.html?what=tours.
+ * Accommodation is the default. Choosing Tours asks for a tour name, a country,
+ * and a start date instead of check-in and check-out, then continues to
+ * search.html?what=tours.
  * A match with a page opens that page. A place with no page continues to
- * search.html. The form still posts q, checkIn, checkOut, adults, and children.
+ * search.html. Accommodation posts q, checkIn, checkOut, adults, and children.
+ * Tours post q, country, startDate, adults, and children.
  */
 (function () {
   'use strict';
@@ -175,7 +177,11 @@
     var mode = kind === 'tours' ? 'tours' : 'accommodation';
     if (mode === 'tours') {
       datalist.innerHTML = '';
-      fetch('/api/search/destinations?what=tours', { headers: { Accept: 'application/json' } })
+      var countrySelect = document.getElementById('hero-search-country');
+      var countryQuery = countrySelect && countrySelect.value
+        ? '&country=' + encodeURIComponent(countrySelect.value)
+        : '';
+      fetch('/api/search/destinations?what=tours' + countryQuery, { headers: { Accept: 'application/json' } })
         .then(function (res) {
           if (!res.ok) {
             throw new Error('Tour list failed');
@@ -365,27 +371,60 @@
     }
   }
 
+  function setSearchField(field, visible) {
+    if (!field) {
+      return;
+    }
+    field.hidden = !visible;
+    Array.prototype.forEach.call(field.querySelectorAll('input, select'), function (control) {
+      control.disabled = !visible;
+    });
+  }
+
   function init() {
     var form = document.getElementById('hero-search-form');
     var destination = document.getElementById('hero-search-destination');
+    var countryField = document.getElementById('hero-search-country-field');
+    var countrySelect = document.getElementById('hero-search-country');
+    var checkInField = document.getElementById('hero-search-checkin-field');
+    var checkOutField = document.getElementById('hero-search-checkout-field');
+    var startField = document.getElementById('hero-search-start-field');
     var checkIn = document.getElementById('hero-search-checkin');
     var checkOut = document.getElementById('hero-search-checkout');
+    var startInput = document.getElementById('hero-search-start');
     var checkInPicker = document.getElementById('hero-search-checkin-picker');
     var checkOutPicker = document.getElementById('hero-search-checkout-picker');
+    var startPicker = document.getElementById('hero-search-start-picker');
     var checkInValue = document.getElementById('hero-search-checkin-value');
     var checkOutValue = document.getElementById('hero-search-checkout-value');
+    var startValue = document.getElementById('hero-search-start-value');
     var adultsInput = document.getElementById('hero-search-adults');
     var childrenInput = document.getElementById('hero-search-children');
     var datalist = document.getElementById('hero-search-destinations');
 
-    if (!form || !destination || !checkIn || !checkOut || !adultsInput || !childrenInput) {
+    if (!form || !destination || !checkIn || !checkOut || !startInput || !countrySelect || !adultsInput || !childrenInput) {
       return;
     }
 
     function applySearchKind(kind) {
-      destination.placeholder = kind === 'tours' ? TOUR_PLACEHOLDER : ACCOMMODATION_PLACEHOLDER;
+      var tours = kind === 'tours';
+      form.classList.toggle('hero-search--tours', tours);
+      destination.placeholder = tours ? TOUR_PLACEHOLDER : ACCOMMODATION_PLACEHOLDER;
+      setSearchField(countryField, tours);
+      setSearchField(startField, tours);
+      setSearchField(checkInField, !tours);
+      setSearchField(checkOutField, !tours);
       fillDestinationList(datalist, kind);
       setStatus('');
+    }
+
+    var storedDates = readStoredBooking();
+    if (storedDates && storedDates.tourCountry) {
+      Array.prototype.forEach.call(countrySelect.options, function (option) {
+        if (option.value === storedDates.tourCountry) {
+          countrySelect.value = storedDates.tourCountry;
+        }
+      });
     }
 
     applySearchKind(currentKind());
@@ -397,6 +436,13 @@
       });
     });
 
+    countrySelect.addEventListener('change', function () {
+      if (currentKind() === 'tours') {
+        fillDestinationList(datalist, 'tours');
+      }
+      setStatus('');
+    });
+
     var minDate = todayISO();
     if (checkInPicker) {
       checkInPicker.min = minDate;
@@ -404,14 +450,19 @@
     if (checkOutPicker) {
       checkOutPicker.min = minDate;
     }
+    if (startPicker) {
+      startPicker.min = minDate;
+    }
 
-    var storedDates = readStoredBooking();
     if (storedDates) {
       if (storedDates.checkInDate) {
         writeDateField(checkIn, checkInPicker, storedDates.checkInDate);
       }
       if (storedDates.checkOutDate) {
         writeDateField(checkOut, checkOutPicker, storedDates.checkOutDate);
+      }
+      if (storedDates.startDate) {
+        writeDateField(startInput, startPicker, storedDates.startDate);
       }
     }
 
@@ -431,6 +482,7 @@
 
     bindDateField(checkIn, checkInPicker, refreshCheckoutMin);
     bindDateField(checkOut, checkOutPicker);
+    bindDateField(startInput, startPicker);
     refreshCheckoutMin();
 
     adultsInput.addEventListener('input', function () {
@@ -442,13 +494,13 @@
 
     form.addEventListener('submit', function (event) {
       var query = destination.value.trim();
-      var checkInDate = toISODate(checkIn.value);
-      var checkOutDate = toISODate(checkOut.value);
+      var kind = currentKind();
+      var checkInDate = kind === 'tours' ? '' : toISODate(checkIn.value);
+      var checkOutDate = kind === 'tours' ? '' : toISODate(checkOut.value);
+      var startDate = kind === 'tours' ? toISODate(startInput.value) : '';
       var adults = parseGuestCount(adultsInput.value, MIN_ADULTS, MAX_ADULTS, NaN);
       var children = parseGuestCount(childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
-      var nights;
-
-      var kind = currentKind();
+      var nights = null;
 
       if (!query) {
         event.preventDefault();
@@ -457,33 +509,56 @@
         return;
       }
 
-      if (!checkIn.value.trim() || !checkOut.value.trim()) {
-        event.preventDefault();
-        setStatus('Please choose check-in and check-out dates.');
-        (checkIn.value.trim() ? checkOut : checkIn).focus();
-        return;
-      }
+      if (kind === 'tours') {
+        if (!startInput.value.trim()) {
+          event.preventDefault();
+          setStatus('Please choose a start date.');
+          startInput.focus();
+          return;
+        }
 
-      if (!checkInDate || !checkOutDate) {
-        event.preventDefault();
-        setStatus('Enter dates as dd/mm/yyyy.');
-        (checkInDate ? checkOut : checkIn).focus();
-        return;
-      }
+        if (!startDate) {
+          event.preventDefault();
+          setStatus('Enter the start date as dd/mm/yyyy.');
+          startInput.focus();
+          return;
+        }
 
-      if (checkInDate < minDate) {
-        event.preventDefault();
-        setStatus('Check-in cannot be in the past.');
-        checkIn.focus();
-        return;
-      }
+        if (startDate < minDate) {
+          event.preventDefault();
+          setStatus('Start date cannot be in the past.');
+          startInput.focus();
+          return;
+        }
+      } else {
+        if (!checkIn.value.trim() || !checkOut.value.trim()) {
+          event.preventDefault();
+          setStatus('Please choose check-in and check-out dates.');
+          (checkIn.value.trim() ? checkOut : checkIn).focus();
+          return;
+        }
 
-      nights = calculateNights(checkInDate, checkOutDate);
-      if (!nights) {
-        event.preventDefault();
-        setStatus('Check-out must be after check-in.');
-        checkOut.focus();
-        return;
+        if (!checkInDate || !checkOutDate) {
+          event.preventDefault();
+          setStatus('Enter dates as dd/mm/yyyy.');
+          (checkInDate ? checkOut : checkIn).focus();
+          return;
+        }
+
+        if (checkInDate < minDate) {
+          event.preventDefault();
+          setStatus('Check-in cannot be in the past.');
+          checkIn.focus();
+          return;
+        }
+
+        nights = calculateNights(checkInDate, checkOutDate);
+        if (!nights) {
+          event.preventDefault();
+          setStatus('Check-out must be after check-in.');
+          checkOut.focus();
+          return;
+        }
       }
 
       if (!Number.isFinite(adults) || adults < MIN_ADULTS) {
@@ -508,21 +583,24 @@
 
       adultsInput.value = String(adults);
       childrenInput.value = String(children);
+      if (kind === 'tours') {
+        if (startValue) {
+          startValue.value = startDate;
+        }
+        countrySelect.disabled = !countrySelect.value;
+        persistBookingSelection(Object.assign({
+          cityName: query,
+          startDate: startDate,
+          tourCountry: countrySelect.value || ''
+        }, guestPayload(adults, children)));
+        return;
+      }
+
       if (checkInValue) {
         checkInValue.value = checkInDate;
       }
       if (checkOutValue) {
         checkOutValue.value = checkOutDate;
-      }
-
-      if (kind === 'tours') {
-        persistBookingSelection(Object.assign({
-          cityName: query,
-          checkInDate: checkInDate,
-          checkOutDate: checkOutDate,
-          nights: nights
-        }, guestPayload(adults, children)));
-        return;
       }
 
       var match = findDestination(query);
