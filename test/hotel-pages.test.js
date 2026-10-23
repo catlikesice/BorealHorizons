@@ -51,7 +51,9 @@ test('hotel pages sit in the same region folder as their city', () => {
     const expected = 'html/cities/' + regionSlug(hotel.country) + '/' + path.posix.basename(hotel.url);
     assert.equal(hotel.url, expected, hotel.name);
     const html = fs.readFileSync(path.join(root, hotel.url), 'utf8');
-    assert.match(html, /<base href="\/">/, hotel.url);
+    // Three levels up from html/cities/<region>/, so styles and the navbar
+    // resolve at the site root even when the file is opened directly.
+    assert.match(html, /<base href="\.\.\/\.\.\/\.\.\/">/, hotel.url);
     const legacy = path.posix.basename(hotel.url);
     assert.equal(canonicalHotelPageUrl(legacy), hotel.url, hotel.name);
   });
