@@ -12,7 +12,7 @@ function wantsTours(query) {
 
 // Homepage datalist. Accommodation labels include places with no HTML page.
 // what=tours lists experiences instead of cities and hotels.
-// country limits that list to one destination country.
+// country limits that list to one destination. United Kingdom includes Scotland and Northeast England.
 router.get('/destinations', (req, res) => {
   if (wantsTours(req.query)) {
     res.json({ labels: experienceLabels(req.query.country) });
@@ -23,6 +23,7 @@ router.get('/destinations', (req, res) => {
 
 // Results page. checkIn, checkOut, startDate, adults, and children are accepted and ignored.
 // what=tours searches experiences only. country keeps tours from that country.
+// United Kingdom covers Scotland and Northeast England.
 // Any other value of what stays on accommodation.
 router.get('/', (req, res) => {
   const query = String(req.query.q || '').trim();

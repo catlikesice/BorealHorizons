@@ -371,6 +371,23 @@ test('tour search can be limited to one country', async () => {
   assert.equal(labels.labels.includes('Kirkwall walking tour — Kirkwall'), false);
 });
 
+test('United Kingdom tour search includes Scotland and Northeast England', async () => {
+  const response = await fetch(base + '/api/search?what=tours&q=walking&country=' + encodeURIComponent('United Kingdom'));
+  assert.equal(response.status, 200);
+  const body = await response.json();
+  assert.ok(body.tours.some((tour) => tour.city === 'Kirkwall' && tour.country === 'Scotland'));
+  assert.ok(body.tours.some((tour) => tour.city === 'Durham' && tour.country === 'Northeast England'));
+  assert.ok(body.tours.every((tour) => tour.country === 'Scotland' || tour.country === 'Northeast England'));
+  assert.equal(body.tours.some((tour) => tour.country === 'Iceland'), false);
+
+  const labelsResponse = await fetch(base + '/api/search/destinations?what=tours&country=' + encodeURIComponent('United Kingdom'));
+  assert.equal(labelsResponse.status, 200);
+  const labels = await labelsResponse.json();
+  assert.ok(labels.labels.includes('Kirkwall walking tour — Kirkwall'));
+  assert.ok(labels.labels.includes('Durham walking tour — Durham'));
+  assert.equal(labels.labels.includes('Faxaflói whale watching — Reykjavík'), false);
+});
+
 test('homepage tour search asks for a start date and a country', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const hero = fs.readFileSync(path.join(root, 'assets/hero-search.js'), 'utf8');
@@ -381,6 +398,9 @@ test('homepage tour search asks for a start date and a country', () => {
   assert.match(html, /name="startDate"/);
   assert.match(html, /value="Iceland"/);
   assert.match(html, /value="Svalbard"/);
+  assert.match(html, /value="United Kingdom"/);
+  assert.doesNotMatch(html, /value="Scotland"/);
+  assert.doesNotMatch(html, /value="Northeast England"/);
   assert.match(html, /hero-search-country-label": "Country"/);
   assert.match(hero, /hero-search--tours/);
   assert.match(hero, /Please choose a start date\./);
