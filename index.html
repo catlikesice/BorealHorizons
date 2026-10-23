@@ -181,7 +181,27 @@
             >
             <datalist id="hero-search-destinations"></datalist>
         </div>
-        <div class="hero-search__field">
+        <div class="hero-search__field hero-search__field--country" id="hero-search-country-field" hidden>
+            <label id="hero-search-country-label" for="hero-search-country">Country</label>
+            <select id="hero-search-country" name="country" disabled>
+                <option value="" id="hero-search-country-any">Any country</option>
+                <option value="Åland Islands">Åland Islands</option>
+                <option value="Denmark">Denmark</option>
+                <option value="Estonia">Estonia</option>
+                <option value="Faroe Islands">Faroe Islands</option>
+                <option value="Finland">Finland</option>
+                <option value="Greenland">Greenland</option>
+                <option value="Iceland">Iceland</option>
+                <option value="Latvia">Latvia</option>
+                <option value="Lithuania">Lithuania</option>
+                <option value="Northeast England">Northeast England</option>
+                <option value="Norway">Norway</option>
+                <option value="Scotland">Scotland</option>
+                <option value="Svalbard">Svalbard</option>
+                <option value="Sweden">Sweden</option>
+            </select>
+        </div>
+        <div class="hero-search__field hero-search__field--checkin" id="hero-search-checkin-field">
             <label id="hero-search-checkin-label" for="hero-search-checkin">Check-in</label>
             <div class="date-field">
                 <input id="hero-search-checkin" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
@@ -189,13 +209,21 @@
             </div>
             <input type="hidden" name="checkIn" id="hero-search-checkin-value">
         </div>
-        <div class="hero-search__field">
+        <div class="hero-search__field hero-search__field--checkout" id="hero-search-checkout-field">
             <label id="hero-search-checkout-label" for="hero-search-checkout">Check-out</label>
             <div class="date-field">
                 <input id="hero-search-checkout" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
                 <input id="hero-search-checkout-picker" class="date-field__picker" type="date" lang="en-GB" aria-label="Open check-out calendar" tabindex="-1">
             </div>
             <input type="hidden" name="checkOut" id="hero-search-checkout-value">
+        </div>
+        <div class="hero-search__field hero-search__field--start" id="hero-search-start-field" hidden>
+            <label id="hero-search-start-label" for="hero-search-start">Start Date</label>
+            <div class="date-field">
+                <input id="hero-search-start" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
+                <input id="hero-search-start-picker" class="date-field__picker" type="date" lang="en-GB" aria-label="Open start date calendar" tabindex="-1">
+            </div>
+            <input type="hidden" name="startDate" id="hero-search-start-value" disabled>
         </div>
         <div class="hero-search__field hero-search__field--guests guest-picker" data-guest-picker>
             <label id="hero-search-guests-label" for="hero-search-guests-toggle">Guests</label>
@@ -810,8 +838,11 @@
         "hero-desc": "Our platform enables hotels and hospitality groups to receive payments in digital currencies—with zero hassle, full transparency, and eco-friendly operations.",
         "hero-btn": "Partner With Us",
         "hero-search-destination-label": "Where are you going?",
+        "hero-search-country-label": "Country",
+        "hero-search-country-any": "Any country",
         "hero-search-checkin-label": "Check-in",
         "hero-search-checkout-label": "Check-out",
+        "hero-search-start-label": "Start Date",
         "hero-search-guests-label": "Guests",
         "hero-search-adults-label": "Adults",
         "hero-search-children-label": "Children",
@@ -948,8 +979,11 @@
         "hero-desc": "Наша платформа позволяет отелям и гостиничным группам получать оплату в цифровых валютах — без ...",
         "hero-btn": "Стать партнером",
         "hero-search-destination-label": "Куда вы едете?",
+        "hero-search-country-label": "Страна",
+        "hero-search-country-any": "Любая страна",
         "hero-search-checkin-label": "Заезд",
         "hero-search-checkout-label": "Выезд",
+        "hero-search-start-label": "Дата начала",
         "hero-search-guests-label": "Гости",
         "hero-search-adults-label": "Взрослые",
         "hero-search-children-label": "Дети",
@@ -1086,8 +1120,11 @@
         "hero-desc": "Vår plattform gör det möjligt för hotell och hotellgrupper att ta emot betalningar i digitala valutor — utan krångel, med full transparens och miljövänlig drift.",
         "hero-btn": "Bli partner",
         "hero-search-destination-label": "Vart ska du?",
+        "hero-search-country-label": "Land",
+        "hero-search-country-any": "Alla länder",
         "hero-search-checkin-label": "Incheckning",
         "hero-search-checkout-label": "Utcheckning",
+        "hero-search-start-label": "Startdatum",
         "hero-search-guests-label": "Gäster",
         "hero-search-adults-label": "Vuxna",
         "hero-search-children-label": "Barn",
@@ -1224,8 +1261,11 @@
         "hero-desc": "Unsere Plattform ermöglicht es Hotels und Hospitality-Gruppen, Zahlungen in digitalen Währungen zu erhalten – ganz ohne Aufwand, mit voller Transparenz und umweltfreundlichen Abläufen.",
         "hero-btn": "Werden Sie Partner",
         "hero-search-destination-label": "Wohin geht die Reise?",
+        "hero-search-country-label": "Land",
+        "hero-search-country-any": "Alle Länder",
         "hero-search-checkin-label": "Anreise",
         "hero-search-checkout-label": "Abreise",
+        "hero-search-start-label": "Startdatum",
         "hero-search-guests-label": "Gäste",
         "hero-search-adults-label": "Erwachsene",
         "hero-search-children-label": "Kinder",

@@ -109,14 +109,18 @@
   function getStayFromUrl() {
     var params = new URLSearchParams(window.location.search);
     var stored = readStoredBooking() || {};
-    var checkIn = canonicalDate(params.get('checkIn') || stored.checkInDate || '');
-    var checkOut = canonicalDate(params.get('checkOut') || stored.checkOutDate || '');
+    var tours = params.get('what') === 'tours';
+    var checkIn = tours ? '' : canonicalDate(params.get('checkIn') || stored.checkInDate || '');
+    var checkOut = tours ? '' : canonicalDate(params.get('checkOut') || stored.checkOutDate || '');
     var adults = parseGuestCount(params.get('adults') != null ? params.get('adults') : stored.adults, 1, 20, NaN);
     var children = parseGuestCount(params.get('children') != null ? params.get('children') : stored.children, 0, 10, NaN);
 
     return {
+      tours: tours,
       checkIn: checkIn,
       checkOut: checkOut,
+      startDate: tours ? canonicalDate(params.get('startDate') || '') : '',
+      tourCountry: tours ? String(params.get('country') || '').trim() : '',
       adults: adults,
       children: children
     };
@@ -125,18 +129,40 @@
   function syncStayFields(stay) {
     var checkInEl = document.getElementById('search-checkin');
     var checkOutEl = document.getElementById('search-checkout');
+    var startEl = document.getElementById('search-start');
+    var countryEl = document.getElementById('search-country');
     var adultsEl = document.getElementById('search-adults');
     var childrenEl = document.getElementById('search-children');
     var stayEl = document.getElementById('search-stay');
+    var tours = Boolean(stay.tours);
 
-    if (checkInEl) checkInEl.value = stay.checkIn || '';
-    if (checkOutEl) checkOutEl.value = stay.checkOut || '';
+    if (checkInEl) {
+      checkInEl.disabled = tours;
+      checkInEl.value = tours ? '' : (stay.checkIn || '');
+    }
+    if (checkOutEl) {
+      checkOutEl.disabled = tours;
+      checkOutEl.value = tours ? '' : (stay.checkOut || '');
+    }
+    if (startEl) {
+      startEl.disabled = !tours;
+      startEl.value = tours ? (stay.startDate || '') : '';
+    }
+    if (countryEl) {
+      countryEl.disabled = !tours || !stay.tourCountry;
+      countryEl.value = tours ? (stay.tourCountry || '') : '';
+    }
     if (adultsEl && Number.isFinite(stay.adults)) adultsEl.value = String(stay.adults);
     if (childrenEl && Number.isFinite(stay.children)) childrenEl.value = String(stay.children);
 
     var parts = [];
-    if (stay.checkIn && stay.checkOut) {
+    if (tours && stay.startDate) {
+      parts.push('Start date: ' + displayDate(stay.startDate));
+    } else if (stay.checkIn && stay.checkOut) {
       parts.push('Stay: ' + displayDate(stay.checkIn) + ' – ' + displayDate(stay.checkOut));
+    }
+    if (tours && stay.tourCountry) {
+      parts.push('Country: ' + stay.tourCountry);
     }
     var guestLabel = formatGuestSummary(stay.adults, stay.children);
     if (guestLabel) {
@@ -153,10 +179,12 @@
       }
     }
 
-    if (stay.checkIn || stay.checkOut || Number.isFinite(stay.adults) || Number.isFinite(stay.children)) {
+    if (stay.startDate || stay.tourCountry || stay.checkIn || stay.checkOut || Number.isFinite(stay.adults) || Number.isFinite(stay.children)) {
       var payload = {};
-      if (stay.checkIn) payload.checkInDate = stay.checkIn;
-      if (stay.checkOut) payload.checkOutDate = stay.checkOut;
+      if (tours && stay.startDate) payload.startDate = stay.startDate;
+      if (tours && stay.tourCountry) payload.tourCountry = stay.tourCountry;
+      if (!tours && stay.checkIn) payload.checkInDate = stay.checkIn;
+      if (!tours && stay.checkOut) payload.checkOutDate = stay.checkOut;
       if (Number.isFinite(stay.adults)) payload.adults = stay.adults;
       if (Number.isFinite(stay.children)) payload.children = stay.children;
       if (Number.isFinite(stay.adults) && Number.isFinite(stay.children)) {
@@ -288,6 +316,7 @@
     if (tour.pageUrl) params.set('page', tour.pageUrl);
     if (tour.addonId) params.set('addon', tour.addonId);
     var stay = getStayFromUrl();
+    if (stay.startDate) params.set('startDate', stay.startDate);
     if (stay.checkIn) params.set('checkIn', stay.checkIn);
     if (stay.checkOut) params.set('checkOut', stay.checkOut);
     if (Number.isFinite(stay.adults)) params.set('adults', String(stay.adults));
@@ -476,6 +505,13 @@
         radio.addEventListener('change', function () {
           var nextKind = selectedKind(form);
           applyKindCopy(nextKind);
+          var nextStay = getStayFromUrl();
+          nextStay.tours = nextKind === 'tours';
+          if (nextKind !== 'tours') {
+            nextStay.startDate = '';
+            nextStay.tourCountry = '';
+          }
+          syncStayFields(nextStay);
           if (query) {
             form.submit();
           } else {

@@ -344,6 +344,50 @@ test('tour search is separate from accommodation', async () => {
   assert.ok(art.tours.some((tour) => tour.addonId === 'art-nouveau' && tour.city === 'Riga' && tour.hotel === ''));
 });
 
+test('tour search can be limited to one country', async () => {
+  const icelandResponse = await fetch(base + '/api/search?what=tours&q=walking&country=' + encodeURIComponent('Iceland'));
+  assert.equal(icelandResponse.status, 200);
+  const iceland = await icelandResponse.json();
+  assert.ok(iceland.tours.length > 0);
+  assert.ok(iceland.tours.every((tour) => tour.country === 'Iceland'));
+
+  const folded = await fetch(base + '/api/search?what=tours&q=walking&country=' + encodeURIComponent('iceland'));
+  const foldedBody = await folded.json();
+  assert.deepEqual(foldedBody.tours.map((tour) => tour.id), iceland.tours.map((tour) => tour.id));
+
+  const elsewhere = await fetch(base + '/api/search?what=tours&q=' + encodeURIComponent('Kirkwall walking') + '&country=Iceland');
+  assert.equal(elsewhere.status, 200);
+  assert.deepEqual((await elsewhere.json()).tours, []);
+
+  const scotland = await fetch(base + '/api/search?what=tours&q=' + encodeURIComponent('Kirkwall walking') + '&country=Scotland');
+  const scotlandBody = await scotland.json();
+  assert.equal(scotlandBody.tours.length, 1);
+  assert.equal(scotlandBody.tours[0].country, 'Scotland');
+
+  const labelsResponse = await fetch(base + '/api/search/destinations?what=tours&country=Iceland');
+  assert.equal(labelsResponse.status, 200);
+  const labels = await labelsResponse.json();
+  assert.ok(labels.labels.includes('Faxaflói whale watching — Reykjavík'));
+  assert.equal(labels.labels.includes('Kirkwall walking tour — Kirkwall'), false);
+});
+
+test('homepage tour search asks for a start date and a country', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const hero = fs.readFileSync(path.join(root, 'assets/hero-search.js'), 'utf8');
+  assert.match(html, /id="hero-search-country-field"/);
+  assert.match(html, /id="hero-search-country"/);
+  assert.match(html, /id="hero-search-country-any"/);
+  assert.match(html, /id="hero-search-start-label"[^>]*>Start Date</);
+  assert.match(html, /name="startDate"/);
+  assert.match(html, /value="Iceland"/);
+  assert.match(html, /value="Svalbard"/);
+  assert.match(html, /hero-search-country-label": "Country"/);
+  assert.match(hero, /hero-search--tours/);
+  assert.match(hero, /Please choose a start date\./);
+  assert.match(hero, /setSearchField\(checkInField, !tours\)/);
+  assert.match(hero, /setSearchField\(checkOutField, !tours\)/);
+});
+
 test('tour destination labels are experiences, not hotels', async () => {
   const response = await fetch(base + '/api/search/destinations?what=tours');
   assert.equal(response.status, 200);
