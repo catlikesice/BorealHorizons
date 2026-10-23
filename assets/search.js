@@ -324,8 +324,16 @@
     return 'trip.html?' + params.toString();
   }
 
+  function tourCountryLabel(country) {
+    var folded = normalize(country).replace(/\s+/g, ' ').trim();
+    if (folded === 'scotland' || folded === 'northeast england') {
+      return 'United Kingdom';
+    }
+    return country || '';
+  }
+
   function renderTourCard(tour) {
-    var place = [tour.city, tour.country].filter(Boolean).join(', ');
+    var place = [tour.city, tourCountryLabel(tour.country)].filter(Boolean).join(', ');
     var location = tour.hotel ? tour.hotel + (place ? ' · ' + place : '') : place;
     return (
       '<article class="search-card search-card--tour">' +
