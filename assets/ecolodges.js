@@ -23,7 +23,7 @@
     'html/cities/scotland/lews-castle-lodge.html',
     'html/cities/northeast-england/kielder-lodges.html',
     'html/cities/faroe-islands/mykines-puffin-lodge.html',
-    'html/cities/svalbard/ny-alesund-polar-lodge.html'
+    'html/cities/norway/ny-alesund-polar-lodge.html'
   ];
 
   var byUrl = {};
