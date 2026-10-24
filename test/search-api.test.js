@@ -494,3 +494,90 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Aarhus'));
   assert.ok(body.labels.includes('Grand Hotel Kempinski — Riga'));
 });
+
+test('ecolodges=1 lists nature lodges and hides other stays', async () => {
+  const allResponse = await fetch(base + '/api/search?ecolodges=1');
+  assert.equal(allResponse.status, 200);
+  const all = await allResponse.json();
+  assert.deepEqual(all.cities, []);
+  assert.deepEqual(all.hotels.map((hotel) => hotel.name), [
+    'Abisko Mountain Lodge',
+    'Björkliden Mountain Lodge',
+    'STF Abisko Turiststation',
+    'Rothiemurchus Lodge',
+    'Ben Nevis Lodge',
+    'Kielder Lodges',
+    'Lews Castle Lodge',
+    'Mykines Puffin Lodge',
+    'Ny-Ålesund Polar Lodge'
+  ]);
+
+  const abiskoResponse = await fetch(base + '/api/search?q=abisko&ecolodges=1');
+  assert.equal(abiskoResponse.status, 200);
+  const abisko = await abiskoResponse.json();
+  assert.deepEqual(abisko.cities, []);
+  assert.deepEqual(abisko.hotels.map((hotel) => hotel.name), [
+    'Abisko Mountain Lodge',
+    'Björkliden Mountain Lodge',
+    'STF Abisko Turiststation'
+  ]);
+
+  const kielderResponse = await fetch(base + '/api/search?q=kielder&ecolodges=1');
+  const kielder = await kielderResponse.json();
+  assert.deepEqual(kielder.cities, []);
+  assert.deepEqual(kielder.hotels.map((hotel) => hotel.name), ['Kielder Lodges']);
+
+  const rigaResponse = await fetch(base + '/api/search?q=riga&ecolodges=1');
+  assert.deepEqual(await rigaResponse.json(), { cities: [], hotels: [] });
+
+  const blankFlag = await fetch(base + '/api/search?ecolodges=');
+  assert.deepEqual(await blankFlag.json(), { cities: [], hotels: [] });
+
+  const toursResponse = await fetch(base + '/api/search?what=tours&q=walking&ecolodges=1');
+  const tours = await toursResponse.json();
+  assert.ok(tours.tours.length > 0);
+  assert.equal(tours.hotels, undefined);
+
+  const labelsResponse = await fetch(base + '/api/search/destinations?ecolodges=1');
+  assert.equal(labelsResponse.status, 200);
+  const labels = await labelsResponse.json();
+  assert.ok(labels.labels.includes('Abisko'));
+  assert.ok(labels.labels.includes('Abisko Mountain Lodge — Abisko'));
+  assert.ok(labels.labels.includes('Ny-Ålesund'));
+  assert.ok(labels.labels.includes('Ny-Ålesund Polar Lodge — Ny-Ålesund'));
+  assert.equal(labels.labels.includes('Grand Hotel Kempinski — Riga'), false);
+  assert.equal(labels.labels.includes('Funken Lodge — Longyearbyen'), false);
+  assert.equal(labels.labels.includes('The Lodge on Loch Lomond — Loch Lomond National Park'), false);
+  assert.equal(labels.labels.includes('Riga'), false);
+});
+
+test('search bars offer an ecolodges-only checkbox beside the query', () => {
+  const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  const hero = fs.readFileSync(path.join(root, 'assets/hero-search.js'), 'utf8');
+  const searchPage = fs.readFileSync(path.join(root, 'search.html'), 'utf8');
+  const searchJs = fs.readFileSync(path.join(root, 'assets/search.js'), 'utf8');
+  const destinationAt = html.indexOf('hero-search__field--destination');
+  const ecoAt = html.indexOf('id="hero-search-ecolodge"');
+  const checkInAt = html.indexOf('id="hero-search-checkin-field"');
+  assert.ok(destinationAt !== -1 && ecoAt > destinationAt && checkInAt > ecoAt);
+  assert.match(html, /id="hero-search-ecolodge" name="ecolodges" value="1"/);
+  assert.match(html, /id="hero-search-ecolodge-label"[^>]*>Ecolodges only</);
+  assert.match(html, /hero-search-ecolodge-label": "Ecolodges only"/);
+  assert.match(html, /hero-search-ecolodge-label": "Только эко-лоджи"/);
+  assert.match(html, /hero-search-ecolodge-label": "Endast ekolodger"/);
+  assert.match(html, /hero-search-ecolodge-label": "Nur Ökolodges"/);
+  assert.match(html, /assets\/ecolodges\.js/);
+  assert.match(css, /\.hero-search__ecolodge \{/);
+  assert.match(hero, /ecolodges=1/);
+  assert.match(hero, /!query && !ecolodgesOnly\(\)/);
+  assert.match(hero, /exactEcolodge\(query\)/);
+  const inputAt = searchPage.indexOf('id="site-search-input"');
+  const pageEcoAt = searchPage.indexOf('id="search-ecolodges"');
+  const buttonAt = searchPage.indexOf('<button type="submit">Search</button>');
+  assert.ok(inputAt !== -1 && pageEcoAt > inputAt && buttonAt > pageEcoAt);
+  assert.match(searchPage, /id="search-ecolodges" name="ecolodges" value="1"/);
+  assert.match(searchPage, /assets\/ecolodges\.js/);
+  assert.match(searchJs, /ecolodgesOnly/);
+  assert.match(searchJs, /Ecolodges only/);
+});

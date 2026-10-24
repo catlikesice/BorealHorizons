@@ -41,6 +41,8 @@ Accommodation and tours are separate lookups:
 
 A blank `q` returns no rows when `country` is omitted. `search.js` treats an empty accommodation query as `{ "cities": [], "hotels": [] }` and an empty tour query with no `country` parameter as `{ "tours": [] }`. Passing `country` with a blank `q` lists the tours in that country. `country=` lists every tour. United Kingdom includes Scotland and Northeast England.
 
+`ecolodges=1` (also `true`, `yes`, or `on`) keeps accommodation results to the nature lodges and mountain stations listed in `assets/ecolodges.js`. Cities are omitted. A blank `q` with `ecolodges=1` lists every ecolodge. The same flag on `GET /api/search/destinations` returns those stays and the places they are in. `ecolodges` is ignored when `what=tours`. The homepage and results-page checkbox send the flag. With it checked, an empty destination still opens the ecolodge list, an exact ecolodge name opens that page, and any other destination stays on the filtered results.
+
 ## Tables
 
 `cities` is one row per destination. A destination does not need an HTML file.

@@ -448,10 +448,10 @@ header a { position: static !important; left: auto !important; right: auto !impo
 /* Booking-style destination + dates + guests bar under the homepage hero */
 .hero-search {
   display: grid;
-  grid-template-columns: minmax(12rem, 2.2fr) 1fr 1fr 1fr auto;
+  grid-template-columns: minmax(11rem, 2fr) auto minmax(7.5rem, 1fr) minmax(7.5rem, 1fr) minmax(7.5rem, 1fr) auto;
   gap: 0.65rem 0.85rem;
   align-items: end;
-  width: min(1080px, calc(100% - 2.5rem));
+  width: min(1180px, calc(100% - 2.5rem));
   margin: -1.65rem auto 0;
   padding: 1rem 1.1rem 0.85rem;
   background: #fff;
@@ -478,6 +478,45 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 .hero-search__field[hidden] {
   display: none !important;
+}
+
+.hero-search__field--ecolodge {
+  align-self: end;
+}
+
+.hero-search__field .hero-search__ecolodge {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  height: 48px;
+  margin: 0;
+  padding: 0 0.85rem;
+  border: 1px solid #c9e5c5;
+  border-radius: 12px;
+  background: #f8fff8;
+  color: #2e4d25;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0;
+  line-height: 1.2;
+  text-transform: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.hero-search__ecolodge:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+  background: #fff;
+}
+
+.hero-search__ecolodge input {
+  width: 1.05rem;
+  height: 1.05rem;
+  margin: 0;
+  accent-color: #2e7d32;
+  cursor: pointer;
 }
 
 .hero-search__field label {
@@ -742,6 +781,7 @@ header a { position: static !important; left: auto !important; right: auto !impo
   }
 
   .hero-search__field--destination,
+  .hero-search__field--ecolodge,
   .hero-search__field--guests,
   .hero-search button[type="submit"] {
     grid-column: 1 / -1;

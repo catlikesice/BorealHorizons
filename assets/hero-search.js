@@ -8,6 +8,9 @@
  * check-out, then continues to search.html?what=tours&country=...
  * A match with a page opens that page. A place with no page continues to
  * search.html. Accommodation posts q, checkIn, checkOut, adults, and children.
+ * Checking "Ecolodges only" posts ecolodges=1. An empty destination then lists
+ * every ecolodge. An exact ecolodge name opens that page. Any other
+ * destination stays on the filtered results. The box is hidden for Tours.
  * Tours post country, startDate, adults, and children. The dropdown starts on
  * "Select Country" until a country is chosen.
  */
@@ -23,6 +26,7 @@
   var DEFAULT_ADULTS = 2;
   var DEFAULT_CHILDREN = 0;
   var ACCOMMODATION_PLACEHOLDER = 'City or hotel, e.g. Riga';
+  var ECOLODGE_PLACEHOLDER = 'Ecolodge or place, e.g. Abisko';
 
   function currentKind() {
     var checked = document.querySelector('#hero-search-form input[name="what"]:checked');
@@ -190,6 +194,15 @@
     datalist.innerHTML = labels.map(optionHtml).join('');
   }
 
+  function ecolodgesOnly() {
+    var box = document.getElementById('hero-search-ecolodge');
+    return Boolean(box && box.checked && !box.disabled);
+  }
+
+  function isEcolodgeItem(item) {
+    return Boolean(window.Ecolodges && typeof window.Ecolodges.isEcolodge === 'function' && window.Ecolodges.isEcolodge(item));
+  }
+
   function fillDestinationList(datalist, kind) {
     if (!datalist || kind === 'tours') {
       return;
@@ -198,8 +211,26 @@
     var seen = {};
     var options = [];
     var data = catalog();
+    var onlyEco = ecolodgesOnly();
+    var ecoCities = {};
+
+    if (onlyEco) {
+      (data.hotels || []).forEach(function (item) {
+        if (isEcolodgeItem(item) && item.city) {
+          ecoCities[item.city] = true;
+        }
+      });
+    }
 
     (data.cities || []).concat(data.hotels || []).forEach(function (item) {
+      if (onlyEco) {
+        if (item.type === 'city' && !ecoCities[item.name]) {
+          return;
+        }
+        if (item.type === 'hotel' && !isEcolodgeItem(item)) {
+          return;
+        }
+      }
       var label = item.name;
       if (item.type === 'hotel' && item.city) {
         label = item.name + ' — ' + item.city;
@@ -218,7 +249,8 @@
 
     writeDestinationLabels(datalist, options, 'accommodation');
 
-    fetch('/api/search/destinations', { headers: { Accept: 'application/json' } })
+    var endpoint = '/api/search/destinations' + (onlyEco ? '?ecolodges=1' : '');
+    fetch(endpoint, { headers: { Accept: 'application/json' } })
       .then(function (res) {
         if (!res.ok) {
           throw new Error('Destination list failed');
@@ -226,6 +258,9 @@
         return res.json();
       })
       .then(function (payload) {
+        if (ecolodgesOnly() !== onlyEco) {
+          return;
+        }
         writeDestinationLabels(datalist, payload && payload.labels, 'accommodation');
       })
       .catch(function () {
@@ -272,6 +307,28 @@
       }
     }
 
+    return null;
+  }
+
+  function exactEcolodge(query) {
+    var needle = normalize(query);
+    if (!needle) {
+      return null;
+    }
+    var hotels = catalog().hotels || [];
+    var i;
+    var item;
+    var name;
+    for (i = 0; i < hotels.length; i += 1) {
+      item = hotels[i];
+      if (!isEcolodgeItem(item) || !item.url) {
+        continue;
+      }
+      name = normalize(item.name);
+      if (name === needle || (item.city && name + ' — ' + normalize(item.city) === needle)) {
+        return item;
+      }
+    }
     return null;
   }
 
@@ -418,6 +475,8 @@
     var adultsInput = document.getElementById('hero-search-adults');
     var childrenInput = document.getElementById('hero-search-children');
     var datalist = document.getElementById('hero-search-destinations');
+    var ecolodgeField = document.getElementById('hero-search-ecolodge-field');
+    var ecolodgeBox = document.getElementById('hero-search-ecolodge');
 
     if (!form || !destination || !checkIn || !checkOut || !startInput || !countrySelect || !adultsInput || !childrenInput) {
       return;
@@ -426,7 +485,6 @@
     function applySearchKind(kind) {
       var tours = kind === 'tours';
       form.classList.toggle('hero-search--tours', tours);
-      destination.placeholder = ACCOMMODATION_PLACEHOLDER;
       setControl(destination, !tours);
       setControl(countrySelect, tours);
       if (destinationLabel) {
@@ -435,6 +493,8 @@
       setSearchField(startField, tours);
       setSearchField(checkInField, !tours);
       setSearchField(checkOutField, !tours);
+      setSearchField(ecolodgeField, !tours);
+      destination.placeholder = !tours && ecolodgesOnly() ? ECOLODGE_PLACEHOLDER : ACCOMMODATION_PLACEHOLDER;
       if (!tours) {
         fillDestinationList(datalist, kind);
       }
@@ -462,6 +522,16 @@
     countrySelect.addEventListener('change', function () {
       setStatus('');
     });
+
+    if (ecolodgeBox) {
+      ecolodgeBox.addEventListener('change', function () {
+        if (currentKind() !== 'tours') {
+          destination.placeholder = ecolodgesOnly() ? ECOLODGE_PLACEHOLDER : ACCOMMODATION_PLACEHOLDER;
+          fillDestinationList(datalist, 'accommodation');
+        }
+        setStatus('');
+      });
+    }
 
     var minDate = todayISO();
     var maxDate = maxBookableDate();
@@ -526,7 +596,7 @@
       var children = parseGuestCount(childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
       var nights = null;
 
-      if (kind !== 'tours' && !query) {
+      if (kind !== 'tours' && !query && !ecolodgesOnly()) {
         event.preventDefault();
         setStatus('Please enter a city or hotel.');
         destination.focus();
@@ -656,11 +726,20 @@
         checkOutValue.value = checkOutDate;
       }
 
-      var match = findDestination(query);
-      if (match && match.item && match.item.url) {
-        event.preventDefault();
-        goToMatch(match, checkInDate, checkOutDate, nights, adults, children);
-        return;
+      if (ecolodgesOnly()) {
+        var ecoMatch = exactEcolodge(query);
+        if (ecoMatch) {
+          event.preventDefault();
+          goToMatch({ kind: 'hotel', item: ecoMatch }, checkInDate, checkOutDate, nights, adults, children);
+          return;
+        }
+      } else {
+        var match = findDestination(query);
+        if (match && match.item && match.item.url) {
+          event.preventDefault();
+          goToMatch(match, checkInDate, checkOutDate, nights, adults, children);
+          return;
+        }
       }
 
       persistBookingSelection(Object.assign({
