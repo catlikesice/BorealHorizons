@@ -383,18 +383,25 @@
   }
 
   function renderTourCard(tour) {
+    var isPackage = tour.type === 'package';
     var place = [tour.city, tourCountryLabel(tour.country)].filter(Boolean).join(', ');
     var location = tour.hotel ? tour.hotel + (place ? ' · ' + place : '') : place;
+    var includes = isPackage && Array.isArray(tour.includes) && tour.includes.length
+      ? '<ul class="search-card__includes">' + tour.includes.map(function (item) {
+          return '<li>' + escapeHtml(item) + '</li>';
+        }).join('') + '</ul>'
+      : '';
     return (
-      '<article class="search-card search-card--tour">' +
+      '<article class="search-card search-card--' + (isPackage ? 'package' : 'tour') + '">' +
         '<div class="search-card__body">' +
-          '<p class="search-card__eyebrow">Tour</p>' +
+          '<p class="search-card__eyebrow">' + (isPackage ? 'Sample package' : 'Tour') + '</p>' +
           '<h3 class="search-card__title">' + escapeHtml(tour.name) + '</h3>' +
           (location ? '<p class="search-card__meta">' + escapeHtml(location) + '</p>' : '') +
           (tour.detail ? '<p class="search-card__meta">' + escapeHtml(tour.detail) + '</p>' : '') +
           (tour.price ? '<p class="search-card__price">' + escapeHtml(tour.price) + '</p>' : '') +
           (tour.description ? '<p class="search-card__desc">' + escapeHtml(tour.description) + '</p>' : '') +
-          pageLink(tourSelectHref(tour), 'Add to stay') +
+          includes +
+          pageLink(tourSelectHref(tour), isPackage ? 'Choose a stay' : 'Add to stay') +
         '</div>' +
       '</article>'
     );
@@ -440,22 +447,22 @@
     setText('site-search-label', tours ? 'Search tours' : 'Search hotels and cities');
     if (input) {
       input.placeholder = tours
-        ? 'Try whale watching, walking tour, or Riga'
+        ? 'Try whale watching, Golden Circle, or Riga'
         : (onlyEco ? 'Ecolodge or place, e.g. Abisko' : 'Try Riga, Tallinn, or Kempinski');
     }
     if (intro) {
       intro.textContent = tours
-        ? 'Find a guided tour, boat trip, or museum visit, then add it to a stay.'
+        ? 'Find a guided tour, boat trip, museum visit, or a sample package such as the Golden Circle or an aurora cabin.'
         : 'Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, the Åland Islands, Greenland, and the Faroe Islands.';
     }
     if (emptyCopy) {
       emptyCopy.innerHTML = tours
-        ? 'No tours match that search. Try a city or a tour name, such as whale watching or a walking tour.'
+        ? 'No tours match that search. Try a city, a tour name, or a package such as Golden Circle.'
         : 'No matches for that search. Try another city or hotel name, or <a href="index.html">start a booking</a>.';
     }
     if (note) {
       note.textContent = tours
-        ? 'Tours are experiences you add to a stay. Open a tour to choose the hotel and include it in the booking.'
+        ? 'Tours are experiences you add to a stay. Sample packages are made-up itineraries. Open one to choose a hotel in that city.'
         : 'Search includes places that do not have their own page. Those stays are listed here from the hotel database.';
     }
   }
@@ -515,7 +522,12 @@
 
     if (statusEl) {
       if (toursMode) {
-        statusEl.textContent = total === 1 ? '1 tour found.' : total + ' tours found.';
+        var packageCount = tours.filter(function (tour) { return tour.type === 'package'; }).length;
+        if (packageCount === total && total > 0) {
+          statusEl.textContent = total === 1 ? '1 package found.' : total + ' packages found.';
+        } else {
+          statusEl.textContent = total === 1 ? '1 tour found.' : total + ' tours found.';
+        }
       } else if (ecolodgesOnly) {
         statusEl.textContent = total === 1 ? '1 ecolodge found.' : total + ' ecolodges found.';
       } else {
@@ -531,6 +543,13 @@
     }
     if (toursEl) {
       toursEl.innerHTML = tours.map(renderTourCard).join('');
+    }
+    var tourHeading = document.getElementById('tour-results-heading');
+    if (tourHeading) {
+      var packagesOnly = tours.length > 0 && tours.every(function (tour) { return tour.type === 'package'; });
+      var mixed = tours.some(function (tour) { return tour.type === 'package'; })
+        && tours.some(function (tour) { return tour.type !== 'package'; });
+      tourHeading.textContent = packagesOnly ? 'Packages' : (mixed ? 'Tours and packages' : 'Tours');
     }
 
     var citiesSection = document.getElementById('city-results-section');
