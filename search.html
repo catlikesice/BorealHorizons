@@ -168,6 +168,25 @@
       border-top: 4px solid #1f6b4a;
     }
 
+    .search-card--package {
+      border-top: 4px solid #0f6f8a;
+    }
+
+    .search-card--package .search-card__eyebrow {
+      color: #0f6f8a;
+    }
+
+    .search-card__includes {
+      margin: 0.15rem 0 0;
+      padding-left: 1.1rem;
+      color: #3d5c34;
+      font-size: 0.9rem;
+    }
+
+    .search-card__includes li + li {
+      margin-top: 0.15rem;
+    }
+
     .search-card__image {
       width: 100%;
       height: 160px;
@@ -391,7 +410,7 @@
     </section>
 
     <section id="tour-results-section" class="search-section" hidden>
-      <h2>Tours</h2>
+      <h2 id="tour-results-heading">Tours</h2>
       <div id="tour-results" class="search-grid"></div>
     </section>
 

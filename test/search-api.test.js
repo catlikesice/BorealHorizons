@@ -8,6 +8,8 @@ const http = require('http');
 const searchRouter = require('../routes/search');
 const { loadStaticCatalog } = require('../lib/search-db');
 const { getCityPage, hotelsFor } = require('../lib/city-pages');
+const { listAddons } = require('../lib/hotel-addons');
+const { listPackages } = require('../assets/tour-packages');
 
 const root = path.join(__dirname, '..');
 let server;
@@ -456,6 +458,85 @@ test('tour destination labels are experiences, not hotels', async () => {
   assert.equal(body.labels.includes('Grand Hotel Kempinski — Riga'), false);
   assert.equal(body.labels.includes('Nida'), false);
   assert.equal(body.labels.includes('Hotel Nida Marina — Nida'), false);
+});
+
+test('sample tour packages appear when searching tours', async () => {
+  const packages = listPackages();
+  assert.equal(packages.length, 13);
+  const ids = new Set();
+  packages.forEach((pkg) => {
+    assert.equal(ids.has(pkg.id), false, pkg.id + ' is used twice');
+    ids.add(pkg.id);
+    assert.equal(fs.existsSync(path.join(root, pkg.pageUrl)), true, pkg.pageUrl);
+    assert.ok(pkg.priceEth > 0);
+    assert.ok(pkg.includes.length >= 3);
+  });
+
+  const golden = await searchForTours('Golden Circle');
+  assert.equal(golden.tours.length, 1);
+  const pkg = golden.tours[0];
+  assert.equal(pkg.type, 'package');
+  assert.equal(pkg.id, 'pkg-iceland-golden-circle');
+  assert.equal(pkg.name, 'Golden Circle three-day package');
+  assert.equal(pkg.city, 'Reykjavík');
+  assert.equal(pkg.country, 'Iceland');
+  assert.equal(pkg.hotel, '');
+  assert.equal(pkg.addonId, '');
+  assert.equal(pkg.scope, 'package');
+  assert.deepEqual(pkg.includes, ['Þingvellir rift', 'Geysir field', 'Gullfoss waterfall', 'Lagoon soak']);
+  assert.equal(pkg.price, '0.24 ETH');
+  assert.equal(pkg.pageUrl, 'html/cities/iceland/reykjavík.html');
+
+  const named = await searchForTours('package');
+  assert.equal(named.tours.length, packages.length);
+  assert.ok(named.tours.every((tour) => tour.type === 'package'));
+
+  const whale = await searchForTours('whale');
+  assert.ok(whale.tours.some((tour) => tour.name === 'Faxaflói whale watching'));
+  assert.ok(whale.tours.every((tour) => tour.type === 'tour'));
+
+  const stays = await searchFor('Golden Circle');
+  assert.equal(stays.tours, undefined);
+  assert.deepEqual(stays.cities, []);
+  assert.deepEqual(stays.hotels, []);
+
+  const icelandList = await (await fetch(base + '/api/search?what=tours&country=' + encodeURIComponent('Iceland'))).json();
+  const icelandNames = icelandList.tours.map((tour) => tour.name);
+  assert.ok(icelandNames.indexOf('Golden Circle three-day package') >= 0);
+  assert.ok(icelandNames.indexOf('Golden Circle three-day package') < icelandNames.indexOf('Faxaflói whale watching'));
+
+  const icelandResponse = await fetch(base + '/api/search?what=tours&q=package&country=' + encodeURIComponent('Iceland'));
+  assert.equal(icelandResponse.status, 200);
+  const iceland = await icelandResponse.json();
+  assert.deepEqual(iceland.tours.map((tour) => tour.id), ['pkg-iceland-golden-circle']);
+
+  const ukResponse = await fetch(base + '/api/search?what=tours&q=package&country=' + encodeURIComponent('United Kingdom'));
+  assert.equal(ukResponse.status, 200);
+  const uk = await ukResponse.json();
+  assert.ok(uk.tours.some((tour) => tour.id === 'pkg-scotland-highland-rail' && tour.country === 'Scotland'));
+  assert.ok(uk.tours.some((tour) => tour.id === 'pkg-england-northumberland' && tour.country === 'Northeast England'));
+  assert.ok(uk.tours.every((tour) => tour.country === 'Scotland' || tour.country === 'Northeast England'));
+
+  const labelsResponse = await fetch(base + '/api/search/destinations?what=tours&country=' + encodeURIComponent('Iceland'));
+  const labels = await labelsResponse.json();
+  assert.ok(labels.labels.includes('Golden Circle three-day package — Reykjavík'));
+  assert.equal(labels.labels.includes('Highland rail package — Edinburgh'), false);
+
+  const allLabels = await (await fetch(base + '/api/search/destinations?what=tours')).json();
+  packages.forEach((item) => {
+    assert.ok(allLabels.labels.includes(item.name + ' — ' + item.city), item.name);
+  });
+
+  const extras = listAddons({ city: 'Reykjavík' });
+  assert.equal(extras.addons.some((addon) => /package/i.test(addon.label)), false);
+
+  const script = fs.readFileSync(path.join(root, 'assets/search.js'), 'utf8');
+  assert.match(script, /Sample package/);
+  assert.match(script, /isPackage \? 'package'/);
+  assert.match(script, /Choose a stay/);
+  const page = fs.readFileSync(path.join(root, 'search.html'), 'utf8');
+  assert.match(page, /search-card--package/);
+  assert.match(page, /id="tour-results-heading"/);
 });
 
 test('destination labels include places that have no page', async () => {

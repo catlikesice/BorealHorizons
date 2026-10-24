@@ -28,7 +28,7 @@ router.get('/destinations', (req, res) => {
 });
 
 // Results page. checkIn, checkOut, startDate, adults, and children are accepted and ignored.
-// what=tours searches experiences only. country keeps tours from that country.
+// what=tours searches experiences and sample packages. country keeps tours from that country.
 // A blank q with country lists that country; country= lists every tour.
 // A blank q with no country parameter still returns no tours.
 // United Kingdom covers Scotland and Northeast England.
