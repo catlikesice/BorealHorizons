@@ -51,6 +51,27 @@
     return new Date().toISOString().split('T')[0];
   }
 
+  function maxBookableDate() {
+    var api = datesApi();
+    if (api && typeof api.latestBookableISO === 'function') {
+      return api.latestBookableISO();
+    }
+    return '';
+  }
+
+  function beyondHorizon(value) {
+    var api = datesApi();
+    return Boolean(value && api && typeof api.exceedsBookingHorizon === 'function' && api.exceedsBookingHorizon(value));
+  }
+
+  function horizonStatus(which) {
+    var api = datesApi();
+    if (api && typeof api.bookingHorizonError === 'function') {
+      return api.bookingHorizonError(which);
+    }
+    return 'You can book up to one year ahead.';
+  }
+
   function datesApi() {
     return window.BookingDates || null;
   }
@@ -356,6 +377,19 @@
     adultsInput.dispatchEvent(new Event('input', { bubbles: true }));
   }
 
+  function pickerAccepts(picker, iso) {
+    if (!picker || !iso) {
+      return false;
+    }
+    if (picker.min && iso < picker.min) {
+      return false;
+    }
+    if (picker.max && iso > picker.max) {
+      return false;
+    }
+    return true;
+  }
+
   function writeDateField(textInput, picker, iso) {
     var european = toEuropeanDate(iso);
     if (!european) {
@@ -363,7 +397,7 @@
     }
     textInput.value = european;
     if (picker) {
-      picker.value = iso;
+      picker.value = pickerAccepts(picker, iso) ? iso : '';
     }
   }
 
@@ -372,9 +406,7 @@
       return;
     }
     var iso = toISODate(textInput.value);
-    if (iso) {
-      picker.value = iso;
-    }
+    picker.value = pickerAccepts(picker, iso) ? iso : '';
   }
 
   function bindDateField(textInput, picker, onChange) {
@@ -502,15 +534,19 @@
     }
 
     var minDate = todayISO();
-    if (checkInPicker) {
-      checkInPicker.min = minDate;
+    var maxDate = maxBookableDate();
+    function boundPicker(picker) {
+      if (!picker) {
+        return;
+      }
+      picker.min = minDate;
+      if (maxDate) {
+        picker.max = maxDate;
+      }
     }
-    if (checkOutPicker) {
-      checkOutPicker.min = minDate;
-    }
-    if (startPicker) {
-      startPicker.min = minDate;
-    }
+    boundPicker(checkInPicker);
+    boundPicker(checkOutPicker);
+    boundPicker(startPicker);
 
     if (storedDates) {
       if (storedDates.checkInDate) {
@@ -595,6 +631,13 @@
           startInput.focus();
           return;
         }
+
+        if (beyondHorizon(startDate)) {
+          event.preventDefault();
+          setStatus(horizonStatus('start'));
+          startInput.focus();
+          return;
+        }
       } else {
         if (!checkIn.value.trim() || !checkOut.value.trim()) {
           event.preventDefault();
@@ -621,6 +664,20 @@
         if (!nights) {
           event.preventDefault();
           setStatus('Check-out must be after check-in.');
+          checkOut.focus();
+          return;
+        }
+
+        if (beyondHorizon(checkInDate)) {
+          event.preventDefault();
+          setStatus(horizonStatus('check-in'));
+          checkIn.focus();
+          return;
+        }
+
+        if (beyondHorizon(checkOutDate)) {
+          event.preventDefault();
+          setStatus(horizonStatus('check-out'));
           checkOut.focus();
           return;
         }

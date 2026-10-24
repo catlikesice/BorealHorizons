@@ -61,6 +61,20 @@
 
   const ADULT_REQUIRED = 'A booking must include at least one adult.';
 
+  function stayHorizonProblem(pending) {
+    const api = window.BookingDates;
+    if (!api || typeof api.exceedsBookingHorizon !== 'function' || !pending) {
+      return '';
+    }
+    if (api.exceedsBookingHorizon(pending.checkInDate)) {
+      return api.bookingHorizonError('check-in');
+    }
+    if (api.exceedsBookingHorizon(pending.checkOutDate)) {
+      return api.bookingHorizonError('check-out');
+    }
+    return '';
+  }
+
   function partyAdults(guests) {
     if (!guests || guests.adults == null || guests.adults === '') {
       return 1;
@@ -142,14 +156,17 @@
     setText('[data-checkout-total]', formatAmount(pending.amount, pending.currency, pending.decimals));
     setText('[data-checkout-method]', paymentMethodLabel(pending));
     const needsAdult = partyAdults(pending.guests) < 1;
+    const horizonProblem = stayHorizonProblem(pending);
     const confirmButton = document.getElementById('checkout-confirm');
-    if (confirmButton && needsAdult) {
+    if (confirmButton && (needsAdult || horizonProblem)) {
       confirmButton.disabled = true;
     } else if (confirmButton && !confirmButton.disabled) {
       confirmButton.textContent = confirmLabel(pending);
     }
     if (needsAdult) {
       setStatus(ADULT_REQUIRED, 'error');
+    } else if (horizonProblem) {
+      setStatus(horizonProblem, 'error');
     }
 
     const roomRow = document.querySelector('[data-checkout-row="room"]');
@@ -193,6 +210,12 @@
       }
       if (partyAdults(pending.guests) < 1) {
         setStatus(ADULT_REQUIRED, 'error');
+        button.disabled = true;
+        return;
+      }
+      const horizonProblem = stayHorizonProblem(pending);
+      if (horizonProblem) {
+        setStatus(horizonProblem, 'error');
         button.disabled = true;
         return;
       }

@@ -51,6 +51,20 @@ test('requires a birth date that makes the person at least 18', () => {
   assert.match(tooYoung.message, /at least 18/);
 });
 
+test('a booking can start up to one calendar year ahead', () => {
+  assert.equal(BookingDates.latestBookableISO(new Date(2026, 9, 24)), '2027-10-24');
+  assert.equal(BookingDates.latestBookableISO(new Date(2024, 1, 29)), '2025-02-28');
+  assert.equal(BookingDates.exceedsBookingHorizon('2027-10-24', new Date(2026, 9, 24)), false);
+  assert.equal(BookingDates.exceedsBookingHorizon('24/10/2027', new Date(2026, 9, 24)), false);
+  assert.equal(BookingDates.exceedsBookingHorizon('2027-10-25', new Date(2026, 9, 24)), true);
+  assert.equal(BookingDates.exceedsBookingHorizon('25/10/2027', new Date(2026, 9, 24)), true);
+  assert.equal(BookingDates.exceedsBookingHorizon('', new Date(2026, 9, 24)), false);
+  assert.equal(BookingDates.bookingHorizonError('check-in'), 'Check-in cannot be more than a year ahead.');
+  assert.equal(BookingDates.bookingHorizonError('check-out'), 'Check-out cannot be more than a year ahead.');
+  assert.equal(BookingDates.bookingHorizonError('start'), 'Start date cannot be more than a year ahead.');
+  assert.equal(BookingDates.bookingHorizonError('event'), 'Event date cannot be more than a year ahead.');
+});
+
 test('masks typed digits into dd/mm/yyyy and keeps explicit slashes', () => {
   assert.equal(BookingDates.maskInput('10052026'), '10/05/2026');
   assert.equal(BookingDates.maskInput('01/012'), '01/01/2');

@@ -131,6 +131,31 @@
     summaryEl.appendChild(message);
   }
 
+  function bookingHorizonProblem(details) {
+    const api = window.BookingDates;
+    if (!api || typeof api.exceedsBookingHorizon !== 'function' || !details) {
+      return '';
+    }
+    if (api.exceedsBookingHorizon(details.checkInDate)) {
+      return api.bookingHorizonError('check-in');
+    }
+    if (api.exceedsBookingHorizon(details.checkOutDate)) {
+      return api.bookingHorizonError('check-out');
+    }
+    return '';
+  }
+
+  function appendHorizonRule(summaryEl, details) {
+    const problem = bookingHorizonProblem(details);
+    if (!summaryEl || !problem) {
+      return;
+    }
+    const message = document.createElement('p');
+    message.className = 'booking-summary__notice';
+    message.textContent = problem;
+    summaryEl.appendChild(message);
+  }
+
   function formatDate(value) {
     if (window.BookingDates && typeof window.BookingDates.toEuropean === 'function') {
       return window.BookingDates.toEuropean(value) || null;
@@ -824,6 +849,7 @@
         summaryEl.appendChild(guestsEl);
       }
       appendAdultRule(summaryEl, bookingDetails);
+      appendHorizonRule(summaryEl, bookingDetails);
       return;
     }
 
@@ -851,6 +877,7 @@
       summaryEl.appendChild(guestsEl);
     }
     appendAdultRule(summaryEl, bookingDetails);
+    appendHorizonRule(summaryEl, bookingDetails);
 
     if (roomSelection) {
       const roomEl = document.createElement('p');
@@ -1091,6 +1118,11 @@
         return;
       }
       if (!quote.guests || quote.guests.adults < 1) {
+        event.preventDefault();
+        renderSummary(detailContainer);
+        return;
+      }
+      if (bookingHorizonProblem(readBookingDetails())) {
         event.preventDefault();
         renderSummary(detailContainer);
         return;

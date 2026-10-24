@@ -59,9 +59,9 @@
     return buildISO(date.getFullYear(), date.getMonth() + 1, date.getDate());
   }
 
-  function latestAdultISO(now) {
+  function shiftCalendarDate(now, years) {
     var date = now || new Date();
-    var year = date.getFullYear() - 18;
+    var year = date.getFullYear() + years;
     var month = date.getMonth() + 1;
     var day = date.getDate();
     var dim = new Date(Date.UTC(year, month, 0)).getUTCDate();
@@ -69,6 +69,34 @@
       day = dim;
     }
     return buildISO(year, month, day);
+  }
+
+  function latestAdultISO(now) {
+    return shiftCalendarDate(now, -18);
+  }
+
+  function latestBookableISO(now) {
+    return shiftCalendarDate(now, 1);
+  }
+
+  function exceedsBookingHorizon(value, now) {
+    var iso = toISO(value);
+    if (!iso) {
+      return false;
+    }
+    return iso > latestBookableISO(now);
+  }
+
+  function bookingHorizonError(which) {
+    var label = 'Check-in';
+    if (which === 'check-out') {
+      label = 'Check-out';
+    } else if (which === 'start') {
+      label = 'Start date';
+    } else if (which === 'event') {
+      label = 'Event date';
+    }
+    return label + ' cannot be more than a year ahead.';
   }
 
   function validateBirthDate(value) {
@@ -165,6 +193,9 @@
     isRealDate: isRealDate,
     localTodayISO: localTodayISO,
     latestAdultISO: latestAdultISO,
+    latestBookableISO: latestBookableISO,
+    exceedsBookingHorizon: exceedsBookingHorizon,
+    bookingHorizonError: bookingHorizonError,
     validateBirthDate: validateBirthDate
   };
 });
