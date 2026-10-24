@@ -197,7 +197,7 @@ test('other named places without pages are searchable', async () => {
     { q: 'Vagar', city: 'Vágar', country: 'Faroe Islands', hotel: 'Vágar Cliff Hotel', file: 'vagar.html' },
     { q: 'Streymoy', city: 'Streymoy', country: 'Faroe Islands', hotel: 'Streymoy Valley Inn', file: 'streymoy.html' },
     { q: 'Eysturoy', city: 'Eysturoy', country: 'Faroe Islands', hotel: 'Eysturoy Sound Hotel', file: 'eysturoy.html' },
-    { q: 'Ny-Alesund', city: 'Ny-Ålesund', country: 'Svalbard', hotel: 'Ny-Ålesund Polar Lodge', file: 'ny-alesund.html' },
+    { q: 'Ny-Alesund', city: 'Ny-Ålesund', country: 'Norway', hotel: 'Ny-Ålesund Polar Lodge', file: 'ny-alesund.html' },
     { q: 'Kastelholm', city: 'Kastelholm', country: 'Åland Islands', hotel: 'Kastelholm Castle Inn', file: 'kastelholm.html' },
     { q: 'Bomarsund', city: 'Bomarsund', country: 'Åland Islands', hotel: 'Bomarsund Fortress House', file: 'bomarsund.html' },
     { q: 'Isle of Skye', city: 'Isle of Skye', country: 'Scotland', hotel: 'Skye Cuillin Hotel', file: 'isle-of-skye.html' }
@@ -406,7 +406,8 @@ test('homepage tour search puts the country dropdown in Where are you going', ()
   assert.match(html, /id="hero-search-start-label"[^>]*>Start Date</);
   assert.match(html, /name="startDate"/);
   assert.match(html, /value="Iceland"/);
-  assert.match(html, /value="Svalbard"/);
+  assert.doesNotMatch(html, /value="Svalbard"/);
+  assert.match(html, /value="Norway"/);
   assert.match(html, /value="United Kingdom"/);
   assert.doesNotMatch(html, /value="Scotland"/);
   assert.doesNotMatch(html, /value="Northeast England"/);

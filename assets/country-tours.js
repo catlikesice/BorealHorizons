@@ -338,8 +338,8 @@
       id: 'norway',
       name: 'Norway',
       page: 'html/tours/norway.html',
-      summary: 'Mountain villages on the Hardangervidda and the valleys of Hemsedal and Voss.',
-      intro: 'Norway’s rural tours start in mountain villages: Geilo on the Hardangervidda, the valley farms of Hemsedal, and the countryside around Voss.',
+      summary: 'Mountain villages on the Hardangervidda, the valleys of Hemsedal and Voss, and Arctic settlements on Svalbard.',
+      intro: 'Norway’s rural tours start in mountain villages: Geilo on the Hardangervidda, the valley farms of Hemsedal, and the countryside around Voss. On Svalbard they leave Longyearbyen for the smaller settlements on the fjords: a research village, a preserved mining town, and a hillside harbour.',
       tours: [
         {
           id: 'norway-geilo',
@@ -370,16 +370,7 @@
           description: 'Leave the station for the farm roads and lake shore around Voss, in the valley between the fjord routes.',
           stayUrl: 'html/cities/norway/voss.html',
           stayLabel: 'Stays in Voss'
-        }
-      ]
-    },
-    {
-      id: 'svalbard',
-      name: 'Svalbard',
-      page: 'html/tours/svalbard.html',
-      summary: 'Outlying Arctic settlements: Ny-Ålesund, Pyramiden, and Barentsburg.',
-      intro: 'Svalbard’s rural tours leave the main street of Longyearbyen for the smaller settlements on the fjords: a research village, a preserved mining town, and a hillside harbour.',
-      tours: [
+        },
         {
           id: 'svalbard-ny-alesund',
           name: 'Ny-Ålesund settlement walk',
@@ -387,7 +378,7 @@
           rural: true,
           detail: 'Half day · research village on Kongsfjorden',
           description: 'Walk the wooden research settlement of Ny-Ålesund on Kongsfjorden, with glacier ice at the head of the fjord.',
-          stayUrl: 'html/cities/svalbard/ny-alesund-polar-lodge.html',
+          stayUrl: 'html/cities/norway/ny-alesund-polar-lodge.html',
           stayLabel: 'Stay in Ny-Ålesund'
         },
         {
@@ -397,7 +388,7 @@
           rural: true,
           detail: 'Half day · guided settlement visit',
           description: 'A guided visit to Pyramiden, the preserved mining settlement on Billefjorden, reached by boat from the main fjord.',
-          stayUrl: 'html/cities/svalbard/pyramiden-harbour-house.html',
+          stayUrl: 'html/cities/norway/pyramiden-harbour-house.html',
           stayLabel: 'Stay in Pyramiden'
         },
         {
@@ -407,7 +398,7 @@
           rural: true,
           detail: 'Half day · harbour and hillside lanes',
           description: 'Walk the harbour and hillside lanes of Barentsburg, the mining settlement on Grønfjorden.',
-          stayUrl: 'html/cities/svalbard/barentsburg-guesthouse.html',
+          stayUrl: 'html/cities/norway/barentsburg-guesthouse.html',
           stayLabel: 'Stay in Barentsburg'
         }
       ]

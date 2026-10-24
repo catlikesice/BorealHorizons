@@ -28,7 +28,7 @@ The statements live in [`hotel-addons.sql`](hotel-addons.sql). Dialect is SQLite
 
 Choosing a hotel on a city page, or **Select stay** on a search result that has no property page of its own, opens `trip.html`. The page lists the hotels in that city, then the stay extras for the selected hotel, then the city experiences and transport. The summary is one checkout: the room plus each added extra.
 
-A property page such as `html/cities/svalbard/funken-lodge.html` keeps the extras written in the page and appends catalog rows whose `addon_id` is not already there. Funken Lodge therefore still shows the lodge spa, and also the Longyearbyen dog-sled outing.
+A property page such as `html/cities/norway/funken-lodge.html` keeps the extras written in the page and appends catalog rows whose `addon_id` is not already there. Funken Lodge therefore still shows the lodge spa, and also the Longyearbyen dog-sled outing.
 
 Every hotel listed on a city page or in the search catalog receives add-ons. Where this file has no stay row for that hotel, the loader adds breakfast for two (£18 per night) and late checkout (£16). Where a city has no experience, it adds a walking tour (£28). Where a city has no transport, it adds a station transfer (£22). Curated rows stay as written, so Esbjerg still shows the maritime museum and Britannia breakfast, and those defaults are not added again.
 
