@@ -54,6 +54,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Arbroath",
+      "city": "Arbroath",
+      "country": "Scotland",
+      "url": "html/cities/scotland/arbroath.html",
+      "description": "Browse hotels in Arbroath, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Aviemore",
       "city": "Aviemore",
       "country": "Scotland",
@@ -147,6 +155,14 @@ window.SEARCH_CATALOG = {
       "country": "Finland",
       "url": "html/cities/finland/espoo.html",
       "description": "Browse hotels in Espoo, Finland."
+    },
+    {
+      "type": "city",
+      "name": "Forfar",
+      "city": "Forfar",
+      "country": "Scotland",
+      "url": "html/cities/scotland/forfar.html",
+      "description": "Browse hotels in Forfar, Scotland."
     },
     {
       "type": "city",
@@ -932,6 +948,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Hotel Seaforth",
+      "city": "Arbroath",
+      "country": "Scotland",
+      "url": "html/cities/scotland/hotel-seaforth.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Seafront hotel on the promenade in Arbroath, looking over the North Sea toward the harbour."
+    },
+    {
+      "type": "hotel",
+      "name": "The Townhouse Hotel",
+      "city": "Arbroath",
+      "country": "Scotland",
+      "url": "html/cities/scotland/the-townhouse-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel on Marketgate in Arbroath, a short walk from the abbey and the High Street."
+    },
+    {
+      "type": "hotel",
+      "name": "Cliffburn Hotel",
+      "city": "Arbroath",
+      "country": "Scotland",
+      "url": "html/cities/scotland/cliffburn-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Hillside hotel above Arbroath, a short walk from the cliffs and the signal tower."
+    },
+    {
+      "type": "hotel",
       "name": "Cairngorm Hotel",
       "city": "Aviemore",
       "country": "Scotland",
@@ -1303,6 +1352,39 @@ window.SEARCH_CATALOG = {
       "price": "0.09 ETH / night",
       "priceEth": 0.09,
       "description": "Waterfront hotel with excellent meeting facilities and nature access."
+    },
+    {
+      "type": "hotel",
+      "name": "The Royal Hotel",
+      "city": "Forfar",
+      "country": "Scotland",
+      "url": "html/cities/scotland/forfar-royal-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Town hotel on Castle Street in Forfar, in the county town of Angus."
+    },
+    {
+      "type": "hotel",
+      "name": "The Stag Hotel",
+      "city": "Forfar",
+      "country": "Scotland",
+      "url": "html/cities/scotland/the-stag-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "High Street hotel in Forfar, close to the shops and the county buildings."
+    },
+    {
+      "type": "hotel",
+      "name": "Forfar Loch House",
+      "city": "Forfar",
+      "country": "Scotland",
+      "url": "html/cities/scotland/forfar-loch-house.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Shore house on Forfar Loch, a short walk from the town centre."
     },
     {
       "type": "hotel",
