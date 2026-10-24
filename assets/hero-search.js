@@ -13,6 +13,8 @@
  * destination stays on the filtered results. The box is hidden for Tours.
  * Tours post country, startDate, adults, and children. The dropdown starts on
  * "Select Country" until a country is chosen.
+ * Check-in, check-out, and start date open a month calendar when the field,
+ * its label, or the calendar button is used.
  */
 (function () {
   'use strict';
@@ -560,10 +562,24 @@
       }
     }
 
+    var checkOutCalendar = null;
+
+    function checkoutMinDate() {
+      var checkInISO = toISODate(checkIn.value);
+      if (!checkInISO) {
+        return minDate;
+      }
+      if (window.BookingCalendar && typeof window.BookingCalendar.shiftISO === 'function') {
+        return window.BookingCalendar.shiftISO(checkInISO, 1) || minDate;
+      }
+      return checkInISO;
+    }
+
     function refreshCheckoutMin() {
       var checkInISO = toISODate(checkIn.value);
+      var checkoutMin = checkoutMinDate();
       if (checkOutPicker) {
-        checkOutPicker.min = checkInISO || minDate;
+        checkOutPicker.min = checkoutMin;
       }
       var checkOutISO = toISODate(checkOut.value);
       if (checkInISO && checkOutISO && checkOutISO <= checkInISO) {
@@ -572,11 +588,49 @@
           checkOutPicker.value = '';
         }
       }
+      if (checkOutCalendar) {
+        checkOutCalendar.refresh();
+      }
+    }
+
+    function dateRange(minISO) {
+      return { min: minISO || minDate, max: maxDate || minDate };
+    }
+
+    function attachBookingCalendar(textInput, rangeFor, onPick) {
+      if (!window.BookingCalendar || typeof window.BookingCalendar.bind !== 'function' || !textInput) {
+        return null;
+      }
+      var field = textInput.closest('[data-booking-calendar]');
+      if (!field) {
+        return null;
+      }
+      return window.BookingCalendar.bind({
+        field: field,
+        input: textInput,
+        range: rangeFor,
+        onPick: onPick
+      });
     }
 
     bindDateField(checkIn, checkInPicker, refreshCheckoutMin);
     bindDateField(checkOut, checkOutPicker);
     bindDateField(startInput, startPicker);
+
+    attachBookingCalendar(checkIn, function () {
+      return dateRange(minDate);
+    }, function () {
+      if (checkOutField.hidden || checkOut.disabled || toISODate(checkOut.value)) {
+        return;
+      }
+      checkOut.focus();
+    });
+    checkOutCalendar = attachBookingCalendar(checkOut, function () {
+      return dateRange(checkoutMinDate());
+    });
+    attachBookingCalendar(startInput, function () {
+      return dateRange(minDate);
+    });
     refreshCheckoutMin();
 
     adultsInput.addEventListener('input', function () {
