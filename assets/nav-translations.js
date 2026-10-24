@@ -15,6 +15,8 @@
       environmentMissionAria: 'Environmental Mission',
       aboutEcoTourism: 'About EcoTourism',
       aboutEcoTourismAria: 'About EcoTourism',
+      ruralTours: 'Rural tours',
+      ruralToursAria: 'Rural tours',
       reliableBlockchain: 'Reliable Blockchain',
       reliableBlockchainAria: 'Reliable Blockchain',
       account: 'Account',
@@ -50,6 +52,8 @@
       environmentMissionAria: 'Экологическая миссия',
       aboutEcoTourism: 'Об экотуризме',
       aboutEcoTourismAria: 'Об экотуризме',
+      ruralTours: 'Сельские туры',
+      ruralToursAria: 'Сельские туры',
       reliableBlockchain: 'Надёжный блокчейн',
       reliableBlockchainAria: 'Надёжный блокчейн',
       account: 'Аккаунт',
@@ -85,6 +89,8 @@
       environmentMissionAria: 'Miljöuppdrag',
       aboutEcoTourism: 'Om ekoturism',
       aboutEcoTourismAria: 'Om ekoturism',
+      ruralTours: 'Landsbygdsturer',
+      ruralToursAria: 'Landsbygdsturer',
       reliableBlockchain: 'Tillförlitlig blockkedja',
       reliableBlockchainAria: 'Tillförlitlig blockkedja',
       account: 'Konto',
@@ -120,6 +126,8 @@
       environmentMissionAria: 'Umweltmission',
       aboutEcoTourism: 'Über Ökotourismus',
       aboutEcoTourismAria: 'Über Ökotourismus',
+      ruralTours: 'Ländliche Touren',
+      ruralToursAria: 'Ländliche Touren',
       reliableBlockchain: 'Zuverlässige Blockchain',
       reliableBlockchainAria: 'Zuverlässige Blockchain',
       account: 'Konto',
@@ -253,6 +261,9 @@
 
         const aboutEcoTourismLink = environmentMenu.querySelector('.nav-about-ecotourism, a[href$="about-ecotourism.html"]');
         updateLinkContent(aboutEcoTourismLink, mapping.aboutEcoTourism, mapping.aboutEcoTourismAria);
+
+        const ruralToursLink = environmentMenu.querySelector('.nav-rural-tours, a[href$="html/tours/index.html"]');
+        updateLinkContent(ruralToursLink, mapping.ruralTours, mapping.ruralToursAria);
       }
     } else {
       const environmentMissionLinks = navRoot.querySelectorAll('.nav-box-environment, a[href$="crypto-environment.html"]');
@@ -400,6 +411,8 @@
           updateLinkContent(anchor, mapping.environmentMission, mapping.environmentMissionAria);
         } else if (href === 'about-ecotourism.html') {
           updateLinkContent(anchor, mapping.aboutEcoTourism, mapping.aboutEcoTourismAria);
+        } else if (href === 'html/tours/index.html') {
+          updateLinkContent(anchor, mapping.ruralTours, mapping.ruralToursAria);
         } else if (href === 'crypto-reliability.html') {
           updateLinkContent(anchor, mapping.reliableBlockchain, mapping.reliableBlockchainAria);
         } else if (href === '#contact' || href === 'index.html#contact' || href === 'contact.html') {

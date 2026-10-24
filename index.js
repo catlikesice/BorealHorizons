@@ -9,6 +9,7 @@ const propertiesRouter = require('./routes/properties');
 const searchRouter = require('./routes/search');
 const hotelAddonsRouter = require('./routes/hotel-addons');
 const contactRouter = require('./routes/contact');
+const tourInterestRouter = require('./routes/tour-interest');
 const { serveCityPage } = require('./lib/city-pages');
 
 const app = express();
@@ -29,6 +30,7 @@ app.use('/api/properties', propertiesRouter);
 app.use('/api/search', searchRouter);
 app.use('/api/hotel-addons', hotelAddonsRouter);
 app.use('/api/contact', contactRouter);
+app.use('/api/tour-interest', tourInterestRouter);
 
 // City listings and hotel pages live under html/cities/<region>/. A request
 // for the old root filename redirects there. If a city file is missing, serve

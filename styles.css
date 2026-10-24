@@ -4556,3 +4556,90 @@ body:has(.trip-builder) {
   }
 }
 
+/* Rural tours by country */
+.tour-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem 0.9rem;
+  margin: 0 0 1.4rem;
+  padding: 0;
+  list-style: none;
+}
+
+.tour-switcher a[aria-current="page"] {
+  color: #23441a;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+.tour-country-grid,
+.tour-list {
+  list-style: none;
+  margin: 0 0 1.6rem;
+  padding: 0;
+}
+
+.tour-country-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+}
+
+.tour-country-card,
+.tour-card {
+  background: #fff;
+  border: 1px solid rgba(35, 68, 26, 0.14);
+  border-radius: 1rem;
+  padding: 1rem 1.05rem 1.1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tour-country-card h3,
+.tour-card h3 {
+  margin: 0 0 0.35rem;
+  color: #2e4d25;
+}
+
+.tour-country-card p,
+.tour-card p {
+  margin: 0 0 0.7rem;
+}
+
+.tour-places,
+.tour-card__meta {
+  color: #335a2d;
+  font-weight: 650;
+}
+
+.tour-list {
+  display: grid;
+  gap: 1rem;
+}
+
+.tour-card--rural {
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.14), 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.tour-card__badge {
+  display: inline-block;
+  margin: 0 0 0.5rem;
+  padding: 0.16rem 0.6rem;
+  border-radius: 999px;
+  background: #2e7d32;
+  color: #fff;
+  font-size: 0.78rem;
+  font-weight: 750;
+  letter-spacing: 0.02em;
+}
+
+.tour-interest {
+  margin-top: 0.4rem;
+}
+
+.tour-interest__country {
+  margin: 0 0 0.95rem;
+  color: #23441a;
+  font-weight: 700;
+}
+
