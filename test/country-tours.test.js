@@ -44,7 +44,11 @@ after(() => new Promise((resolve, reject) => {
 
 test('every country has a rural tour page with the navbar and an interest form', () => {
   const seen = new Set();
-  assert.ok(CountryTours.countries.length >= 13);
+  assert.equal(CountryTours.countries.length, 12);
+  assert.equal(CountryTours.get('svalbard'), null);
+  const norway = CountryTours.get('norway');
+  assert.ok(norway);
+  assert.ok(CountryTours.ruralTours(norway).some((tour) => tour.place === 'Ny-Ålesund'));
 
   CountryTours.countries.forEach((country) => {
     assert.equal(seen.has(country.id), false, country.id + ' is listed twice');
