@@ -189,6 +189,20 @@
 
   var ADULT_REQUIRED = 'A booking must include at least one adult.';
 
+  function horizonProblem(stay) {
+    var api = window.BookingDates;
+    if (!api || typeof api.exceedsBookingHorizon !== 'function' || !stay) {
+      return '';
+    }
+    if (api.exceedsBookingHorizon(stay.checkIn)) {
+      return api.bookingHorizonError('check-in');
+    }
+    if (api.exceedsBookingHorizon(stay.checkOut)) {
+      return api.bookingHorizonError('check-out');
+    }
+    return '';
+  }
+
   function partyAdults(stay) {
     if (!stay || !Number.isFinite(stay.adults)) {
       return 1;
@@ -506,7 +520,8 @@
     body.appendChild(total);
 
     var needsAdult = partyAdults(state.stay) < 1;
-    var continueLink = el('a', 'trip-continue', needsAdult ? 'Add an adult' : continueLabel(bookingCount, nights));
+    var tooFar = horizonProblem(state.stay);
+    var continueLink = el('a', 'trip-continue', needsAdult ? 'Add an adult' : (tooFar ? 'Choose earlier dates' : continueLabel(bookingCount, nights)));
     continueLink.id = 'trip-continue';
     if (needsAdult) {
       continueLink.href = 'index.html';
@@ -514,12 +529,18 @@
         event.preventDefault();
         setStatus(ADULT_REQUIRED);
       });
+    } else if (tooFar) {
+      continueLink.href = 'index.html';
+      continueLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        setStatus(tooFar);
+      });
     } else if (hotel && nights > 0 && hotel.priceEth > 0) {
       continueLink.href = 'checkout.html';
       continueLink.addEventListener('click', function (event) {
         if (!persistCheckout(hotel, addons, nights)) {
           event.preventDefault();
-          setStatus(ADULT_REQUIRED);
+          setStatus(horizonProblem(state.stay) || ADULT_REQUIRED);
           return;
         }
         event.preventDefault();
@@ -532,6 +553,8 @@
     }
     if (needsAdult) {
       body.appendChild(el('p', 'trip-summary__note', ADULT_REQUIRED));
+    } else if (tooFar) {
+      body.appendChild(el('p', 'trip-summary__note', tooFar));
     }
     body.appendChild(continueLink);
     body.appendChild(el('p', 'trip-summary__note', 'Review cancellation terms for each item before choosing card or crypto payment.'));

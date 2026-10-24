@@ -67,9 +67,11 @@
         });
     }
 
-    function createBooking(userId, payload) {
+    function createBooking(userId, payload, options) {
+      var opts = options || {};
       var record = BookingRecords.createRecord(userId, payload, {
-        existingCodes: existingCodes()
+        existingCodes: existingCodes(),
+        now: opts.now
       });
       var bookings = allBookings();
       bookings.push(record);

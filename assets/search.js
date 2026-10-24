@@ -106,6 +106,23 @@
     return value;
   }
 
+  function horizonNote(stay) {
+    var api = window.BookingDates;
+    if (!api || typeof api.exceedsBookingHorizon !== 'function' || typeof api.bookingHorizonError !== 'function' || !stay) {
+      return '';
+    }
+    if (stay.tours && api.exceedsBookingHorizon(stay.startDate)) {
+      return api.bookingHorizonError('start');
+    }
+    if (!stay.tours && api.exceedsBookingHorizon(stay.checkIn)) {
+      return api.bookingHorizonError('check-in');
+    }
+    if (!stay.tours && api.exceedsBookingHorizon(stay.checkOut)) {
+      return api.bookingHorizonError('check-out');
+    }
+    return '';
+  }
+
   function getStayFromUrl() {
     var params = new URLSearchParams(window.location.search);
     var stored = readStoredBooking() || {};
@@ -161,6 +178,10 @@
       parts.push('Start date: ' + displayDate(stay.startDate));
     } else if (stay.checkIn && stay.checkOut) {
       parts.push('Stay: ' + displayDate(stay.checkIn) + ' – ' + displayDate(stay.checkOut));
+    }
+    var tooFar = horizonNote(stay);
+    if (tooFar) {
+      parts.push(tooFar);
     }
     if (tours && stay.tourCountry) {
       parts.push('Country: ' + stay.tourCountry);
