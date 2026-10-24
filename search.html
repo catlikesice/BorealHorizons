@@ -83,6 +83,40 @@
       background: #23441a;
     }
 
+    .search-form__ecolodge {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      height: 48px;
+      margin: 0;
+      padding: 0 0.9rem;
+      border: 2px solid #2e7d32;
+      border-radius: 0.65rem;
+      background: #fff;
+      color: #23421a;
+      font-weight: 700;
+      white-space: nowrap;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    .search-form__ecolodge[hidden] {
+      display: none;
+    }
+
+    .search-form__ecolodge:focus-within {
+      outline: 3px solid rgba(46, 125, 50, 0.25);
+      outline-offset: 1px;
+    }
+
+    .search-form__ecolodge input {
+      width: 1.05rem;
+      height: 1.05rem;
+      margin: 0;
+      accent-color: #2e7d32;
+      cursor: pointer;
+    }
+
     .search-stay {
       margin: 0.85rem auto 0;
       max-width: 40rem;
@@ -225,8 +259,10 @@
     }
 
     @media (max-width: 560px) {
-      .search-form button {
+      .search-form button,
+      .search-form__ecolodge {
         width: 100%;
+        justify-content: center;
       }
     }
   </style>
@@ -326,6 +362,10 @@
             enterkeyhint="search"
           >
         </div>
+        <label class="search-form__ecolodge" id="search-ecolodge-field" for="search-ecolodges">
+          <input type="checkbox" id="search-ecolodges" name="ecolodges" value="1">
+          <span id="search-ecolodges-label">Ecolodges only</span>
+        </label>
         <input type="hidden" id="search-checkin" name="checkIn">
         <input type="hidden" id="search-checkout" name="checkOut">
         <input type="hidden" id="search-start" name="startDate" disabled>
@@ -346,7 +386,7 @@
     </section>
 
     <section id="hotel-results-section" class="search-section" hidden>
-      <h2>Hotels</h2>
+      <h2 id="hotel-results-heading">Hotels</h2>
       <div id="hotel-results" class="search-grid"></div>
     </section>
 
@@ -374,6 +414,7 @@
   <script src="assets/local-auth.js"></script>
   <script src="assets/auth-client.js"></script>
   <script src="assets/search-catalog.js"></script>
+  <script src="assets/ecolodges.js"></script>
   <script src="assets/property-pages.js"></script>
   <script src="assets/booking-dates.js"></script>
   <script src="assets/search.js"></script>

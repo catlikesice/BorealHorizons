@@ -4,6 +4,8 @@
  * Prefer GET /api/search, which reads the SQL catalog and also returns places
  * that have no HTML page (url is null). If the API cannot be reached, fall
  * back to window.SEARCH_CATALOG. Schema: docs/sql/hotel-search.md.
+ * ecolodges=1 limits accommodation results to nature lodges and mountain stations.
+ * A blank q with that flag lists every ecolodge. Tours ignore the flag.
  */
 (function () {
   'use strict';
@@ -31,6 +33,11 @@
   function getKindFromUrl() {
     var params = new URLSearchParams(window.location.search);
     return params.get('what') === 'tours' ? 'tours' : 'accommodation';
+  }
+
+  function ecolodgeFlag(value) {
+    var text = String(value || '').trim().toLowerCase();
+    return text === '1' || text === 'true' || text === 'yes' || text === 'on';
   }
 
   function selectedKind(form) {
@@ -117,6 +124,7 @@
 
     return {
       tours: tours,
+      ecolodgesOnly: !tours && ecolodgeFlag(params.get('ecolodges')),
       checkIn: checkIn,
       checkOut: checkOut,
       startDate: tours ? canonicalDate(params.get('startDate') || '') : '',
@@ -164,6 +172,9 @@
     }
     if (tours && stay.tourCountry) {
       parts.push('Country: ' + stay.tourCountry);
+    }
+    if (stay.ecolodgesOnly) {
+      parts.push('Ecolodges only');
     }
     var guestLabel = formatGuestSummary(stay.adults, stay.children);
     if (guestLabel) {
@@ -216,13 +227,26 @@
     });
   }
 
-  function filterCatalog(query) {
+  function filterCatalog(query, options) {
     var catalog = window.SEARCH_CATALOG || { cities: [], hotels: [] };
+    var onlyEco = Boolean(options && options.ecolodgesOnly);
+    var hotels = catalog.hotels || [];
+    if (onlyEco) {
+      hotels = hotels.filter(function (item) {
+        return window.Ecolodges && window.Ecolodges.isEcolodge(item);
+      });
+    }
+    if (!query) {
+      return {
+        cities: [],
+        hotels: onlyEco ? hotels : []
+      };
+    }
     return {
-      cities: (catalog.cities || []).filter(function (item) {
+      cities: onlyEco ? [] : (catalog.cities || []).filter(function (item) {
         return matchesQuery(item, query);
       }),
-      hotels: (catalog.hotels || []).filter(function (item) {
+      hotels: hotels.filter(function (item) {
         return matchesQuery(item, query);
       })
     };
@@ -232,6 +256,10 @@
     var params = new URLSearchParams(window.location.search);
     params.set('q', query);
     params.set('what', kind === 'tours' ? 'tours' : 'accommodation');
+    if (kind === 'tours') {
+      params.delete('ecolodges');
+    }
+    var onlyEco = kind !== 'tours' && ecolodgeFlag(params.get('ecolodges'));
     return fetch(SQL_SEARCH_ENDPOINT + '?' + params.toString(), {
       headers: { Accept: 'application/json' }
     }).then(function (res) {
@@ -243,7 +271,7 @@
       // The static catalog has no SQL-only places and no tours. Use it only
       // for accommodation when the API cannot be reached.
       if (kind !== 'tours' && err && err.name === 'TypeError' && window.SEARCH_CATALOG) {
-        return filterCatalog(query);
+        return filterCatalog(query, { ecolodgesOnly: onlyEco });
       }
       if (kind === 'tours' && err && err.name === 'TypeError') {
         throw new Error('Tour search is unavailable. Open the site from the server and try again.');
@@ -357,11 +385,12 @@
       ? '<img class="search-card__image" src="' + escapeHtml(hotel.image) + '" alt="' + escapeHtml(hotel.name) + '">'
       : '<div class="search-card__image search-card__image--placeholder" aria-hidden="true"></div>';
 
+    var eyebrow = window.Ecolodges && window.Ecolodges.isEcolodge(hotel) ? 'Ecolodge' : 'Hotel';
     return (
       '<article class="search-card search-card--hotel">' +
         image +
         '<div class="search-card__body">' +
-          '<p class="search-card__eyebrow">Hotel</p>' +
+          '<p class="search-card__eyebrow">' + eyebrow + '</p>' +
           '<h3 class="search-card__title">' + escapeHtml(hotel.name) + '</h3>' +
           (location ? '<p class="search-card__meta">' + escapeHtml(location) + '</p>' : '') +
           (hotel.price ? '<p class="search-card__price">' + escapeHtml(hotel.price) + '</p>' : '') +
@@ -381,6 +410,8 @@
 
   function applyKindCopy(kind) {
     var tours = kind === 'tours';
+    var ecoBox = document.getElementById('search-ecolodges');
+    var onlyEco = !tours && ecoBox && ecoBox.checked && !ecoBox.disabled;
     var input = document.getElementById('site-search-input');
     var emptyCopy = document.getElementById('search-empty-copy');
     var note = document.getElementById('search-catalog-note');
@@ -389,7 +420,7 @@
     if (input) {
       input.placeholder = tours
         ? 'Try whale watching, walking tour, or Riga'
-        : 'Try Riga, Tallinn, or Kempinski';
+        : (onlyEco ? 'Ecolodge or place, e.g. Abisko' : 'Try Riga, Tallinn, or Kempinski');
     }
     if (intro) {
       intro.textContent = tours
@@ -410,6 +441,7 @@
 
   function renderResults(query, results, kind, stay) {
     var toursMode = kind === 'tours';
+    var ecolodgesOnly = Boolean(!toursMode && stay && stay.ecolodgesOnly);
     var countryBrowse = Boolean(toursMode && stay && stay.countrySpecified && !query);
     var cities = toursMode ? [] : (results.cities || []);
     var hotels = toursMode ? [] : (results.hotels || []);
@@ -422,8 +454,19 @@
     var statusEl = document.getElementById('search-status');
 
     applyKindCopy(kind);
+    setText('hotel-results-heading', ecolodgesOnly ? 'Ecolodges' : 'Hotels');
+    if (ecolodgesOnly) {
+      var emptyCopy = document.getElementById('search-empty-copy');
+      var intro = document.getElementById('search-intro');
+      if (emptyCopy) {
+        emptyCopy.textContent = 'No ecolodges match that search. Try a place such as Abisko, Aviemore, or Kielder.';
+      }
+      if (intro) {
+        intro.textContent = 'Showing nature lodges and mountain stations. Leave the search empty to see every ecolodge.';
+      }
+    }
 
-    if (!query && !countryBrowse) {
+    if (!query && !countryBrowse && !ecolodgesOnly) {
       setText('search-heading', toursMode ? 'Search tours' : 'Search hotels and cities');
       setText('search-status', toursMode
         ? 'Enter a tour name or a city to see tours.'
@@ -443,6 +486,8 @@
 
     if (countryBrowse) {
       setText('search-heading', stay.tourCountry ? 'Tours in ' + stay.tourCountry : 'Tours');
+    } else if (ecolodgesOnly && !query) {
+      setText('search-heading', 'Ecolodges');
     } else {
       setText('search-heading', 'Results for “' + query + '”');
     }
@@ -450,6 +495,8 @@
     if (statusEl) {
       if (toursMode) {
         statusEl.textContent = total === 1 ? '1 tour found.' : total + ' tours found.';
+      } else if (ecolodgesOnly) {
+        statusEl.textContent = total === 1 ? '1 ecolodge found.' : total + ' ecolodges found.';
       } else {
         statusEl.textContent = total === 1 ? '1 match found.' : total + ' matches found.';
       }
@@ -481,6 +528,18 @@
     if (emptyEl) emptyEl.hidden = true;
   }
 
+  function syncEcolodgeField(kind) {
+    var field = document.getElementById('search-ecolodge-field');
+    var box = document.getElementById('search-ecolodges');
+    var tours = kind === 'tours';
+    if (field) {
+      field.hidden = tours;
+    }
+    if (box) {
+      box.disabled = tours;
+    }
+  }
+
   function syncKindFields(form, kind) {
     if (!form) {
       return;
@@ -502,6 +561,11 @@
       input.value = query;
     }
 
+    var ecolodgeBox = document.getElementById('search-ecolodges');
+    if (ecolodgeBox && kind !== 'tours' && stay.ecolodgesOnly) {
+      ecolodgeBox.checked = true;
+    }
+    syncEcolodgeField(kind);
     syncKindFields(form, kind);
     syncStayFields(stay);
     applyKindCopy(kind);
@@ -510,27 +574,58 @@
       form.addEventListener('submit', function (event) {
         // Allow normal GET navigation to search.html?q=...&what=...
         // A tour search that already chose a country can omit the text query.
+        // Ecolodges only can omit the text query and list every ecolodge.
         var value = input ? input.value.trim() : '';
         var tours = selectedKind(form) === 'tours';
         var countryEl = document.getElementById('search-country');
         var hasCountry = tours && countryEl && !countryEl.disabled;
-        if (!value && !hasCountry) {
+        var eco = !tours && ecolodgeBox && ecolodgeBox.checked && !ecolodgeBox.disabled;
+        if (!value && !hasCountry && !eco) {
           event.preventDefault();
           input && input.focus();
         }
       });
+      if (ecolodgeBox) {
+        ecolodgeBox.addEventListener('change', function () {
+          applyKindCopy(selectedKind(form));
+          var value = input ? input.value.trim() : '';
+          if (!ecolodgeBox.checked && !value) {
+            var cleared = getStayFromUrl();
+            cleared.ecolodgesOnly = false;
+            cleared.tours = false;
+            if (window.history && typeof window.history.replaceState === 'function') {
+              var params = new URLSearchParams(window.location.search);
+              params.delete('ecolodges');
+              params.delete('q');
+              var nextUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+              window.history.replaceState(null, '', nextUrl);
+            }
+            renderResults('', { cities: [], hotels: [], tours: [] }, 'accommodation', cleared);
+            return;
+          }
+          if (typeof form.requestSubmit === 'function') {
+            form.requestSubmit();
+          } else {
+            form.submit();
+          }
+        });
+      }
       Array.prototype.forEach.call(form.querySelectorAll('input[name="what"]'), function (radio) {
         radio.addEventListener('change', function () {
           var nextKind = selectedKind(form);
+          syncEcolodgeField(nextKind);
           applyKindCopy(nextKind);
           var nextStay = getStayFromUrl();
           nextStay.tours = nextKind === 'tours';
-          if (nextKind !== 'tours') {
+          if (nextKind === 'tours') {
+            nextStay.ecolodgesOnly = false;
+          } else {
             nextStay.startDate = '';
             nextStay.tourCountry = '';
+            nextStay.ecolodgesOnly = Boolean(ecolodgeBox && ecolodgeBox.checked && !ecolodgeBox.disabled);
           }
           syncStayFields(nextStay);
-          if (query || (nextKind === 'tours' && stay.countrySpecified)) {
+          if (query || (nextKind === 'tours' && stay.countrySpecified) || (nextKind !== 'tours' && nextStay.ecolodgesOnly)) {
             form.submit();
           } else {
             renderResults('', { cities: [], hotels: [], tours: [] }, nextKind, nextStay);
@@ -539,7 +634,7 @@
       });
     }
 
-    if (!query && !(kind === 'tours' && stay.countrySpecified)) {
+    if (!query && !(kind === 'tours' && stay.countrySpecified) && !stay.ecolodgesOnly) {
       renderResults('', { cities: [], hotels: [], tours: [] }, kind, stay);
       return;
     }
