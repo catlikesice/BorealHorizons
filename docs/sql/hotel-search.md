@@ -34,11 +34,12 @@ Accommodation and tours are separate lookups:
 | --- | --- | --- |
 | Results page (`search.html`, `GET /api/search?q=`) | Free text | Every whitespace-separated token is a substring of the city or hotel haystack |
 | Homepage bar (`index.html`) | One destination | First city or hotel in catalog order, using the priority list below |
-| Tours (`what=tours` on either surface) | Free text | Every token is a substring of an experience haystack. Cities and hotels are not returned |
+| Tours (`what=tours` on the results page) | Free text, optional `country` | Every token is a substring of an experience haystack. A blank `q` with `country` lists that country's tours. Cities and hotels are not returned |
+| Homepage Tours | Country dropdown in “Where are you going?” | Opens `search.html?what=tours&country=...`. An empty `country` lists every tour |
 
 `checkIn`, `checkOut`, `adults`, and `children` travel with both forms. They are stay details for pricing and booking. They do not filter these queries. `what` chooses the catalog: omit it, or pass `accommodation`, for cities and hotels. Pass `tours` to search experiences only.
 
-A blank `q` returns no rows. `search.js` treats an empty accommodation query as `{ "cities": [], "hotels": [] }` and an empty tour query as `{ "tours": [] }`. Neither scan runs.
+A blank `q` returns no rows when `country` is omitted. `search.js` treats an empty accommodation query as `{ "cities": [], "hotels": [] }` and an empty tour query with no `country` parameter as `{ "tours": [] }`. Passing `country` with a blank `q` lists the tours in that country. `country=` lists every tour. United Kingdom includes Scotland and Northeast England.
 
 ## Tables
 
@@ -265,7 +266,7 @@ Each tour:
 | `price` | ETH display string, `ETH / night` when billing is per night |
 | `pageUrl` | City or hotel page used to open `trip.html` |
 
-A city tour's suggestion label is `name — city`. A hotel tour's label is `name — hotel`. `GET /api/search/destinations?what=tours` returns those labels. The homepage Tours option uses that list and always opens `search.html`. Tour cards link to `trip.html` with the city, the hotel when there is one, and `addon` set to `addonId`.
+A city tour's suggestion label is `name — city`. A hotel tour's label is `name — hotel`. `GET /api/search/destinations?what=tours` returns those labels. The homepage Tours option does not use that list: “Where are you going?” is the country dropdown, and Search opens `search.html` with `country` and `startDate`. The results page still accepts a tour name in `q`. Tour cards link to `trip.html` with the city, the hotel when there is one, and `addon` set to `addonId`.
 
 `q=breakfast` matches no tours. `q=kempinski` matches the hotel only while `what` is accommodation.
 

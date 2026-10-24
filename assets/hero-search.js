@@ -3,12 +3,13 @@
  * Persists booking dates and guests from the homepage search so hotel pages
  * can price the stay. Destination suggestions come from GET /api/search/destinations
  * when the API is available, including places that have no HTML page.
- * Accommodation is the default. Choosing Tours asks for a tour name, a country,
- * and a start date instead of check-in and check-out, then continues to
- * search.html?what=tours.
+ * Accommodation is the default. Choosing Tours turns "Where are you going?"
+ * into a country dropdown and asks for a start date instead of check-in and
+ * check-out, then continues to search.html?what=tours&country=...
  * A match with a page opens that page. A place with no page continues to
  * search.html. Accommodation posts q, checkIn, checkOut, adults, and children.
- * Tours post q, country, startDate, adults, and children.
+ * Tours post country, startDate, adults, and children. An empty country is
+ * "Any country" and still lists tours.
  */
 (function () {
   'use strict';
@@ -22,7 +23,6 @@
   var DEFAULT_ADULTS = 2;
   var DEFAULT_CHILDREN = 0;
   var ACCOMMODATION_PLACEHOLDER = 'City or hotel, e.g. Riga';
-  var TOUR_PLACEHOLDER = 'Tour or city, e.g. whale watching';
 
   function currentKind() {
     var checked = document.querySelector('#hero-search-form input[name="what"]:checked');
@@ -170,30 +170,7 @@
   }
 
   function fillDestinationList(datalist, kind) {
-    if (!datalist) {
-      return;
-    }
-
-    var mode = kind === 'tours' ? 'tours' : 'accommodation';
-    if (mode === 'tours') {
-      datalist.innerHTML = '';
-      var countrySelect = document.getElementById('hero-search-country');
-      var countryQuery = countrySelect && countrySelect.value
-        ? '&country=' + encodeURIComponent(countrySelect.value)
-        : '';
-      fetch('/api/search/destinations?what=tours' + countryQuery, { headers: { Accept: 'application/json' } })
-        .then(function (res) {
-          if (!res.ok) {
-            throw new Error('Tour list failed');
-          }
-          return res.json();
-        })
-        .then(function (payload) {
-          writeDestinationLabels(datalist, payload && payload.labels, 'tours');
-        })
-        .catch(function () {
-          // Leave the list empty when tour search is unavailable.
-        });
+    if (!datalist || kind === 'tours') {
       return;
     }
 
@@ -381,10 +358,18 @@
     });
   }
 
+  function setControl(control, visible) {
+    if (!control) {
+      return;
+    }
+    control.hidden = !visible;
+    control.disabled = !visible;
+  }
+
   function init() {
     var form = document.getElementById('hero-search-form');
     var destination = document.getElementById('hero-search-destination');
-    var countryField = document.getElementById('hero-search-country-field');
+    var destinationLabel = document.getElementById('hero-search-destination-label');
     var countrySelect = document.getElementById('hero-search-country');
     var checkInField = document.getElementById('hero-search-checkin-field');
     var checkOutField = document.getElementById('hero-search-checkout-field');
@@ -409,12 +394,18 @@
     function applySearchKind(kind) {
       var tours = kind === 'tours';
       form.classList.toggle('hero-search--tours', tours);
-      destination.placeholder = tours ? TOUR_PLACEHOLDER : ACCOMMODATION_PLACEHOLDER;
-      setSearchField(countryField, tours);
+      destination.placeholder = ACCOMMODATION_PLACEHOLDER;
+      setControl(destination, !tours);
+      setControl(countrySelect, tours);
+      if (destinationLabel) {
+        destinationLabel.htmlFor = tours ? countrySelect.id : destination.id;
+      }
       setSearchField(startField, tours);
       setSearchField(checkInField, !tours);
       setSearchField(checkOutField, !tours);
-      fillDestinationList(datalist, kind);
+      if (!tours) {
+        fillDestinationList(datalist, kind);
+      }
       setStatus('');
     }
 
@@ -437,9 +428,6 @@
     });
 
     countrySelect.addEventListener('change', function () {
-      if (currentKind() === 'tours') {
-        fillDestinationList(datalist, 'tours');
-      }
       setStatus('');
     });
 
@@ -502,9 +490,9 @@
       var children = parseGuestCount(childrenInput.value, MIN_CHILDREN, MAX_CHILDREN, NaN);
       var nights = null;
 
-      if (!query) {
+      if (kind !== 'tours' && !query) {
         event.preventDefault();
-        setStatus(kind === 'tours' ? 'Please enter a tour or a city.' : 'Please enter a city or hotel.');
+        setStatus('Please enter a city or hotel.');
         destination.focus();
         return;
       }
@@ -587,9 +575,10 @@
         if (startValue) {
           startValue.value = startDate;
         }
-        countrySelect.disabled = !countrySelect.value;
+        destination.disabled = true;
+        countrySelect.disabled = false;
         persistBookingSelection(Object.assign({
-          cityName: query,
+          cityName: countrySelect.value || '',
           startDate: startDate,
           tourCountry: countrySelect.value || ''
         }, guestPayload(adults, children)));

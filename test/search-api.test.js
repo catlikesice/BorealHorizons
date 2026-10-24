@@ -388,12 +388,19 @@ test('United Kingdom tour search includes Scotland and Northeast England', async
   assert.equal(labels.labels.includes('Faxaflói whale watching — Reykjavík'), false);
 });
 
-test('homepage tour search asks for a start date and a country', () => {
+test('homepage tour search puts the country dropdown in Where are you going', () => {
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const hero = fs.readFileSync(path.join(root, 'assets/hero-search.js'), 'utf8');
-  assert.match(html, /id="hero-search-country-field"/);
-  assert.match(html, /id="hero-search-country"/);
-  assert.match(html, /id="hero-search-country-any"/);
+  const destination = html.slice(
+    html.indexOf('hero-search__field--destination'),
+    html.indexOf('hero-search__field--checkin')
+  );
+  assert.match(destination, /id="hero-search-destination-label"[^>]*>Where are you going\?</);
+  assert.match(destination, /id="hero-search-country"/);
+  assert.match(destination, /id="hero-search-country-any"/);
+  assert.doesNotMatch(html, /id="hero-search-country-field"/);
+  assert.doesNotMatch(html, /id="hero-search-country-label"/);
+  assert.doesNotMatch(html, /hero-search-country-label/);
   assert.match(html, /id="hero-search-start-label"[^>]*>Start Date</);
   assert.match(html, /name="startDate"/);
   assert.match(html, /value="Iceland"/);
@@ -401,11 +408,35 @@ test('homepage tour search asks for a start date and a country', () => {
   assert.match(html, /value="United Kingdom"/);
   assert.doesNotMatch(html, /value="Scotland"/);
   assert.doesNotMatch(html, /value="Northeast England"/);
-  assert.match(html, /hero-search-country-label": "Country"/);
   assert.match(hero, /hero-search--tours/);
+  assert.match(hero, /setControl\(countrySelect, tours\)/);
+  assert.match(hero, /setControl\(destination, !tours\)/);
   assert.match(hero, /Please choose a start date\./);
   assert.match(hero, /setSearchField\(checkInField, !tours\)/);
   assert.match(hero, /setSearchField\(checkOutField, !tours\)/);
+});
+
+test('a country with no tour text lists that country', async () => {
+  const icelandResponse = await fetch(base + '/api/search?what=tours&country=' + encodeURIComponent('Iceland'));
+  assert.equal(icelandResponse.status, 200);
+  const iceland = await icelandResponse.json();
+  assert.ok(iceland.tours.length > 0);
+  assert.ok(iceland.tours.every((tour) => tour.country === 'Iceland'));
+  assert.ok(iceland.tours.some((tour) => tour.name === 'Faxaflói whale watching'));
+
+  const anywhere = await fetch(base + '/api/search?what=tours&country=');
+  assert.equal(anywhere.status, 200);
+  const allTours = await anywhere.json();
+  assert.ok(allTours.tours.length > iceland.tours.length);
+  assert.ok(allTours.tours.some((tour) => tour.country === 'Iceland'));
+  assert.ok(allTours.tours.some((tour) => tour.country === 'Scotland'));
+
+  const unitedKingdom = await fetch(base + '/api/search?what=tours&country=' + encodeURIComponent('United Kingdom'));
+  assert.equal(unitedKingdom.status, 200);
+  const uk = await unitedKingdom.json();
+  assert.ok(uk.tours.some((tour) => tour.city === 'Kirkwall' && tour.country === 'Scotland'));
+  assert.ok(uk.tours.some((tour) => tour.city === 'Durham' && tour.country === 'Northeast England'));
+  assert.equal(uk.tours.some((tour) => tour.country === 'Iceland'), false);
 });
 
 test('tour destination labels are experiences, not hotels', async () => {

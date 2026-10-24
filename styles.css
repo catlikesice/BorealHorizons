@@ -532,11 +532,6 @@ header a { position: static !important; left: auto !important; right: auto !impo
     grid-row: 2;
   }
 
-  .hero-search--tours .hero-search__field--country {
-    grid-column: 1;
-    grid-row: 3;
-  }
-
   .hero-search--tours .hero-search__field--start {
     grid-column: 2;
     grid-row: 2;
@@ -747,14 +742,12 @@ header a { position: static !important; left: auto !important; right: auto !impo
   }
 
   .hero-search__field--destination,
-  .hero-search__field--country,
   .hero-search__field--guests,
   .hero-search button[type="submit"] {
     grid-column: 1 / -1;
   }
 
   .hero-search--tours .hero-search__field--destination,
-  .hero-search--tours .hero-search__field--country,
   .hero-search--tours .hero-search__field--start,
   .hero-search--tours .hero-search__field--guests,
   .hero-search--tours > button[type="submit"] {
