@@ -39,6 +39,13 @@ const DESTINATIONS = [
     hotels: ['Cairngorm Hotel', 'Rothiemurchus Lodge', 'Spey Valley Hotel']
   },
   {
+    city: 'Perth',
+    query: 'perth',
+    url: 'html/cities/scotland/perth.html',
+    section: 'boreal-perth-title',
+    hotels: ['Parklands Hotel', 'Salutation Hotel', 'Royal George Hotel']
+  },
+  {
     city: 'Pitlochry',
     query: 'pitlochry',
     url: 'html/cities/scotland/pitlochry.html',
@@ -58,10 +65,24 @@ const DESTINATIONS = [
     url: 'html/cities/scotland/benbecula.html',
     section: 'boreal-benbecula-title',
     hotels: ['Dark Island Hotel', 'Balivanich Airport House', 'Culla Bay Hotel']
+  },
+  {
+    city: 'Arbroath',
+    query: 'arbroath',
+    url: 'html/cities/scotland/arbroath.html',
+    section: 'boreal-arbroath-title',
+    hotels: ['Hotel Seaforth', 'The Townhouse Hotel', 'Cliffburn Hotel']
+  },
+  {
+    city: 'Forfar',
+    query: 'forfar',
+    url: 'html/cities/scotland/forfar.html',
+    section: 'boreal-forfar-title',
+    hotels: ['The Royal Hotel', 'The Stag Hotel', 'Forfar Loch House']
   }
 ];
 
-test('Ullapool, St Andrews, Aviemore, Pitlochry, Loch Lomond National Park, and Benbecula are on the HTML city list and in search', () => {
+test('Ullapool, St Andrews, Aviemore, Perth, Pitlochry, Loch Lomond National Park, Benbecula, Arbroath, and Forfar are on the HTML city list and in search', () => {
   const catalog = loadCatalog();
   const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const db = openSearchDatabase();

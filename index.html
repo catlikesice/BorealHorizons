@@ -206,25 +206,46 @@
         </div>
         <div class="hero-search__field hero-search__field--checkin" id="hero-search-checkin-field">
             <label id="hero-search-checkin-label" for="hero-search-checkin">Check-in</label>
-            <div class="date-field">
+            <div class="date-field" data-booking-calendar>
                 <input id="hero-search-checkin" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
-                <input id="hero-search-checkin-picker" class="date-field__picker" type="date" lang="en-GB" aria-label="Open check-in calendar" tabindex="-1">
+                <button type="button" class="date-field__button" id="hero-search-checkin-calendar" data-booking-calendar-open aria-label="Open check-in calendar" aria-haspopup="dialog" aria-expanded="false" aria-controls="hero-search-checkin-dialog">
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                        <rect x="3.5" y="5" width="17" height="15.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+                        <path d="M3.5 10h17M8 3.5v4M16 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                    </svg>
+                </button>
+                <div id="hero-search-checkin-dialog" class="birth-calendar booking-calendar" data-booking-calendar-dialog role="dialog" aria-label="Choose check-in date" hidden></div>
+                <input id="hero-search-checkin-picker" class="date-field__picker" type="date" lang="en-GB" tabindex="-1" aria-hidden="true">
             </div>
             <input type="hidden" name="checkIn" id="hero-search-checkin-value">
         </div>
         <div class="hero-search__field hero-search__field--checkout" id="hero-search-checkout-field">
             <label id="hero-search-checkout-label" for="hero-search-checkout">Check-out</label>
-            <div class="date-field">
+            <div class="date-field" data-booking-calendar>
                 <input id="hero-search-checkout" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
-                <input id="hero-search-checkout-picker" class="date-field__picker" type="date" lang="en-GB" aria-label="Open check-out calendar" tabindex="-1">
+                <button type="button" class="date-field__button" id="hero-search-checkout-calendar" data-booking-calendar-open aria-label="Open check-out calendar" aria-haspopup="dialog" aria-expanded="false" aria-controls="hero-search-checkout-dialog">
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                        <rect x="3.5" y="5" width="17" height="15.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+                        <path d="M3.5 10h17M8 3.5v4M16 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                    </svg>
+                </button>
+                <div id="hero-search-checkout-dialog" class="birth-calendar booking-calendar" data-booking-calendar-dialog role="dialog" aria-label="Choose check-out date" hidden></div>
+                <input id="hero-search-checkout-picker" class="date-field__picker" type="date" lang="en-GB" tabindex="-1" aria-hidden="true">
             </div>
             <input type="hidden" name="checkOut" id="hero-search-checkout-value">
         </div>
         <div class="hero-search__field hero-search__field--start" id="hero-search-start-field" hidden>
             <label id="hero-search-start-label" for="hero-search-start">Start Date</label>
-            <div class="date-field">
+            <div class="date-field" data-booking-calendar>
                 <input id="hero-search-start" class="date-field__text" type="text" inputmode="numeric" placeholder="dd/mm/yyyy" autocomplete="off" maxlength="10" spellcheck="false">
-                <input id="hero-search-start-picker" class="date-field__picker" type="date" lang="en-GB" aria-label="Open start date calendar" tabindex="-1">
+                <button type="button" class="date-field__button" id="hero-search-start-calendar" data-booking-calendar-open aria-label="Open start date calendar" aria-haspopup="dialog" aria-expanded="false" aria-controls="hero-search-start-dialog">
+                    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+                        <rect x="3.5" y="5" width="17" height="15.5" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"></rect>
+                        <path d="M3.5 10h17M8 3.5v4M16 3.5v4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"></path>
+                    </svg>
+                </button>
+                <div id="hero-search-start-dialog" class="birth-calendar booking-calendar" data-booking-calendar-dialog role="dialog" aria-label="Choose start date" hidden></div>
+                <input id="hero-search-start-picker" class="date-field__picker" type="date" lang="en-GB" tabindex="-1" aria-hidden="true">
             </div>
             <input type="hidden" name="startDate" id="hero-search-start-value" disabled>
         </div>
@@ -648,6 +669,26 @@
       </li>
     </ul>
 
+    <h3 id="boreal-perth-title">Perth, Scotland</h3>
+    <ul>
+      <li id="boreal-perth-town">
+        <strong>Perth:</strong>
+        Stay in the former royal burgh on the River Tay, the city at the heart of Perthshire.
+      </li>
+      <li id="boreal-perth-scone">
+        <strong>Scone Palace:</strong>
+        Visit the palace across the river, where Scottish kings were crowned on the Stone of Destiny.
+      </li>
+      <li id="boreal-perth-tay">
+        <strong>The River Tay:</strong>
+        Walk the riverside from Tay Street to the bridges and the North Inch.
+      </li>
+      <li id="boreal-perth-fair-maid">
+        <strong>Fair Maid’s House:</strong>
+        See the house linked to Scott’s novel, then continue into the medieval lanes of the old town.
+      </li>
+    </ul>
+
     <h3 id="boreal-pitlochry-title">Pitlochry, Scotland</h3>
     <ul>
       <li id="boreal-pitlochry-town">
@@ -708,6 +749,46 @@
       </li>
     </ul>
 
+    <h3 id="boreal-arbroath-title">Arbroath, Scotland</h3>
+    <ul>
+      <li id="boreal-arbroath-town">
+        <strong>Arbroath:</strong>
+        Stay in the fishing town on the Angus coast, where the abbey and the harbour face the North Sea.
+      </li>
+      <li id="boreal-arbroath-abbey">
+        <strong>Arbroath Abbey:</strong>
+        Visit the red sandstone abbey where the Declaration of Arbroath was sealed in 1320.
+      </li>
+      <li id="boreal-arbroath-harbour">
+        <strong>The Harbour:</strong>
+        Walk the harbour wall where the smokies are cured, then continue to the signal tower.
+      </li>
+      <li id="boreal-arbroath-cliffs">
+        <strong>The Cliffs:</strong>
+        Follow the path along the red cliffs toward the caves and Auchmithie.
+      </li>
+    </ul>
+
+    <h3 id="boreal-forfar-title">Forfar, Scotland</h3>
+    <ul>
+      <li id="boreal-forfar-town">
+        <strong>Forfar:</strong>
+        Stay in the county town of Angus, between Forfar Loch and the road south to Glamis.
+      </li>
+      <li id="boreal-forfar-loch">
+        <strong>Forfar Loch:</strong>
+        Walk the path around the loch on the western edge of the town.
+      </li>
+      <li id="boreal-forfar-meffan">
+        <strong>The Meffan:</strong>
+        Visit the museum and galleries on the High Street, then continue through the old lanes.
+      </li>
+      <li id="boreal-forfar-glamis">
+        <strong>Glamis Castle:</strong>
+        Travel out to the castle in the woods, a short journey south of the town.
+      </li>
+    </ul>
+
     <h3 id="boreal-why-title">Why Visit Northern Europe?</h3>
     <ul>
       <li id="boreal-why-coastlines">
@@ -739,6 +820,7 @@
   <script src="assets/ecolodges.js"></script>
   <script src="assets/guest-picker.js"></script>
   <script src="assets/booking-dates.js"></script>
+  <script src="assets/booking-calendar.js"></script>
   <script src="assets/hero-search.js"></script>
     <script>
       // Translation data for supported languages
@@ -822,6 +904,10 @@
         'boreal-aviemore-cairngorms',
         'boreal-aviemore-spey',
         'boreal-aviemore-railway',
+        'boreal-perth-town',
+        'boreal-perth-scone',
+        'boreal-perth-tay',
+        'boreal-perth-fair-maid',
         'boreal-pitlochry-town',
         'boreal-pitlochry-ben',
         'boreal-pitlochry-theatre',
@@ -834,6 +920,14 @@
         'boreal-benbecula-causeway',
         'boreal-benbecula-airport',
         'boreal-benbecula-culla',
+        'boreal-arbroath-town',
+        'boreal-arbroath-abbey',
+        'boreal-arbroath-harbour',
+        'boreal-arbroath-cliffs',
+        'boreal-forfar-town',
+        'boreal-forfar-loch',
+        'boreal-forfar-meffan',
+        'boreal-forfar-glamis',
         'boreal-why-coastlines',
         'boreal-why-outdoors',
         'boreal-why-rural-tours',
@@ -961,6 +1055,11 @@
           "boreal-aviemore-cairngorms": "<strong>The Cairngorms:</strong> Ride the mountain railway toward the plateau, then look across the granite tops.",
           "boreal-aviemore-spey": "<strong>The River Spey:</strong> Follow the river through Rothiemurchus pinewood, where the forest meets the water.",
           "boreal-aviemore-railway": "<strong>The Highland Line:</strong> Arrive at the town station, then walk to the lochs and trails just outside the centre.",
+          "boreal-perth-title": "Perth, Scotland",
+          "boreal-perth-town": "<strong>Perth:</strong> Stay in the former royal burgh on the River Tay, the city at the heart of Perthshire.",
+          "boreal-perth-scone": "<strong>Scone Palace:</strong> Visit the palace across the river, where Scottish kings were crowned on the Stone of Destiny.",
+          "boreal-perth-tay": "<strong>The River Tay:</strong> Walk the riverside from Tay Street to the bridges and the North Inch.",
+          "boreal-perth-fair-maid": "<strong>Fair Maid’s House:</strong> See the house linked to Scott’s novel, then continue into the medieval lanes of the old town.",
           "boreal-pitlochry-title": "Pitlochry, Scotland",
           "boreal-pitlochry-town": "<strong>Pitlochry:</strong> Stay in the Victorian resort town in Perthshire, on the road north through the Highlands.",
           "boreal-pitlochry-ben": "<strong>Ben Vrackie:</strong> Walk toward the peak that rises behind the town and the surrounding hills.",
@@ -976,6 +1075,16 @@
           "boreal-benbecula-causeway": "<strong>The Causeways:</strong> Cross the bridges that join Benbecula to North Uist and South Uist.",
           "boreal-benbecula-airport": "<strong>Benbecula Airport:</strong> Arrive at the island airport in Balivanich, then walk toward the shops and the shore.",
           "boreal-benbecula-culla": "<strong>Culla Bay:</strong> Walk the white sand on the west coast, with the machair behind the beach.",
+          "boreal-arbroath-title": "Arbroath, Scotland",
+          "boreal-arbroath-town": "<strong>Arbroath:</strong> Stay in the fishing town on the Angus coast, where the abbey and the harbour face the North Sea.",
+          "boreal-arbroath-abbey": "<strong>Arbroath Abbey:</strong> Visit the red sandstone abbey where the Declaration of Arbroath was sealed in 1320.",
+          "boreal-arbroath-harbour": "<strong>The Harbour:</strong> Walk the harbour wall where the smokies are cured, then continue to the signal tower.",
+          "boreal-arbroath-cliffs": "<strong>The Cliffs:</strong> Follow the path along the red cliffs toward the caves and Auchmithie.",
+          "boreal-forfar-title": "Forfar, Scotland",
+          "boreal-forfar-town": "<strong>Forfar:</strong> Stay in the county town of Angus, between Forfar Loch and the road south to Glamis.",
+          "boreal-forfar-loch": "<strong>Forfar Loch:</strong> Walk the path around the loch on the western edge of the town.",
+          "boreal-forfar-meffan": "<strong>The Meffan:</strong> Visit the museum and galleries on the High Street, then continue through the old lanes.",
+          "boreal-forfar-glamis": "<strong>Glamis Castle:</strong> Travel out to the castle in the woods, a short journey south of the town.",
           "boreal-why-title": "Why Visit Northern Europe?",
           "boreal-why-coastlines": "<strong>Beautiful Coastlines:</strong> The Baltic Sea offers sandy beaches, picturesque islands, and fresh sea air.",
           "boreal-why-outdoors": "<strong>Outdoor Adventures:</strong> Hiking in national parks, cycling through forests, or relaxing in rural countryside villages.",
@@ -1103,6 +1212,11 @@
           "boreal-aviemore-cairngorms": "<strong>Кернгормы:</strong> Поднимитесь на горной железной дороге к плато и посмотрите на гранитные вершины.",
           "boreal-aviemore-spey": "<strong>Река Спей:</strong> Идите вдоль реки через сосновый лес Ротимуркус, где лес встречается с водой.",
           "boreal-aviemore-railway": "<strong>Хайлендская линия:</strong> Прибудьте на городскую станцию, а затем пройдите к озёрам и тропам сразу за центром.",
+          "boreal-perth-title": "Перт, Шотландия",
+          "boreal-perth-town": "<strong>Перт:</strong> Остановитесь в бывшем королевском бурге на реке Тей, городе в сердце Пертшира.",
+          "boreal-perth-scone": "<strong>Скунский дворец:</strong> Посетите дворец за рекой, где шотландских королей короновали на Камне судьбы.",
+          "boreal-perth-tay": "<strong>Река Тей:</strong> Пройдите вдоль набережной от Тей-стрит к мостам и Норт-Инч.",
+          "boreal-perth-fair-maid": "<strong>Дом Пертской красавицы:</strong> Посмотрите дом, связанный с романом Скотта, и продолжите путь по средневековым переулкам старого города.",
           "boreal-pitlochry-title": "Питлохри, Шотландия",
           "boreal-pitlochry-town": "<strong>Питлохри:</strong> Остановитесь в викторианском курортном городе в Пертшире, на дороге на север через Хайленд.",
           "boreal-pitlochry-ben": "<strong>Бен-Враки:</strong> Идите к вершине, которая поднимается за городом и окрестными холмами.",
@@ -1118,6 +1232,16 @@
           "boreal-benbecula-causeway": "<strong>Дамбы:</strong> Пересеките мосты, которые соединяют Бенбекулу с Норт-Уистом и Саут-Уистом.",
           "boreal-benbecula-airport": "<strong>Аэропорт Бенбекулы:</strong> Прибудьте в островной аэропорт в Баливаниче, затем пройдите к магазинам и берегу.",
           "boreal-benbecula-culla": "<strong>Залив Калла:</strong> Пройдитесь по белому песку на западном берегу, где махер лежит за пляжем.",
+          "boreal-arbroath-title": "Арброт, Шотландия",
+          "boreal-arbroath-town": "<strong>Арброт:</strong> Остановитесь в рыбацком городе на побережье Ангуса, где аббатство и гавань смотрят на Северное море.",
+          "boreal-arbroath-abbey": "<strong>Аббатство Арброт:</strong> Посетите аббатство из красного песчаника, где в 1320 году была скреплена Арбротская декларация.",
+          "boreal-arbroath-harbour": "<strong>Гавань:</strong> Пройдите вдоль стенки гавани, где коптят смоки, и продолжите путь к сигнальной башне.",
+          "boreal-arbroath-cliffs": "<strong>Скалы:</strong> Идите тропой вдоль красных скал к пещерам и Охмити.",
+          "boreal-forfar-title": "Форфар, Шотландия",
+          "boreal-forfar-town": "<strong>Форфар:</strong> Остановитесь в главном городе Ангуса, между озером Форфар-Лох и дорогой на юг к Гламису.",
+          "boreal-forfar-loch": "<strong>Форфар-Лох:</strong> Пройдите тропой вокруг озера на западной окраине города.",
+          "boreal-forfar-meffan": "<strong>Меффан:</strong> Посетите музей и галереи на Хай-стрит, а затем продолжите путь по старым переулкам.",
+          "boreal-forfar-glamis": "<strong>Замок Гламис:</strong> Отправьтесь к замку в лесу, в короткой поездке к югу от города.",
           "boreal-why-title": "Почему стоит посетить Северную Европу?",
           "boreal-why-coastlines": "<strong>Живописное побережье:</strong> Балтийское море предлагает песчаные пляжи, живописные острова и свежий морской воздух.",
           "boreal-why-outdoors": "<strong>Активный отдых на природе:</strong> Пешие походы в национальных парках, велопрогулки по лесам и отдых в деревенских усадьбах.",
@@ -1245,6 +1369,11 @@
           "boreal-aviemore-cairngorms": "<strong>Cairngorms:</strong> Åk bergsjärnvägen mot platån och se ut över granittopparna.",
           "boreal-aviemore-spey": "<strong>Floden Spey:</strong> Följ floden genom tallskogen i Rothiemurchus, där skogen möter vattnet.",
           "boreal-aviemore-railway": "<strong>Highlandbanan:</strong> Kom till stationen i staden och gå sedan till sjöarna och stigarna strax utanför centrum.",
+          "boreal-perth-title": "Perth, Skottland",
+          "boreal-perth-town": "<strong>Perth:</strong> Bo i den tidigare kungliga köpstaden vid floden Tay, staden i hjärtat av Perthshire.",
+          "boreal-perth-scone": "<strong>Scone Palace:</strong> Besök palatset på andra sidan floden, där skotska kungar kröntes på Ödesstenen.",
+          "boreal-perth-tay": "<strong>Floden Tay:</strong> Gå längs stranden från Tay Street till broarna och North Inch.",
+          "boreal-perth-fair-maid": "<strong>Fair Maid’s House:</strong> Se huset som knyts till Scotts roman och fortsätt sedan in i den medeltida stadens gränder.",
           "boreal-pitlochry-title": "Pitlochry, Skottland",
           "boreal-pitlochry-town": "<strong>Pitlochry:</strong> Bo i den viktorianska kurorten i Perthshire, vid vägen norrut genom högländerna.",
           "boreal-pitlochry-ben": "<strong>Ben Vrackie:</strong> Gå mot toppen som reser sig bakom staden och de omgivande kullarna.",
@@ -1260,6 +1389,16 @@
           "boreal-benbecula-causeway": "<strong>Vägbankarna:</strong> Korsa broarna som binder Benbecula till North Uist och South Uist.",
           "boreal-benbecula-airport": "<strong>Benbecula Airport:</strong> Anländ till öns flygplats i Balivanich och gå sedan mot affärerna och stranden.",
           "boreal-benbecula-culla": "<strong>Culla Bay:</strong> Gå på den vita sanden på västkusten, med machairen bakom stranden.",
+          "boreal-arbroath-title": "Arbroath, Skottland",
+          "boreal-arbroath-town": "<strong>Arbroath:</strong> Bo i fiskestaden på Angus-kusten, där klostret och hamnen vetter mot Nordsjön.",
+          "boreal-arbroath-abbey": "<strong>Arbroath Abbey:</strong> Besök klostret i röd sandsten, där Arbroathdeklarationen beseglades 1320.",
+          "boreal-arbroath-harbour": "<strong>Hamnen:</strong> Gå längs hamnmuren där smokies röks, och fortsätt sedan till signaltornet.",
+          "boreal-arbroath-cliffs": "<strong>Klipporna:</strong> Följ stigen längs de röda klipporna mot grottorna och Auchmithie.",
+          "boreal-forfar-title": "Forfar, Skottland",
+          "boreal-forfar-town": "<strong>Forfar:</strong> Bo i Angus huvudort, mellan Forfar Loch och vägen söderut mot Glamis.",
+          "boreal-forfar-loch": "<strong>Forfar Loch:</strong> Gå stigen runt sjön vid stadens västra kant.",
+          "boreal-forfar-meffan": "<strong>The Meffan:</strong> Besök museet och gallerierna på High Street och fortsätt sedan genom de gamla gränderna.",
+          "boreal-forfar-glamis": "<strong>Glamis Castle:</strong> Res ut till slottet i skogen, en kort färd söder om staden.",
           "boreal-why-title": "Varför besöka Nordeuropa?",
           "boreal-why-coastlines": "<strong>Vackra kuster:</strong> Östersjön bjuder på sandstränder, pittoreska öar och frisk havsluft.",
           "boreal-why-outdoors": "<strong>Äventyr utomhus:</strong> Vandring i nationalparker, cykling genom skogar eller avkoppling i landsbygdens byar.",
@@ -1387,6 +1526,11 @@
           "boreal-aviemore-cairngorms": "<strong>Die Cairngorms:</strong> Fahren Sie mit der Bergbahn zum Plateau und blicken Sie über die Granitgipfel.",
           "boreal-aviemore-spey": "<strong>Der River Spey:</strong> Folgen Sie dem Fluss durch den Kiefernwald von Rothiemurchus, wo der Wald auf das Wasser trifft.",
           "boreal-aviemore-railway": "<strong>Die Highland-Linie:</strong> Kommen Sie am Bahnhof der Stadt an und gehen Sie dann zu den Lochs und Wegen direkt außerhalb des Zentrums.",
+          "boreal-perth-title": "Perth, Schottland",
+          "boreal-perth-town": "<strong>Perth:</strong> Übernachten Sie in der ehemaligen königlichen Burgh am Fluss Tay, der Stadt im Herzen von Perthshire.",
+          "boreal-perth-scone": "<strong>Scone Palace:</strong> Besuchen Sie den Palast jenseits des Flusses, wo schottische Könige auf dem Schicksalsstein gekrönt wurden.",
+          "boreal-perth-tay": "<strong>Der Fluss Tay:</strong> Gehen Sie am Ufer von der Tay Street zu den Brücken und zum North Inch.",
+          "boreal-perth-fair-maid": "<strong>Fair Maid’s House:</strong> Sehen Sie das Haus, das mit Scotts Roman verbunden ist, und gehen Sie dann weiter in die mittelalterlichen Gassen der Altstadt.",
           "boreal-pitlochry-title": "Pitlochry, Schottland",
           "boreal-pitlochry-town": "<strong>Pitlochry:</strong> Übernachten Sie im viktorianischen Kurort in Perthshire, an der Straße nach Norden durch die Highlands.",
           "boreal-pitlochry-ben": "<strong>Ben Vrackie:</strong> Gehen Sie zum Gipfel, der sich hinter der Stadt und den umliegenden Hügeln erhebt.",
@@ -1402,6 +1546,16 @@
           "boreal-benbecula-causeway": "<strong>Die Dammstraßen:</strong> Überqueren Sie die Brücken, die Benbecula mit North Uist und South Uist verbinden.",
           "boreal-benbecula-airport": "<strong>Flughafen Benbecula:</strong> Kommen Sie am Inselflughafen in Balivanich an und gehen Sie dann zu den Geschäften und ans Ufer.",
           "boreal-benbecula-culla": "<strong>Culla Bay:</strong> Gehen Sie über den weißen Sand an der Westküste, mit der Machair hinter dem Strand.",
+          "boreal-arbroath-title": "Arbroath, Schottland",
+          "boreal-arbroath-town": "<strong>Arbroath:</strong> Übernachten Sie in der Fischerstadt an der Küste von Angus, wo Abtei und Hafen auf die Nordsee blicken.",
+          "boreal-arbroath-abbey": "<strong>Arbroath Abbey:</strong> Besuchen Sie die Abtei aus rotem Sandstein, in der die Erklärung von Arbroath 1320 besiegelt wurde.",
+          "boreal-arbroath-harbour": "<strong>Der Hafen:</strong> Gehen Sie an der Hafenmauer entlang, wo die Smokies geräuchert werden, und weiter zum Signalturm.",
+          "boreal-arbroath-cliffs": "<strong>Die Klippen:</strong> Folgen Sie dem Weg an den roten Klippen entlang zu den Höhlen und nach Auchmithie.",
+          "boreal-forfar-title": "Forfar, Schottland",
+          "boreal-forfar-town": "<strong>Forfar:</strong> Übernachten Sie in der Hauptstadt von Angus, zwischen Forfar Loch und der Straße nach Süden nach Glamis.",
+          "boreal-forfar-loch": "<strong>Forfar Loch:</strong> Gehen Sie den Weg um den Loch am westlichen Rand der Stadt.",
+          "boreal-forfar-meffan": "<strong>The Meffan:</strong> Besuchen Sie Museum und Galerien in der High Street und gehen Sie dann weiter durch die alten Gassen.",
+          "boreal-forfar-glamis": "<strong>Glamis Castle:</strong> Fahren Sie zum Schloss im Wald, eine kurze Fahrt südlich der Stadt.",
           "boreal-why-title": "Warum Nordeuropa besuchen?",
           "boreal-why-coastlines": "<strong>Wunderschöne Küsten:</strong> Die Ostsee lockt mit Sandstränden, malerischen Inseln und frischer Meeresluft.",
           "boreal-why-outdoors": "<strong>Outdoor-Abenteuer:</strong> Wandern in Nationalparks, Radfahren durch Wälder oder Entspannen in ländlichen Dörfern.",
