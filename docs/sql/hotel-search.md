@@ -4,7 +4,7 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. `lib/search-db.js` loads that file, the same way `lib/city-pages.js` loads `city-pages.sql`.
 
-The static catalog is 87 cities and 244 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Svalbard, and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (118 cities, 275 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
+The static catalog is 87 cities and 244 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Norway (including Svalbard), and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (118 cities, 275 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
 City listing files and hotel pages are grouped by region under `html/cities/`. Aarhus is `html/cities/denmark/aarhus.html`, and Comwell Aarhus is `html/cities/denmark/comwell-aarhus.html`. The region folder is the country name in lowercase, with accents removed and spaces turned into hyphens (`northeast-england`, `aland-islands`, `faroe-islands`). Search result links use that path. A request for an old root filename, such as `/aarhus.html` or `/comwell-aarhus.html`, redirects to the file in its region folder.
 
@@ -50,7 +50,7 @@ A blank `q` returns no rows when `country` is omitted. `search.js` treats an emp
 | Column | Catalog field | Notes |
 | --- | --- | --- |
 | `name` | `name` and `city` | Same string on a city row |
-| `country` | `country` | Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Åland Islands, Greenland, Faroe Islands, Svalbard |
+| `country` | `country` | Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Åland Islands, Greenland, Faroe Islands |
 | `page_url` | `url` | Path under `html/cities/<region>/`, for example `html/cities/denmark/aarhus.html`. That document is stored in `city-pages.sql` as well. NULL when the place has no city page |
 | `description` | `description` | |
 | `sort_order` | array order | `Array.filter` keeps catalog order; `ORDER BY sort_order` does the same |
@@ -206,8 +206,8 @@ Every catalog hotel has its own page in the same region folder as its city. `pag
 | Palanga | Lithuania | Palanga Dune Hotel |
 | Druskininkai | Lithuania | Druskininkai Spa House |
 | Trakai | Lithuania | Trakai Lake House |
-| Barentsburg | Svalbard | Barentsburg Guesthouse |
-| Pyramiden | Svalbard | Pyramiden Harbour House |
+| Barentsburg | Norway | Barentsburg Guesthouse |
+| Pyramiden | Norway | Pyramiden Harbour House |
 | Porvoo | Finland | Porvoo Old Town Hotel |
 | Kuopio | Finland | Kuopio Lakefront Hotel |
 | Savonlinna | Finland | Savonlinna Castle Hotel |
@@ -219,7 +219,7 @@ Every catalog hotel has its own page in the same region folder as its city. `pag
 | Vágar | Faroe Islands | Vágar Cliff Hotel |
 | Streymoy | Faroe Islands | Streymoy Valley Inn |
 | Eysturoy | Faroe Islands | Eysturoy Sound Hotel |
-| Ny-Ålesund | Svalbard | Ny-Ålesund Polar Lodge |
+| Ny-Ålesund | Norway | Ny-Ålesund Polar Lodge |
 | Kastelholm | Åland Islands | Kastelholm Castle Inn |
 | Bomarsund | Åland Islands | Bomarsund Fortress House |
 | Isle of Skye | Scotland | Skye Cuillin Hotel |

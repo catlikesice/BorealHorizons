@@ -9400,7 +9400,7 @@ if (langSelect) {
 </body>
 </html>
 ');
-INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/svalbard/longyearbyen.html', 'Hotels in Longyearbyen', 'Longyearbyen', 'Svalbard', 'Available Hotels in Longyearbyen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
+INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/longyearbyen.html', 'Hotels in Longyearbyen', 'Longyearbyen', 'Norway', 'Available Hotels in Longyearbyen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
   <base href="/">
@@ -9578,7 +9578,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Radisson Blu Polar Hotel Spitsbergen</h3>
                 <div class="price" data-eth="0.13" data-btc="0.0021" data-usdt="370">0.13 ETH / night</div>
                 <p>Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.</p>
-                <a href="html/cities/svalbard/radisson-blu-polar-spitsbergen.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/radisson-blu-polar-spitsbergen.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9586,7 +9586,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Funken Lodge</h3>
                 <div class="price" data-eth="0.11" data-btc="0.0018" data-usdt="315">0.11 ETH / night</div>
                 <p>Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.</p>
-                <a href="html/cities/svalbard/funken-lodge.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/funken-lodge.html" class="book-link">View & Book</a>
             </div>
 
             <div class="hotel-card">
@@ -9594,7 +9594,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
                 <h3>Basecamp Hotel</h3>
                 <div class="price" data-eth="0.09" data-btc="0.0015" data-usdt="255">0.09 ETH / night</div>
                 <p>Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.</p>
-                <a href="html/cities/svalbard/basecamp-hotel-svalbard.html" class="book-link">View & Book</a>
+                <a href="html/cities/norway/basecamp-hotel-svalbard.html" class="book-link">View & Book</a>
             </div>
 
         </div>
@@ -18459,9 +18459,9 @@ INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, ch
 INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 1, 'Quality Hotel Ekoxen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Quality Hotel Ekoxen', NULL, '0.06 ETH / night', 0.06, 0.001, 171, 'Well-equipped city hotel with a pool and spa, close to Linköping’s main square.', 'html/cities/sweden/quality-hotel-ekoxen.html', 'View & Book');
 INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 2, 'Scandic Frimurarehotellet', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Scandic Frimurarehotellet', NULL, '0.05 ETH / night', 0.05, 0.0008, 142, 'Landmark hotel in the city centre with easy access to the cathedral and old town.', 'html/cities/sweden/scandic-frimurarehotellet.html', 'View & Book');
 INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/linköping.html', 3, 'Stora Hotellet Linköping', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Stora Hotellet Linköping', NULL, '0.045 ETH / night', 0.045, 0.0007, 128, 'Classic independent hotel with a restaurant, a short walk from the railway station.', 'html/cities/sweden/stora-hotellet-linkoping.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 1, 'Radisson Blu Polar Hotel Spitsbergen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Polar Hotel Spitsbergen', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 2, 'Funken Lodge', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Funken Lodge', NULL, '0.11 ETH / night', 0.11, 0.0018, 315, 'Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.', 'html/cities/svalbard/funken-lodge.html', 'View & Book');
-INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/svalbard/longyearbyen.html', 3, 'Basecamp Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Basecamp Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 255, 'Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.', 'html/cities/svalbard/basecamp-hotel-svalbard.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/longyearbyen.html', 1, 'Radisson Blu Polar Hotel Spitsbergen', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Radisson Blu Polar Hotel Spitsbergen', NULL, '0.13 ETH / night', 0.13, 0.0021, 370, 'Landmark hotel in Longyearbyen with polar views, a short walk from the harbour, Svalbard Museum, and northern lights tours.', 'html/cities/norway/radisson-blu-polar-spitsbergen.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/longyearbyen.html', 2, 'Funken Lodge', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Funken Lodge', NULL, '0.11 ETH / night', 0.11, 0.0018, 315, 'Historic mining-era lodge in Nybyen with a restaurant and spa, looking over Adventfjorden and the surrounding peaks.', 'html/cities/norway/funken-lodge.html', 'View & Book');
+INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/norway/longyearbyen.html', 3, 'Basecamp Hotel', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Basecamp Hotel', NULL, '0.09 ETH / night', 0.09, 0.0015, 255, 'Trapper-style rooms in the centre of Longyearbyen, a practical base for snowmobile trips, boat tours, and Arctic day hikes.', 'html/cities/norway/basecamp-hotel-svalbard.html', 'View & Book');
 INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 1, 'Clarion Hotel Malmö Live', 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80', 'Clarion Hotel Malmö Live', NULL, '0.09 ETH / night', 0.09, 0.0015, 256, 'High-rise waterfront hotel with a sky bar and concert hall next door.', 'html/cities/sweden/clarion-hotel-malmo-live.html', 'View & Book');
 INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 2, 'Hotel Savoy Malmö', 'https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80', 'Hotel Savoy Malmö', NULL, '0.07 ETH / night', 0.07, 0.0012, 200, 'Historic city hotel opposite the central station, a short hop from the Turning Torso.', 'html/cities/sweden/hotel-savoy-malmo.html', 'View & Book');
 INSERT INTO city_page_hotels (page_url, position, name, image_url, image_alt, chain_name, price_label, price_eth, price_btc, price_usdt, description, book_url, book_label) VALUES ('html/cities/sweden/malmö.html', 3, 'Scandic Triangeln', 'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80', 'Scandic Triangeln', NULL, '0.055 ETH / night', 0.055, 0.0009, 157, 'Modern tower hotel above Triangeln station, handy for Möllevången and shopping.', 'html/cities/sweden/scandic-triangeln.html', 'View & Book');
@@ -19292,30 +19292,30 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/linköping.html', 'de', 'currency-label', 'Währung auswählen:');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/linköping.html', 'de', 'back-link-text', 'Zurück zur Buchung');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/linköping.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'en', 'booking-header-title', 'Boreal Horizons');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'en', 'currency-label', 'Select Currency:');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'en', 'back-link-text', 'Back to Booking');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'ru', 'booking-header-title', 'Boreal Horizons');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'ru', 'currency-label', 'Выберите валюту:');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'ru', 'back-link-text', 'Назад к бронированию');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'sv', 'booking-header-title', 'Boreal Horizons');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'sv', 'currency-label', 'Välj valuta:');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'de', 'booking-header-title', 'Boreal Horizons');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'de', 'currency-label', 'Währung auswählen:');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'de', 'back-link-text', 'Zurück zur Buchung');
-INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/svalbard/longyearbyen.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'en', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'en', 'available-hotels', 'Available Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'en', 'currency-label', 'Select Currency:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'en', 'back-link-text', 'Back to Booking');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'en', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'ru', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'ru', 'booking-header-desc', 'Забронируйте проживание с безопасными криптоплатежами и дополнительной оплатой в фиате');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'ru', 'available-hotels', 'Доступные отели в {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'ru', 'currency-label', 'Выберите валюту:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'ru', 'back-link-text', 'Назад к бронированию');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'ru', 'footer-text', '&copy; 2026 Boreal Horizons. Блокчейн-решения для гостиничной индустрии.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'sv', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'sv', 'booking-header-desc', 'Boka din vistelse med säkra kryptobetalningar, och betala i fiat också');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'sv', 'available-hotels', 'Tillgängliga hotell i {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'sv', 'currency-label', 'Välj valuta:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'sv', 'back-link-text', 'Tillbaka till bokningen');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'sv', 'footer-text', '&copy; 2026 Boreal Horizons. Blockkedjelösningar för hotellbranschen.');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'de', 'booking-header-title', 'Boreal Horizons');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'de', 'booking-header-desc', 'Buchen Sie Ihren Aufenthalt mit sicheren Krypto-Zahlungen und zusätzlich in Fiat');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'de', 'available-hotels', 'Verfügbare Hotels in {city}');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'de', 'currency-label', 'Währung auswählen:');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'de', 'back-link-text', 'Zurück zur Buchung');
+INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/norway/longyearbyen.html', 'de', 'footer-text', '&copy; 2026 Boreal Horizons. Blockchain-Lösungen für die Hotellerie.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/malmö.html', 'en', 'booking-header-title', 'Boreal Horizons');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/malmö.html', 'en', 'booking-header-desc', 'Book your stay with secure crypto payments, and pay in fiat too.');
 INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/cities/sweden/malmö.html', 'en', 'available-hotels', 'Available Hotels in {city}');
