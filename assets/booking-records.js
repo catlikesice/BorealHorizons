@@ -123,13 +123,19 @@
   }
 
   function parseGuests(input) {
-    var adults = parseInt(input && input.adults, 10);
-    var children = parseInt(input && input.children, 10);
-    if (!Number.isFinite(adults) || adults < 1) {
-      adults = 1;
-    }
+    var guests = input && typeof input === 'object' ? input : {};
+    var adultsSpecified = guests.adults != null && guests.adults !== '';
+    var adults = parseInt(guests.adults, 10);
+    var children = parseInt(guests.children, 10);
     if (!Number.isFinite(children) || children < 0) {
       children = 0;
+    }
+    // A stay can omit the guest count, and that party is one adult.
+    // An explicit count below one — including children travelling alone — is refused.
+    if (!adultsSpecified) {
+      adults = 1;
+    } else if (!Number.isFinite(adults) || adults < 1) {
+      fail(400, 'A booking must include at least one adult.');
     }
     return {
       adults: Math.min(20, adults),

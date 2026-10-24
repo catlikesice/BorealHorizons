@@ -61,6 +61,45 @@ test('records a fiat payment when the guest pays in a government currency', () =
   assert.equal(BookingRecords.publicBooking(record).paymentMethod, 'fiat');
 });
 
+test('requires at least one adult on a stay', () => {
+  assert.throws(
+    () => BookingRecords.createRecord('user-1', {
+      kind: 'stay',
+      propertyName: 'Wellton Riverside Riga',
+      city: 'Riga',
+      checkInDate: '2099-05-10',
+      checkOutDate: '2099-05-13',
+      guests: { adults: 0, children: 2 },
+      amount: 0.1,
+      currency: 'ETH'
+    }),
+    (error) => error.status === 400 && /at least one adult/.test(error.message)
+  );
+
+  const singleAdult = BookingRecords.createRecord('user-1', {
+    kind: 'stay',
+    propertyName: 'Wellton Riverside Riga',
+    city: 'Riga',
+    checkInDate: '2099-05-10',
+    checkOutDate: '2099-05-12',
+    guests: { adults: 1, children: 3 },
+    amount: 0.12,
+    currency: 'ETH'
+  });
+  assert.deepEqual(singleAdult.guests, { adults: 1, children: 3 });
+
+  const omitted = BookingRecords.createRecord('user-1', {
+    kind: 'stay',
+    propertyName: 'Wellton Riverside Riga',
+    city: 'Riga',
+    checkInDate: '2099-05-10',
+    checkOutDate: '2099-05-12',
+    amount: 0.12,
+    currency: 'ETH'
+  });
+  assert.deepEqual(omitted.guests, { adults: 1, children: 0 });
+});
+
 test('rejects incomplete stays and accepts booked event tickets', () => {
   assert.throws(
     () => BookingRecords.createRecord('user-1', {

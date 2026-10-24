@@ -2754,6 +2754,11 @@ body > header.header-bar {
   cursor: pointer;
 }
 
+.account-actions .btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
 .account-settings {
   display: grid;
   grid-template-columns: 1fr 1fr;

@@ -59,12 +59,24 @@
     return isFiatPayment(pending) ? 'Confirm fiat payment' : 'Confirm crypto payment';
   }
 
+  const ADULT_REQUIRED = 'A booking must include at least one adult.';
+
+  function partyAdults(guests) {
+    if (!guests || guests.adults == null || guests.adults === '') {
+      return 1;
+    }
+    const adults = parseInt(guests.adults, 10);
+    return Number.isFinite(adults) ? adults : 0;
+  }
+
   function guestLabel(guests) {
     const adults = guests && Number(guests.adults);
     const children = guests && Number(guests.children);
     const parts = [];
     if (Number.isFinite(adults) && adults > 0) {
       parts.push(adults === 1 ? '1 adult' : adults + ' adults');
+    } else if (guests && guests.adults != null && guests.adults !== '' && (!Number.isFinite(adults) || adults < 1)) {
+      parts.push('no adults');
     }
     if (Number.isFinite(children) && children > 0) {
       parts.push(children === 1 ? '1 child' : children + ' children');
@@ -129,9 +141,15 @@
     setText('[data-checkout-guests]', guestLabel(pending.guests));
     setText('[data-checkout-total]', formatAmount(pending.amount, pending.currency, pending.decimals));
     setText('[data-checkout-method]', paymentMethodLabel(pending));
+    const needsAdult = partyAdults(pending.guests) < 1;
     const confirmButton = document.getElementById('checkout-confirm');
-    if (confirmButton && !confirmButton.disabled) {
+    if (confirmButton && needsAdult) {
+      confirmButton.disabled = true;
+    } else if (confirmButton && !confirmButton.disabled) {
       confirmButton.textContent = confirmLabel(pending);
+    }
+    if (needsAdult) {
+      setStatus(ADULT_REQUIRED, 'error');
     }
 
     const roomRow = document.querySelector('[data-checkout-row="room"]');
@@ -171,6 +189,11 @@
       }
       if (!pending.hasDates) {
         setStatus('Choose stay dates before paying.', 'error');
+        return;
+      }
+      if (partyAdults(pending.guests) < 1) {
+        setStatus(ADULT_REQUIRED, 'error');
+        button.disabled = true;
         return;
       }
 
