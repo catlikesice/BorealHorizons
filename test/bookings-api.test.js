@@ -41,6 +41,15 @@ after(() => new Promise((resolve, reject) => {
   });
 }));
 
+function isoPlusDays(days) {
+  const date = new Date();
+  date.setHours(12, 0, 0, 0);
+  date.setDate(date.getDate() + days);
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return date.getFullYear() + '-' + month + '-' + day;
+}
+
 async function jsonRequest(pathname, options) {
   const response = await fetch(base + pathname, options);
   let data = null;
@@ -105,8 +114,8 @@ test('saves a confirmed stay and lists it for that account only', async () => {
       propertyName: 'Wellton Riverside Riga',
       city: 'Riga',
       country: 'Latvia',
-      checkInDate: '2099-05-10',
-      checkOutDate: '2099-05-13',
+      checkInDate: isoPlusDays(30),
+      checkOutDate: isoPlusDays(33),
       guests: { adults: 2, children: 1 },
       roomLabel: 'Riverside Deluxe Room',
       amount: 0.18,
@@ -164,4 +173,41 @@ test('rejects a stay booked with no adult', async () => {
 
   assert.equal(booked.status, 400);
   assert.match(booked.data.error, /at least one adult/);
+});
+
+test('rejects a stay more than a year ahead', async () => {
+  const email = 'far-ahead-' + Date.now() + '@example.com';
+  const createdUser = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'Ada Booker',
+      email,
+      password: 'password123',
+      birthDate: '15/03/1990'
+    })
+  });
+  assert.equal(createdUser.status, 201);
+
+  const booked = await jsonRequest('/api/bookings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + createdUser.data.token
+    },
+    body: JSON.stringify({
+      kind: 'stay',
+      propertyName: 'Wellton Riverside Riga',
+      city: 'Riga',
+      country: 'Latvia',
+      checkInDate: isoPlusDays(400),
+      checkOutDate: isoPlusDays(403),
+      guests: { adults: 2, children: 0 },
+      amount: 0.18,
+      currency: 'ETH'
+    })
+  });
+
+  assert.equal(booked.status, 400);
+  assert.match(booked.data.error, /Check-in cannot be more than a year ahead/);
 });

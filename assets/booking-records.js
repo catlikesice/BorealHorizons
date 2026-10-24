@@ -1,11 +1,34 @@
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) {
-    module.exports = factory();
+    module.exports = factory(root);
   } else {
-    root.BookingRecords = factory();
+    root.BookingRecords = factory(root);
   }
-})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+})(typeof globalThis !== 'undefined' ? globalThis : this, function (root) {
   'use strict';
+
+  function datesApi() {
+    if (typeof require === 'function') {
+      try {
+        return require('./booking-dates');
+      } catch (error) {
+        return null;
+      }
+    }
+    return (root && root.BookingDates) || null;
+  }
+
+  function assertBookable(iso, now, which) {
+    var api = datesApi();
+    if (!api || typeof api.exceedsBookingHorizon !== 'function') {
+      return;
+    }
+    if (api.exceedsBookingHorizon(iso, now)) {
+      fail(400, typeof api.bookingHorizonError === 'function'
+        ? api.bookingHorizonError(which)
+        : 'You can book up to one year ahead.');
+    }
+  }
 
   var CONFIRMATION_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
   var FIAT_CURRENCIES = {
@@ -220,6 +243,8 @@
       record.checkOutDate = checkOutDate;
       record.nights = nights;
       record.guests = parseGuests(body.guests);
+      assertBookable(checkInDate, now, 'check-in');
+      assertBookable(checkOutDate, now, 'check-out');
       record.roomLabel = cleanText(body.roomLabel, 120);
       record.addOns = parseAddOns(body.addOns);
     } else {
@@ -231,6 +256,7 @@
       if (!parseISODate(eventDate)) {
         fail(400, 'Please include a valid event date.');
       }
+      assertBookable(eventDate, now, 'event');
       record.eventName = eventName;
       record.eventDate = eventDate;
       record.eventTime = cleanText(body.eventTime, 40);

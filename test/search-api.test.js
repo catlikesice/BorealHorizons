@@ -415,6 +415,8 @@ test('homepage tour search puts the country dropdown in Where are you going', ()
   assert.match(hero, /setControl\(countrySelect, tours\)/);
   assert.match(hero, /setControl\(destination, !tours\)/);
   assert.match(hero, /Please choose a start date\./);
+  assert.match(hero, /latestBookableISO/);
+  assert.match(hero, /bookingHorizonError/);
   assert.match(hero, /setSearchField\(checkInField, !tours\)/);
   assert.match(hero, /setSearchField\(checkOutField, !tours\)/);
 });
