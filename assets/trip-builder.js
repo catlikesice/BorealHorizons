@@ -187,10 +187,26 @@
     return start.getUTCDate() + ' ' + MONTHS[start.getUTCMonth()] + ' – ' + end.getUTCDate() + ' ' + MONTHS[end.getUTCMonth()];
   }
 
+  var ADULT_REQUIRED = 'A booking must include at least one adult.';
+
+  function partyAdults(stay) {
+    if (!stay || !Number.isFinite(stay.adults)) {
+      return 1;
+    }
+    return stay.adults;
+  }
+
   function guestLabel(stay) {
-    var adults = Number.isFinite(stay.adults) ? stay.adults : 0;
+    var adults = Number.isFinite(stay.adults) ? stay.adults : NaN;
     var children = Number.isFinite(stay.children) ? stay.children : 0;
-    var total = adults + children;
+    if (Number.isFinite(adults) && adults < 1) {
+      if (children > 0) {
+        return 'no adults, ' + (children === 1 ? '1 child' : children + ' children');
+      }
+      return 'no adults';
+    }
+    var adultCount = Number.isFinite(adults) ? adults : 0;
+    var total = adultCount + children;
     if (!total) {
       return '';
     }
@@ -489,12 +505,23 @@
     total.appendChild(el('p', 'trip-summary__eth', 'Approx. ' + formatEth(totalEth)));
     body.appendChild(total);
 
-    var continueLink = el('a', 'trip-continue', continueLabel(bookingCount, nights));
+    var needsAdult = partyAdults(state.stay) < 1;
+    var continueLink = el('a', 'trip-continue', needsAdult ? 'Add an adult' : continueLabel(bookingCount, nights));
     continueLink.id = 'trip-continue';
-    if (hotel && nights > 0 && hotel.priceEth > 0) {
+    if (needsAdult) {
+      continueLink.href = 'index.html';
+      continueLink.addEventListener('click', function (event) {
+        event.preventDefault();
+        setStatus(ADULT_REQUIRED);
+      });
+    } else if (hotel && nights > 0 && hotel.priceEth > 0) {
       continueLink.href = 'checkout.html';
       continueLink.addEventListener('click', function (event) {
-        persistCheckout(hotel, addons, nights);
+        if (!persistCheckout(hotel, addons, nights)) {
+          event.preventDefault();
+          setStatus(ADULT_REQUIRED);
+          return;
+        }
         event.preventDefault();
         window.location.href = 'checkout.html';
       });
@@ -502,6 +529,9 @@
       continueLink.href = 'index.html';
     } else {
       continueLink.href = state.offer && state.offer.pageUrl ? state.offer.pageUrl : 'search.html';
+    }
+    if (needsAdult) {
+      body.appendChild(el('p', 'trip-summary__note', ADULT_REQUIRED));
     }
     body.appendChild(continueLink);
     body.appendChild(el('p', 'trip-summary__note', 'Review cancellation terms for each item before choosing card or crypto payment.'));
@@ -537,7 +567,10 @@
   }
 
   function persistCheckout(hotel, addons, nights) {
-    var adults = Number.isFinite(state.stay.adults) ? state.stay.adults : 1;
+    var adults = partyAdults(state.stay);
+    if (adults < 1) {
+      return false;
+    }
     var children = Number.isFinite(state.stay.children) ? state.stay.children : 0;
     var totalEth = lineEth(hotel.priceEth, 'per-night', nights);
     var quoteAddons = addons.map(function (addon) {
@@ -575,6 +608,7 @@
     } catch (error) {
       // Checkout reads the same key and shows an empty state if it is missing.
     }
+    return true;
   }
 
   function showError(message) {

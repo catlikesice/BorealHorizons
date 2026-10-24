@@ -128,3 +128,40 @@ test('saves a confirmed stay and lists it for that account only', async () => {
   assert.equal(listed.data.bookings.length, 1);
   assert.equal(listed.data.bookings[0].propertyName, 'Wellton Riverside Riga');
 });
+
+test('rejects a stay booked with no adult', async () => {
+  const email = 'children-only-' + Date.now() + '@example.com';
+  const createdUser = await jsonRequest('/api/auth/register', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      name: 'Ada Booker',
+      email,
+      password: 'password123',
+      birthDate: '15/03/1990'
+    })
+  });
+  assert.equal(createdUser.status, 201);
+
+  const booked = await jsonRequest('/api/bookings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: 'Bearer ' + createdUser.data.token
+    },
+    body: JSON.stringify({
+      kind: 'stay',
+      propertyName: 'Wellton Riverside Riga',
+      city: 'Riga',
+      country: 'Latvia',
+      checkInDate: '2099-05-10',
+      checkOutDate: '2099-05-13',
+      guests: { adults: 0, children: 2 },
+      amount: 0.18,
+      currency: 'ETH'
+    })
+  });
+
+  assert.equal(booked.status, 400);
+  assert.match(booked.data.error, /at least one adult/);
+});

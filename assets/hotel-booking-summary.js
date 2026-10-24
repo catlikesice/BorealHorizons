@@ -88,6 +88,8 @@
 
     if (Number.isFinite(adults) && adults > 0) {
       parts.push(adults === 1 ? '1 adult' : adults + ' adults');
+    } else if (adults === 0) {
+      parts.push('no adults');
     }
     if (Number.isFinite(children) && children > 0) {
       parts.push(children === 1 ? '1 child' : children + ' children');
@@ -100,6 +102,33 @@
     }
 
     return parts.join(', ');
+  }
+
+  const ADULT_REQUIRED = 'A booking must include at least one adult.';
+
+  function quotedAdults(value) {
+    if (value == null || value === '') {
+      return 1;
+    }
+    const parsed = parseInt(value, 10);
+    if (!Number.isFinite(parsed)) {
+      return 1;
+    }
+    return Math.min(20, parsed);
+  }
+
+  function stayMissingAdult(details) {
+    return quotedAdults(details && details.adults) < 1;
+  }
+
+  function appendAdultRule(summaryEl, details) {
+    if (!summaryEl || !stayMissingAdult(details)) {
+      return;
+    }
+    const message = document.createElement('p');
+    message.className = 'booking-summary__notice';
+    message.textContent = ADULT_REQUIRED;
+    summaryEl.appendChild(message);
   }
 
   function formatDate(value) {
@@ -794,6 +823,7 @@
         guestsEl.textContent = 'Guests: ' + guestLabelWithoutRate;
         summaryEl.appendChild(guestsEl);
       }
+      appendAdultRule(summaryEl, bookingDetails);
       return;
     }
 
@@ -820,6 +850,7 @@
       guestsEl.textContent = 'Guests: ' + guestLabel;
       summaryEl.appendChild(guestsEl);
     }
+    appendAdultRule(summaryEl, bookingDetails);
 
     if (roomSelection) {
       const roomEl = document.createElement('p');
@@ -1001,7 +1032,7 @@
       checkOutDate: bookingDetails.checkOutDate || '',
       nights: nights,
       guests: {
-        adults: parseGuestCount(bookingDetails.adults, 1, 20, 1),
+        adults: quotedAdults(bookingDetails.adults),
         children: parseGuestCount(bookingDetails.children, 0, 10, 0)
       },
       roomLabel: roomSelection ? roomSelection.label : '',
@@ -1057,6 +1088,11 @@
     payNow.addEventListener('click', function (event) {
       const quote = computeStayQuote(detailContainer);
       if (!quote || !quote.propertyName) {
+        return;
+      }
+      if (!quote.guests || quote.guests.adults < 1) {
+        event.preventDefault();
+        renderSummary(detailContainer);
         return;
       }
       persistPendingCheckout(quote);
