@@ -39,6 +39,13 @@ const DESTINATIONS = [
     hotels: ['Cairngorm Hotel', 'Rothiemurchus Lodge', 'Spey Valley Hotel']
   },
   {
+    city: 'Perth',
+    query: 'perth',
+    url: 'html/cities/scotland/perth.html',
+    section: 'boreal-perth-title',
+    hotels: ['Parklands Hotel', 'Salutation Hotel', 'Royal George Hotel']
+  },
+  {
     city: 'Pitlochry',
     query: 'pitlochry',
     url: 'html/cities/scotland/pitlochry.html',
@@ -61,7 +68,7 @@ const DESTINATIONS = [
   }
 ];
 
-test('Ullapool, St Andrews, Aviemore, Pitlochry, Loch Lomond National Park, and Benbecula are on the HTML city list and in search', () => {
+test('Ullapool, St Andrews, Aviemore, Perth, Pitlochry, Loch Lomond National Park, and Benbecula are on the HTML city list and in search', () => {
   const catalog = loadCatalog();
   const indexHtml = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   const db = openSearchDatabase();

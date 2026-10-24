@@ -462,6 +462,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Perth",
+      "city": "Perth",
+      "country": "Scotland",
+      "url": "html/cities/scotland/perth.html",
+      "description": "Browse hotels in Perth, Scotland."
+    },
+    {
+      "type": "city",
       "name": "Pitlochry",
       "city": "Pitlochry",
       "country": "Scotland",
@@ -2483,6 +2491,39 @@ window.SEARCH_CATALOG = {
       "price": "0.04 ETH / night",
       "priceEth": 0.04,
       "description": "Modern hotel near the city park offering comfortable rooms and easy access to local attractions and concert venues."
+    },
+    {
+      "type": "hotel",
+      "name": "Parklands Hotel",
+      "city": "Perth",
+      "country": "Scotland",
+      "url": "html/cities/scotland/parklands-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Country-house hotel in parkland above the South Inch, a short walk from the city centre."
+    },
+    {
+      "type": "hotel",
+      "name": "Salutation Hotel",
+      "city": "Perth",
+      "country": "Scotland",
+      "url": "html/cities/scotland/salutation-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Historic coaching inn on South Street, among Scotland’s oldest hotels."
+    },
+    {
+      "type": "hotel",
+      "name": "Royal George Hotel",
+      "city": "Perth",
+      "country": "Scotland",
+      "url": "html/cities/scotland/royal-george-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Riverside hotel on Tay Street, looking across the Tay toward the bridges."
     },
     {
       "type": "hotel",
