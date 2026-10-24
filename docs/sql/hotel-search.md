@@ -35,7 +35,7 @@ Accommodation and tours are separate lookups:
 | Results page (`search.html`, `GET /api/search?q=`) | Free text | Every whitespace-separated token is a substring of the city or hotel haystack |
 | Homepage bar (`index.html`) | One destination | First city or hotel in catalog order, using the priority list below |
 | Tours (`what=tours` on the results page) | Free text, optional `country` | Every token is a substring of an experience haystack. A blank `q` with `country` lists that country's tours. Cities and hotels are not returned |
-| Homepage Tours | Country dropdown in “Where are you going?” | Opens `search.html?what=tours&country=...`. An empty `country` lists every tour |
+| Homepage Tours | Country dropdown in “Where are you going?” | Opens `search.html?what=tours&country=...`. The first option is “Select Country” and does not search until a country is chosen |
 
 `checkIn`, `checkOut`, `adults`, and `children` travel with both forms. They are stay details for pricing and booking. They do not filter these queries. `what` chooses the catalog: omit it, or pass `accommodation`, for cities and hotels. Pass `tours` to search experiences only.
 

@@ -8,8 +8,8 @@
  * check-out, then continues to search.html?what=tours&country=...
  * A match with a page opens that page. A place with no page continues to
  * search.html. Accommodation posts q, checkIn, checkOut, adults, and children.
- * Tours post country, startDate, adults, and children. An empty country is
- * "Any country" and still lists tours.
+ * Tours post country, startDate, adults, and children. The dropdown starts on
+ * "Select Country" until a country is chosen.
  */
 (function () {
   'use strict';
@@ -498,6 +498,13 @@
       }
 
       if (kind === 'tours') {
+        if (!countrySelect.value) {
+          event.preventDefault();
+          setStatus('Please select a country.');
+          countrySelect.focus();
+          return;
+        }
+
         if (!startInput.value.trim()) {
           event.preventDefault();
           setStatus('Please choose a start date.');
