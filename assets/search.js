@@ -3,7 +3,9 @@
  *
  * Prefer GET /api/search, which reads the SQL catalog and also returns places
  * that have no HTML page (url is null). If the API cannot be reached, fall
- * back to window.SEARCH_CATALOG. Schema: docs/sql/hotel-search.md.
+ * back to window.SEARCH_CATALOG. Tour search falls back to window.TourPackages
+ * when that request fails, including a 404, so sample packages still appear.
+ * Schema: docs/sql/hotel-search.md.
  * ecolodges=1 limits accommodation results to nature lodges and mountain stations.
  * A blank q with that flag lists every ecolodge. Tours ignore the flag.
  */
@@ -287,15 +289,25 @@
       if (!res.ok) {
         throw new Error('Search request failed (' + res.status + ')');
       }
+      var contentType = res.headers && typeof res.headers.get === 'function'
+        ? res.headers.get('content-type') || ''
+        : '';
+      if (contentType && contentType.indexOf('json') === -1) {
+        throw new Error('Search request failed (' + res.status + ')');
+      }
       return res.json();
     }).catch(function (err) {
-      // The static catalog has no SQL-only places and no tours. Use it only
-      // for accommodation when the API cannot be reached.
+      // A static host has no /api/search and answers 404. Sample packages
+      // still come from the page script.
+      if (kind === 'tours' && window.TourPackages && typeof window.TourPackages.search === 'function') {
+        var searchParams = new URLSearchParams(window.location.search);
+        var country = searchParams.has('country') ? searchParams.get('country') : undefined;
+        return { tours: window.TourPackages.search(query, country) };
+      }
+      // The static catalog has no SQL-only places. Use it for accommodation
+      // when the API cannot be reached.
       if (kind !== 'tours' && err && err.name === 'TypeError' && window.SEARCH_CATALOG) {
         return filterCatalog(query, { ecolodgesOnly: onlyEco });
-      }
-      if (kind === 'tours' && err && err.name === 'TypeError') {
-        throw new Error('Tour search is unavailable. Open the site from the server and try again.');
       }
       throw err;
     });

@@ -1,9 +1,18 @@
-'use strict';
+/**
+ * Fictional multi-day itineraries for tour search.
+ * These are sample packages, not hotel add-ons. The room is chosen separately.
+ * The results page uses search() when GET /api/search is missing.
+ */
+(function (root, factory) {
+  var api = factory();
+  if (typeof module === 'object' && module.exports) {
+    module.exports = api;
+  }
+  root.TourPackages = api;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+  'use strict';
 
-// Fictional multi-day itineraries for tour search.
-// These are sample packages, not hotel add-ons. The room is chosen separately.
-
-const PACKAGES = [
+  var PACKAGES = [
   {
     id: 'pkg-iceland-golden-circle',
     name: 'Golden Circle three-day package',
@@ -149,10 +158,110 @@ const PACKAGES = [
   }
 ];
 
-function listPackages() {
-  return PACKAGES.map((pkg) => Object.assign({}, pkg, { includes: pkg.includes.slice() }));
-}
+  function normalize(text) {
+    return String(text || '')
+      .toLowerCase()
+      .replace(/ø/g, 'o')
+      .replace(/æ/g, 'ae')
+      .replace(/ð/g, 'd')
+      .replace(/þ/g, 'th')
+      .replace(/['’ʼ]/g, '')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '');
+  }
 
-module.exports = {
-  listPackages
-};
+  function tokensFor(query) {
+    var normalized = normalize(String(query || '').trim()).replace(/[—–]/g, ' ');
+    if (!normalized.trim()) {
+      return [];
+    }
+    return normalized.split(/\s+/).filter(Boolean);
+  }
+
+  function formatPrice(priceEth) {
+    var amount = Number(priceEth);
+    if (!Number.isFinite(amount) || amount <= 0) {
+      return '';
+    }
+    return amount.toFixed(3).replace(/\.?0+$/, '') + ' ETH';
+  }
+
+  function listPackages() {
+    return PACKAGES.map(function (pkg) {
+      return Object.assign({}, pkg, { includes: pkg.includes.slice() });
+    });
+  }
+
+  function toPublic(pkg) {
+    return {
+      type: 'package',
+      id: pkg.id,
+      addonId: '',
+      name: pkg.name,
+      city: pkg.city,
+      country: pkg.country || '',
+      hotel: '',
+      scope: 'package',
+      description: pkg.description || '',
+      detail: pkg.detail || '',
+      includes: Array.isArray(pkg.includes) ? pkg.includes.slice() : [],
+      price: formatPrice(pkg.priceEth),
+      priceEth: pkg.priceEth,
+      billing: 'per-stay',
+      pageUrl: pkg.pageUrl || ''
+    };
+  }
+
+  function sameCountry(actual, requested) {
+    var needle = normalize(requested).replace(/\s+/g, ' ').trim();
+    if (!needle) {
+      return true;
+    }
+    var hay = normalize(actual).replace(/\s+/g, ' ').trim();
+    if (needle === 'united kingdom') {
+      return hay === 'scotland' || hay === 'northeast england';
+    }
+    return hay === needle;
+  }
+
+  function haystack(tour) {
+    return normalize([
+      tour.name,
+      tour.city,
+      tour.country,
+      tour.description,
+      tour.detail,
+      (tour.includes || []).join(' '),
+      tour.price,
+      'package',
+      'tour'
+    ].join(' '));
+  }
+
+  // country undefined means the parameter was omitted. An empty string lists every package.
+  function search(query, country) {
+    var tokens = tokensFor(query);
+    var countryProvided = country != null;
+    if (!tokens.length && !countryProvided) {
+      return [];
+    }
+    return listPackages().map(toPublic).filter(function (tour) {
+      if (countryProvided && !sameCountry(tour.country, country)) {
+        return false;
+      }
+      if (!tokens.length) {
+        return true;
+      }
+      var text = haystack(tour);
+      return tokens.every(function (token) {
+        return text.indexOf(token) !== -1;
+      });
+    });
+  }
+
+  return {
+    listPackages: listPackages,
+    toPublic: toPublic,
+    search: search
+  };
+});

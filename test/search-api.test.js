@@ -9,7 +9,7 @@ const searchRouter = require('../routes/search');
 const { loadStaticCatalog } = require('../lib/search-db');
 const { getCityPage, hotelsFor } = require('../lib/city-pages');
 const { listAddons } = require('../lib/hotel-addons');
-const { listPackages } = require('../assets/tour-packages');
+const { listPackages, search: searchPackages } = require('../assets/tour-packages');
 
 const root = path.join(__dirname, '..');
 let server;
@@ -534,9 +534,26 @@ test('sample tour packages appear when searching tours', async () => {
   assert.match(script, /Sample package/);
   assert.match(script, /isPackage \? 'package'/);
   assert.match(script, /Choose a stay/);
+  assert.match(script, /TourPackages\.search/);
   const page = fs.readFileSync(path.join(root, 'search.html'), 'utf8');
   assert.match(page, /search-card--package/);
   assert.match(page, /id="tour-results-heading"/);
+  assert.match(page, /assets\/tour-packages\.js/);
+  assert.ok(page.indexOf('assets/tour-packages.js') < page.indexOf('assets/search.js'));
+
+  const offlineNorway = searchPackages('', 'Norway');
+  assert.deepEqual(offlineNorway.map((tour) => tour.name), ['Hardangerfjord week']);
+  assert.equal(offlineNorway[0].city, 'Bergen');
+  assert.equal(offlineNorway[0].type, 'package');
+  assert.deepEqual(searchPackages('', undefined), []);
+  assert.deepEqual(searchPackages('package', undefined).map((tour) => tour.id), packages.map((tour) => tour.id));
+
+  const norwayResponse = await fetch(base + '/api/search?what=tours&country=' + encodeURIComponent('Norway'));
+  const norway = await norwayResponse.json();
+  assert.deepEqual(
+    norway.tours.filter((tour) => tour.type === 'package'),
+    offlineNorway
+  );
 });
 
 test('destination labels include places that have no page', async () => {

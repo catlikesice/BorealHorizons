@@ -270,7 +270,7 @@ Each tour:
 
 A city tour's suggestion label is `name — city`. A hotel tour's label is `name — hotel`. `GET /api/search/destinations?what=tours` returns those labels. The homepage Tours option does not use that list: “Where are you going?” is the country dropdown, and Search opens `search.html` with `country` and `startDate`. The results page still accepts a tour name in `q`. Tour cards link to `trip.html` with the city, the hotel when there is one, and `addon` set to `addonId`.
 
-Sample packages live in `assets/tour-packages.js` and are merged into the same `{ "tours": [ ... ] }` list. A package has `type` `package`, an empty `addonId` and `hotel`, a base `city`, and an `includes` array. `q=package` returns only those rows. They are not hotel add-ons, so they do not appear on the trip extras list. The card links to `trip.html` for the base city so the guest can choose a room. A package label is `name — city`.
+Sample packages live in `assets/tour-packages.js` and are merged into the same `{ "tours": [ ... ] }` list. `search.html` loads that file. If `GET /api/search` fails, including with 404, the results page searches the same list in the browser. A package has `type` `package`, an empty `addonId` and `hotel`, a base `city`, and an `includes` array. `q=package` returns only those rows. They are not hotel add-ons, so they do not appear on the trip extras list. The card links to `trip.html` for the base city so the guest can choose a room. A package label is `name — city`.
 
 `q=breakfast` matches no tours. `q=kempinski` matches the hotel only while `what` is accommodation.
 
