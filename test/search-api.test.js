@@ -397,7 +397,9 @@ test('homepage tour search puts the country dropdown in Where are you going', ()
   );
   assert.match(destination, /id="hero-search-destination-label"[^>]*>Where are you going\?</);
   assert.match(destination, /id="hero-search-country"/);
-  assert.match(destination, /id="hero-search-country-any"/);
+  assert.match(destination, /id="hero-search-country-any"[^>]*>Select Country</);
+  assert.match(html, /hero-search-country-any": "Select Country"/);
+  assert.doesNotMatch(html, /Any country/);
   assert.doesNotMatch(html, /id="hero-search-country-field"/);
   assert.doesNotMatch(html, /id="hero-search-country-label"/);
   assert.doesNotMatch(html, /hero-search-country-label/);
@@ -408,6 +410,7 @@ test('homepage tour search puts the country dropdown in Where are you going', ()
   assert.match(html, /value="United Kingdom"/);
   assert.doesNotMatch(html, /value="Scotland"/);
   assert.doesNotMatch(html, /value="Northeast England"/);
+  assert.match(hero, /Please select a country\./);
   assert.match(hero, /hero-search--tours/);
   assert.match(hero, /setControl\(countrySelect, tours\)/);
   assert.match(hero, /setControl\(destination, !tours\)/);
