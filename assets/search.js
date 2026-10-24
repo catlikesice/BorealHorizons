@@ -120,7 +120,8 @@
       checkIn: checkIn,
       checkOut: checkOut,
       startDate: tours ? canonicalDate(params.get('startDate') || '') : '',
-      tourCountry: tours ? String(params.get('country') || '').trim() : '',
+      countrySpecified: tours && params.has('country'),
+      tourCountry: tours && params.has('country') ? String(params.get('country') || '').trim() : '',
       adults: adults,
       children: children
     };
@@ -149,7 +150,7 @@
       startEl.value = tours ? (stay.startDate || '') : '';
     }
     if (countryEl) {
-      countryEl.disabled = !tours || !stay.tourCountry;
+      countryEl.disabled = !tours || !stay.countrySpecified;
       countryEl.value = tours ? (stay.tourCountry || '') : '';
     }
     if (adultsEl && Number.isFinite(stay.adults)) adultsEl.value = String(stay.adults);
@@ -179,10 +180,10 @@
       }
     }
 
-    if (stay.startDate || stay.tourCountry || stay.checkIn || stay.checkOut || Number.isFinite(stay.adults) || Number.isFinite(stay.children)) {
+    if (stay.startDate || stay.countrySpecified || stay.tourCountry || stay.checkIn || stay.checkOut || Number.isFinite(stay.adults) || Number.isFinite(stay.children)) {
       var payload = {};
       if (tours && stay.startDate) payload.startDate = stay.startDate;
-      if (tours && stay.tourCountry) payload.tourCountry = stay.tourCountry;
+      if (tours && stay.countrySpecified) payload.tourCountry = stay.tourCountry || '';
       if (!tours && stay.checkIn) payload.checkInDate = stay.checkIn;
       if (!tours && stay.checkOut) payload.checkOutDate = stay.checkOut;
       if (Number.isFinite(stay.adults)) payload.adults = stay.adults;
@@ -407,8 +408,9 @@
     }
   }
 
-  function renderResults(query, results, kind) {
+  function renderResults(query, results, kind, stay) {
     var toursMode = kind === 'tours';
+    var countryBrowse = Boolean(toursMode && stay && stay.countrySpecified && !query);
     var cities = toursMode ? [] : (results.cities || []);
     var hotels = toursMode ? [] : (results.hotels || []);
     var tours = toursMode ? (results.tours || []) : [];
@@ -421,7 +423,7 @@
 
     applyKindCopy(kind);
 
-    if (!query) {
+    if (!query && !countryBrowse) {
       setText('search-heading', toursMode ? 'Search tours' : 'Search hotels and cities');
       setText('search-status', toursMode
         ? 'Enter a tour name or a city to see tours.'
@@ -439,7 +441,11 @@
       return;
     }
 
-    setText('search-heading', 'Results for “' + query + '”');
+    if (countryBrowse) {
+      setText('search-heading', stay.tourCountry ? 'Tours in ' + stay.tourCountry : 'Tours');
+    } else {
+      setText('search-heading', 'Results for “' + query + '”');
+    }
 
     if (statusEl) {
       if (toursMode) {
@@ -503,8 +509,12 @@
     if (form) {
       form.addEventListener('submit', function (event) {
         // Allow normal GET navigation to search.html?q=...&what=...
+        // A tour search that already chose a country can omit the text query.
         var value = input ? input.value.trim() : '';
-        if (!value) {
+        var tours = selectedKind(form) === 'tours';
+        var countryEl = document.getElementById('search-country');
+        var hasCountry = tours && countryEl && !countryEl.disabled;
+        if (!value && !hasCountry) {
           event.preventDefault();
           input && input.focus();
         }
@@ -520,24 +530,24 @@
             nextStay.tourCountry = '';
           }
           syncStayFields(nextStay);
-          if (query) {
+          if (query || (nextKind === 'tours' && stay.countrySpecified)) {
             form.submit();
           } else {
-            renderResults('', { cities: [], hotels: [], tours: [] }, nextKind);
+            renderResults('', { cities: [], hotels: [], tours: [] }, nextKind, nextStay);
           }
         });
       });
     }
 
-    if (!query) {
-      renderResults('', { cities: [], hotels: [], tours: [] }, kind);
+    if (!query && !(kind === 'tours' && stay.countrySpecified)) {
+      renderResults('', { cities: [], hotels: [], tours: [] }, kind, stay);
       return;
     }
 
     setText('search-status', 'Searching…');
     fetchSearchResults(query, kind)
       .then(function (results) {
-        renderResults(query, results || { cities: [], hotels: [], tours: [] }, kind);
+        renderResults(query, results || { cities: [], hotels: [], tours: [] }, kind, stay);
       })
       .catch(function (err) {
         showError(err && err.message ? err.message : 'Unable to load search results.');
