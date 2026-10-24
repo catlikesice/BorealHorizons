@@ -20,7 +20,7 @@ const DESTINATIONS = [
   { city: 'Nuuk', country: 'Greenland', url: 'html/cities/greenland/nuuk.html', hotels: ['Hotel Hans Egede', 'Inuit Hotel', 'Hotel Nuuk'] },
   { city: 'Ilulissat', country: 'Greenland', url: 'html/cities/greenland/ilulissat.html', hotels: ['Hotel Arctic', 'Hotel Icefiord', 'Hotel Hvide Falk'] },
   { city: 'Tórshavn', country: 'Faroe Islands', url: 'html/cities/faroe-islands/tórshavn.html', hotels: ['Hotel Føroyar', 'Hotel Hafnia', 'Hotel Streym'] },
-  { city: 'Longyearbyen', country: 'Svalbard', url: 'html/cities/svalbard/longyearbyen.html', hotels: ['Radisson Blu Polar Hotel Spitsbergen', 'Funken Lodge', 'Basecamp Hotel'] }
+  { city: 'Longyearbyen', country: 'Norway', url: 'html/cities/norway/longyearbyen.html', hotels: ['Radisson Blu Polar Hotel Spitsbergen', 'Funken Lodge', 'Basecamp Hotel'] }
 ];
 
 test('search catalog includes Åland, Greenland, Faroe Island, and Svalbard cities', () => {
@@ -69,19 +69,20 @@ test('Svalbard hotels can be booked from Longyearbyen and search', () => {
   const catalog = loadCatalog();
   const city = catalog.cities.find((item) => item.city === 'Longyearbyen');
   assert.ok(city);
-  assert.match(city.country + ' ' + city.description, /Svalbard/);
+  assert.equal(city.country, 'Norway');
+  assert.match(city.description, /Svalbard/);
 
   const hotels = catalog.hotels.filter((item) => item.city === 'Longyearbyen');
   assert.equal(hotels.length, 3);
   hotels.forEach((hotel) => {
-    assert.equal(hotel.country, 'Svalbard');
-    assert.notEqual(hotel.url, 'html/cities/svalbard/longyearbyen.html', hotel.name + ' should open a hotel booking page');
+    assert.equal(hotel.country, 'Norway');
+    assert.notEqual(hotel.url, 'html/cities/norway/longyearbyen.html', hotel.name + ' should open a hotel booking page');
     const filePath = path.join(root, hotel.url);
     assert.ok(fs.existsSync(filePath), hotel.url + ' should exist');
     const html = fs.readFileSync(filePath, 'utf8');
     assert.match(html, /name=["']viewport["']/);
     assert.match(html, /data-city="Longyearbyen"/);
-    assert.match(html, /data-country="Svalbard"/);
+    assert.match(html, /data-country="Norway"/);
     assert.match(html, /checkout\.html/);
     assert.match(html, new RegExp(hotel.name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')));
   });
@@ -91,5 +92,5 @@ test('Svalbard hotels can be booked from Longyearbyen and search', () => {
   assert.match(indexHtml, /id="boreal-svalbard-longyearbyen"/);
 
   const searchHtml = fs.readFileSync(path.join(root, 'search.html'), 'utf8');
-  assert.match(searchHtml, /Svalbard/);
+  assert.doesNotMatch(searchHtml, /Svalbard/);
 });

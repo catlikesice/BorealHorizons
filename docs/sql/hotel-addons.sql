@@ -121,70 +121,70 @@ INSERT INTO hotel_addons (
   category, label, description, detail_line, price_eth, billing, icon, sort_order
 ) VALUES
   (
-    'longyearbyen:funken-lodge:spa-access', 'spa-access', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/funken-lodge.html',
+    'longyearbyen:funken-lodge:spa-access', 'spa-access', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Norway', 'html/cities/norway/funken-lodge.html',
     'stay', 'Lodge spa evening',
     'Sauna and relaxation room after glacier hikes or snowmobile days.',
     'Each evening of the stay',
     0.012, 'per-night', 'spa', 10
   ),
   (
-    'longyearbyen:funken-lodge:funken-dinner', 'funken-dinner', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/funken-lodge.html',
+    'longyearbyen:funken-lodge:funken-dinner', 'funken-dinner', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Norway', 'html/cities/norway/funken-lodge.html',
     'stay', 'Funken set dinner',
     'Three-course polar dinner with wine pairing in the lodge restaurant.',
     'Each evening of the stay',
     0.03, 'per-night', 'utensils', 20
   ),
   (
-    'longyearbyen:funken-lodge:snowmobile', 'snowmobile', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/funken-lodge.html',
+    'longyearbyen:funken-lodge:snowmobile', 'snowmobile', 'hotel', 'Funken Lodge', 'Longyearbyen', 'Norway', 'html/cities/norway/funken-lodge.html',
     'experience', 'Guided snowmobile day trip',
     'Full-day outing across the plateau with a certified guide, thermal suit, and hot lunch in the field.',
     'Full day · guide and thermal suit',
     0.08, 'per-stay', 'ticket', 100
   ),
   (
-    'longyearbyen:basecamp-hotel:packed-lunch', 'packed-lunch', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/basecamp-hotel-svalbard.html',
+    'longyearbyen:basecamp-hotel:packed-lunch', 'packed-lunch', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Norway', 'html/cities/norway/basecamp-hotel-svalbard.html',
     'stay', 'Expedition packed lunch',
     'Thermos coffee and trail lunch packed each morning for glacier walks or town rambles.',
     'Packed each morning',
     0.01, 'per-night', 'utensils', 10
   ),
   (
-    'longyearbyen:basecamp-hotel:boat-safari', 'boat-safari', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/basecamp-hotel-svalbard.html',
+    'longyearbyen:basecamp-hotel:boat-safari', 'boat-safari', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Norway', 'html/cities/norway/basecamp-hotel-svalbard.html',
     'experience', 'Isfjorden boat safari',
     'Half-day cruise among glaciers and bird cliffs, with a chance to spot seals, whales, and Arctic wildlife.',
     'Half day · glacier route',
     0.055, 'per-stay', 'waves', 100
   ),
   (
-    'longyearbyen:basecamp-hotel:museum-pass', 'museum-pass', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/basecamp-hotel-svalbard.html',
+    'longyearbyen:basecamp-hotel:museum-pass', 'museum-pass', 'hotel', 'Basecamp Hotel', 'Longyearbyen', 'Norway', 'html/cities/norway/basecamp-hotel-svalbard.html',
     'experience', 'Svalbard Museum visit',
     'Admission to the Svalbard Museum, covering mining history, polar exploration, and High Arctic nature.',
     'Flexible entry',
     0.008, 'per-stay', 'museum', 110
   ),
   (
-    'longyearbyen:radisson-blu:arctic-tasting', 'arctic-tasting', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html',
+    'longyearbyen:radisson-blu:arctic-tasting', 'arctic-tasting', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Norway', 'html/cities/norway/radisson-blu-polar-spitsbergen.html',
     'stay', 'Arctic tasting menu',
     'Seasonal Svalbard menu with locally landed fish, cloudberries, and polar-night desserts.',
     'Each evening of the stay',
     0.035, 'per-night', 'utensils', 10
   ),
   (
-    'longyearbyen:radisson-blu:aurora-tour', 'aurora-tour', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html',
+    'longyearbyen:radisson-blu:aurora-tour', 'aurora-tour', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Norway', 'html/cities/norway/radisson-blu-polar-spitsbergen.html',
     'experience', 'Northern lights minibus tour',
     'Evening outing with a local guide to dark-sky valleys around Longyearbyen, with hot drinks and photo stops.',
     'Evening · guide and hot drinks',
     0.04, 'per-stay', 'ticket', 100
   ),
   (
-    'longyearbyen:radisson-blu:airport-transfer', 'airport-transfer', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/radisson-blu-polar-spitsbergen.html',
+    'longyearbyen:radisson-blu:airport-transfer', 'airport-transfer', 'hotel', 'Radisson Blu Polar Hotel Spitsbergen', 'Longyearbyen', 'Norway', 'html/cities/norway/radisson-blu-polar-spitsbergen.html',
     'transport', 'Svalbard Airport transfer',
     'Shared shuttle from LYR into Longyearbyen and back on departure day.',
     'Arrival and departure',
     0.03, 'per-stay', 'bus', 200
   ),
   (
-    'longyearbyen:city:dogsled', 'dogsled', 'city', '', 'Longyearbyen', 'Svalbard', 'html/cities/svalbard/longyearbyen.html',
+    'longyearbyen:city:dogsled', 'dogsled', 'city', '', 'Longyearbyen', 'Norway', 'html/cities/norway/longyearbyen.html',
     'experience', 'Dog-sled outing',
     'Short dog-sled run on the edge of town with a musher and a thermal suit.',
     '2 hours · thermal suit included',

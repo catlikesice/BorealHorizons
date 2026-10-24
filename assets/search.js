@@ -394,7 +394,7 @@
     if (intro) {
       intro.textContent = tours
         ? 'Find a guided tour, boat trip, or museum visit, then add it to a stay.'
-        : 'Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, the Åland Islands, Greenland, the Faroe Islands, and Svalbard.';
+        : 'Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, the Åland Islands, Greenland, and the Faroe Islands.';
     }
     if (emptyCopy) {
       emptyCopy.innerHTML = tours
