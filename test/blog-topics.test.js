@@ -78,6 +78,15 @@ function topicNav(source) {
   return source.slice(start, end);
 }
 
+test('blog page keeps only its topic bar, in a lighter green than the site navbar', () => {
+  assert.equal(html.includes('class="site-nav"'), false, 'blog page should not render the site navbar');
+  assert.equal(html.includes('<header'), false, 'blog page should not keep the site header');
+  assert.match(html, /<nav class="blog-topics"/);
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /\.blog-topics\s*\{[^}]*background:\s*#3a6e32/s);
+  assert.match(css, /#23441a/);
+});
+
 test('blog topic bar uses original headings in the same groups', () => {
   const nav = topicNav(html);
   parents.forEach((label) => {

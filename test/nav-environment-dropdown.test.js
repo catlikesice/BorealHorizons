@@ -14,7 +14,6 @@ const navPages = [
   'contact.html',
   'crypto-environment.html',
   'crypto-reliability.html',
-  'culture-blog.html',
   'forgot-password.html',
   'hotel-chains.html',
   'login.html',
