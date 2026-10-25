@@ -45,6 +45,32 @@ test('shared preferences script mounts the primary navbar around the language co
   assert.match(source, /header \.site-nav \.nav-inner/);
 });
 
+test('city hotel booking pages point assets three levels up so the navbar can load', () => {
+  const pages = listCityPages().filter((page) => {
+    const html = getCityPage(page.page_url).html;
+    return html.includes('booking-container') || html.includes('booking-header') || html.includes('hotel-detail');
+  });
+
+  assert.ok(pages.length > 80, 'expected city hotel booking pages');
+  assert.ok(pages.some((page) => page.page_url === 'html/cities/estonia/tallinn.html'));
+  assert.ok(pages.some((page) => page.page_url === 'html/cities/lithuania/šiauliai.htm'));
+
+  pages.forEach((page) => {
+    const html = getCityPage(page.page_url).html;
+    assert.equal(fs.readFileSync(path.join(root, page.page_url), 'utf8'), html, page.page_url);
+    assert.match(html, /<base href="\.\.\/\.\.\/\.\.\/">/, page.page_url + ' should resolve styles and the navbar from the site root');
+    assert.match(html, /site-preferences\.js/, page.page_url + ' should load the shared navbar');
+    assert.match(html, /class="language-switcher"/, page.page_url + ' should keep the language control for the navbar');
+  });
+});
+
+test('the shared navbar is not mounted from the blog topic bar', () => {
+  const source = fs.readFileSync(path.join(root, 'site-preferences.js'), 'utf8');
+  assert.match(source, /blog-topics/);
+  const blog = fs.readFileSync(path.join(root, 'culture-blog.html'), 'utf8');
+  assert.equal(blog.includes('class="site-nav"'), false);
+});
+
 test('a standalone booking language bar stays compact instead of stretching full width', () => {
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
   assert.match(css, /body:has\(\.booking-container\) > \.language-switcher/);

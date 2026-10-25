@@ -50,7 +50,7 @@ CREATE TABLE city_page_strings (
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/denmark/aalborg.html', 'Aalborg — Denmark (Placeholder)', 'Aalborg', 'Denmark', 'Aalborg — Denmark', NULL, NULL, NULL, 'This is a placeholder page for Aalborg in Denmark. The hotel listing for this city will be added here soon.', 'html/cities/denmark/aalborg.html', NULL, '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
   <meta charset="utf-8">
   <title>Aalborg — Denmark (Placeholder)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -139,7 +139,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/denmark/aarhus.html', 'Hotels in Aarhus', 'Aarhus', 'Denmark', 'Available Hotels in Aarhus', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Aarhus</title>
@@ -440,7 +440,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/aberdeen.html', 'Hotels in Aberdeen', 'Aberdeen', 'Scotland', 'Available Hotels in Aberdeen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Aberdeen</title>
@@ -742,7 +742,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/abisko.html', 'Hotels in Abisko', 'Abisko', 'Sweden', 'Available Hotels in Abisko', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Abisko</title>
@@ -1044,7 +1044,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/akureyri.html', 'Hotels in Akureyri', 'Akureyri', 'Iceland', 'Available Hotels in Akureyri', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Akureyri</title>
@@ -1347,7 +1347,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/latvia/bauska.html', 'Hotels in Bauska', 'Bauska', 'Latvia', 'Available Hotels in Bauska', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Bauska</title>
@@ -1636,7 +1636,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/bergen.html', 'Hotels in Bergen', 'Bergen', 'Norway', 'Available Hotels in Bergen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Bergen</title>
@@ -1939,7 +1939,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/northeast-england/berwick-upon-tweed.html', 'Hotels in Berwick-upon-Tweed', 'Berwick-upon-Tweed', 'Northeast England', 'Available Hotels in Berwick-upon-Tweed', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Berwick-upon-Tweed</title>
@@ -2242,7 +2242,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/denmark/copenhagen.html', 'Hotels in Copenhagen', 'Copenhagen', 'Denmark', 'Available Hotels in Copenhagen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Copenhagen</title>
@@ -2564,7 +2564,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/latvia/daugavpils.html', 'Hotels in Daugavpils', 'Daugavpils', 'Latvia', 'Available Hotels in Daugavpils', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Daugavpils</title>
@@ -2865,7 +2865,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/dundee.html', 'Hotels in Dundee', 'Dundee', 'Scotland', 'Available Hotels in Dundee', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Dundee</title>
@@ -3167,7 +3167,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/edinburgh.html', 'Hotels in Edinburgh', 'Edinburgh', 'Scotland', 'Available Hotels in Edinburgh', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Edinburgh</title>
@@ -3469,7 +3469,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/denmark/esbjerg.html', 'Hotel Booking - Esbjerg', 'Esbjerg', 'Denmark', 'Available Hotels in Esbjerg', 'HotelPaymentSystem', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, NULL, '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Booking - Esbjerg</title>
@@ -3710,7 +3710,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/espoo.html', 'Hotels in Espoo', 'Espoo', 'Finland', 'Available Hotels in Espoo', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Espoo</title>
@@ -4011,7 +4011,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/fort-william.html', 'Hotels in Fort William', 'Fort William', 'Scotland', 'Available Hotels in Fort William', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Fort William</title>
@@ -4313,7 +4313,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/glasgow.html', 'Hotels in Glasgow', 'Glasgow', 'Scotland', 'Available Hotels in Glasgow', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Glasgow</title>
@@ -4615,7 +4615,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/gothenburg.html', 'Hotels in Gothenburg', 'Gothenburg', 'Sweden', 'Available Hotels in Gothenburg', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Gothenburg</title>
@@ -4918,7 +4918,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/hafnarfjörður.html', 'Hotels in Hafnarfjörður', 'Hafnarfjörður', 'Iceland', 'Available Hotels in Hafnarfjörður', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Hafnarfjörður</title>
@@ -5221,7 +5221,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/helsinki.html', 'Hotels in Helsinki', 'Helsinki', 'Finland', 'Available Hotels in Helsinki', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Helsinki</title>
@@ -5517,7 +5517,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/greenland/ilulissat.html', 'Hotels in Ilulissat', 'Ilulissat', 'Greenland', 'Available Hotels in Ilulissat', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Ilulissat</title>
@@ -5820,7 +5820,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/inverness.html', 'Hotels in Inverness', 'Inverness', 'Scotland', 'Available Hotels in Inverness', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Inverness</title>
@@ -6122,7 +6122,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/latvia/jelgava.html', 'Hotels in Jelgava', 'Jelgava', 'Latvia', 'Available Hotels in Jelgava', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Jelgava</title>
@@ -6407,7 +6407,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/latvia/jurmala.html', 'Hotels in Jurmala', 'Jūrmala', 'Latvia', 'Available Hotels in Jurmala', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Jurmala</title>
@@ -6708,7 +6708,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/lithuania/kaunas.html', 'Hotels in Kaunas', 'Kaunas', 'Lithuania', 'Available Hotels in Kaunas', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Kaunas</title>
@@ -6997,7 +6997,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/kiruna.html', 'Hotels in Kiruna', 'Kiruna', 'Sweden', 'Available Hotels in Kiruna', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Kiruna</title>
@@ -7300,7 +7300,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/lithuania/klaipeda.html', 'Hotels in Klaipėda', 'Klaipėda', 'Lithuania', 'Available Hotels in Klaipėda', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Klaipėda</title>
@@ -7589,7 +7589,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/kópavogur.html', 'Hotels in Kópavogur', 'Kópavogur', 'Iceland', 'Available Hotels in Kópavogur', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Kópavogur</title>
@@ -7892,7 +7892,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/kristiansand.html', 'Hotels in Kristiansand', 'Kristiansand', 'Norway', 'Available Hotels in Kristiansand', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Kristiansand</title>
@@ -8195,7 +8195,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/lerwick.html', 'Hotels in Lerwick', 'Lerwick', 'Scotland', 'Available Hotels in Lerwick', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Lerwick</title>
@@ -8497,7 +8497,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/latvia/liepaja.html', 'Hotels in Liepaja', 'Liepāja', 'Latvia', 'Available Hotels in Liepaja', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Liepaja</title>
@@ -8798,7 +8798,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/lillehammer.html', 'Hotels in Lillehammer', 'Lillehammer', 'Norway', 'Available Hotels in Lillehammer', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Lillehammer</title>
@@ -9100,7 +9100,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/linköping.html', 'Hotels in Linköping', 'Linköping', 'Sweden', 'Available Hotels in Linköping', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Linköping</title>
@@ -9403,7 +9403,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/longyearbyen.html', 'Hotels in Longyearbyen', 'Longyearbyen', 'Norway', 'Available Hotels in Longyearbyen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Longyearbyen</title>
@@ -9706,7 +9706,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/malmö.html', 'Hotels in Malmö', 'Malmö', 'Sweden', 'Available Hotels in Malmö', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Malmö</title>
@@ -10009,7 +10009,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/aland-islands/mariehamn.html', 'Hotels in Mariehamn', 'Mariehamn', 'Åland Islands', 'Available Hotels in Mariehamn', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Mariehamn</title>
@@ -10312,7 +10312,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/estonia/narva.html', 'Hotels in Narva', 'Narva', 'Estonia', 'Available Hotels in Narva', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Narva</title>
@@ -10605,7 +10605,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/northeast-england/newcastle.html', 'Hotels in Newcastle', 'Newcastle', 'Northeast England', 'Available Hotels in Newcastle', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Newcastle</title>
@@ -10908,7 +10908,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/greenland/nuuk.html', 'Hotels in Nuuk', 'Nuuk', 'Greenland', 'Available Hotels in Nuuk', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Nuuk</title>
@@ -11211,7 +11211,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/oban.html', 'Hotels in Oban', 'Oban', 'Scotland', 'Available Hotels in Oban', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Oban</title>
@@ -11513,7 +11513,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/denmark/odense.html', 'Hotel Booking - Odense', 'Odense', 'Denmark', 'Available Hotels in Odense', 'HotelPaymentSystem', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, NULL, '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Booking - Odense</title>
@@ -11656,7 +11656,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/oslo.html', 'Hotels in Oslo', 'Oslo', 'Norway', 'Available Hotels in Oslo', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Oslo</title>
@@ -11959,7 +11959,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/oulu.html', 'Hotels in Oulu', 'Oulu', 'Finland', 'Available Hotels in Oulu', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Oulu</title>
@@ -12260,7 +12260,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/lithuania/panevėžys.html', 'Hotels in Panevėžys', 'Panevėžys', 'Lithuania', 'Available Hotels in Panevėžys', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Panevėžys</title>
@@ -12553,7 +12553,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/estonia/pärnu.html', 'Pärnu — Estonia (Placeholder)', 'Pärnu', 'Estonia', 'Pärnu — Estonia', NULL, NULL, NULL, 'This is a placeholder page for Pärnu in Estonia. The hotel listing for this city will be added here soon.', 'html/cities/estonia/pärnu.html', NULL, '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
   <meta charset="utf-8">
   <title>Pärnu — Estonia (Placeholder)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12666,7 +12666,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/portree.html', 'Hotels in Portree', 'Portree', 'Scotland', 'Available Hotels in Portree', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Portree</title>
@@ -12968,7 +12968,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/reykjanesbær.html', 'Hotels in Reykjanesbær', 'Reykjanesbær', 'Iceland', 'Available Hotels in Reykjanesbær', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Reykjanesbær</title>
@@ -13271,7 +13271,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/reykjavík.html', 'Hotels in Reykjavík', 'Reykjavík', 'Iceland', 'Available Hotels in Reykjavík', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Reykjavík</title>
@@ -13574,7 +13574,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/latvia/riga.html', 'Hotels in Riga', 'Riga', 'Latvia', 'Available Hotels in Riga', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Riga</title>
@@ -13863,7 +13863,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/rovaniemi.html', 'Hotels in Rovaniemi', 'Rovaniemi', 'Finland', 'Available Hotels in Rovaniemi', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Rovaniemi</title>
@@ -14166,7 +14166,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/lithuania/šiauliai.htm', 'Hotels in Šiauliai.Htm', 'Šiauliai', 'Lithuania', 'Available Hotels in Šiauliai.Htm', 'Boreal Horizons', 'Book your stay with secure crypto payments', 'selectlocation.html', NULL, NULL, 'ETH,BTC,USDT', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <title>Hotels in Šiauliai.Htm</title>
     <link rel="stylesheet" href="styles.css">
@@ -14300,6 +14300,17 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
         <h1>Boreal Horizons</h1>
         <p>Book your stay with secure crypto payments</p>
     </div>
+    <div class="language-switcher" aria-label="Language selector">
+        <label for="lang-select">Language</label>
+        <div class="language-switcher__select">
+            <select id="lang-select" aria-label="Select language">
+                <option value="en">English</option>
+                <option value="ru">Русский</option>
+                <option value="sv">Svenska</option>
+                <option value="de">Deutsch</option>
+            </select>
+        </div>
+    </div>
     <div class="booking-container">
         <h2>Available Hotels in Šiauliai.Htm</h2>
         <div class="currency-selector">
@@ -14334,6 +14345,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
     <footer>
         <p>&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
     </footer>
+    <script src="site-preferences.js"></script>
     <script>
         function updatePrices() {{
             const currency = document.getElementById(''currency'').value;
@@ -14362,7 +14374,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/stavanger.html', 'Hotels in Stavanger', 'Stavanger', 'Norway', 'Available Hotels in Stavanger', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Stavanger</title>
@@ -14665,7 +14677,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/stirling.html', 'Hotels in Stirling', 'Stirling', 'Scotland', 'Available Hotels in Stirling', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Stirling</title>
@@ -14967,7 +14979,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/stockholm.html', 'Hotels in Stockholm', 'Stockholm', 'Sweden', 'Available Hotels in Stockholm', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Stockholm</title>
@@ -15270,7 +15282,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/stornoway.html', 'Hotels in Stornoway', 'Stornoway', 'Scotland', 'Available Hotels in Stornoway', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Stornoway</title>
@@ -15572,7 +15584,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/estonia/tallinn.html', 'Hotels in Tallinn', 'Tallinn', 'Estonia', 'Available Hotels in Tallinn', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Tallinn</title>
@@ -15861,7 +15873,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/tampere.html', 'Hotels in Tampere', 'Tampere', 'Finland', 'Available Hotels in Tampere', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Tampere</title>
@@ -16162,7 +16174,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/estonia/tartu.html', 'Hotels in Tartu', 'Tartu', 'Estonia', 'Available Hotels in Tartu', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Tartu</title>
@@ -16455,7 +16467,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/faroe-islands/tórshavn.html', 'Hotels in Tórshavn', 'Tórshavn', 'Faroe Islands', 'Available Hotels in Tórshavn', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Tórshavn</title>
@@ -16758,7 +16770,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/tromso.html', 'Hotels in Tromsø', 'Tromsø', 'Norway', 'Available Hotels in Tromsø', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Tromsø</title>
@@ -17061,7 +17073,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/trondheim.html', 'Hotels in Trondheim', 'Trondheim', 'Norway', 'Available Hotels in Trondheim', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Trondheim</title>
@@ -17364,7 +17376,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/turku.html', 'Hotels in Turku', 'Turku', 'Finland', 'Available Hotels in Turku', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Turku</title>
@@ -17665,7 +17677,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/uppsala.html', 'Hotels in Uppsala', 'Uppsala', 'Sweden', 'Available Hotels in Uppsala', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Uppsala</title>
@@ -17968,7 +17980,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/estonia/viljandi.html', 'Viljandi — Estonia (Placeholder)', 'Viljandi', 'Estonia', 'Viljandi — Estonia', NULL, NULL, NULL, 'This is a placeholder page for Viljandi in Estonia. The hotel listing for this city will be added here soon.', 'html/cities/estonia/viljandi.html', NULL, '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
   <meta charset="utf-8">
   <title>Viljandi — Estonia (Placeholder)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18081,7 +18093,7 @@ if (langSelect) {
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/lithuania/vilnius.html', 'Hotels in Vilnius', 'Vilnius', 'Lithuania', 'Available Hotels in Vilnius', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Vilnius</title>
@@ -20011,7 +20023,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/keflavík.html', 'Hotels in Keflavík', 'Keflavík', 'Iceland', 'Available Hotels in Keflavík', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Keflavík</title>
@@ -20340,7 +20352,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/ísafjörður.html', 'Hotels in Ísafjörður', 'Ísafjörður', 'Iceland', 'Available Hotels in Ísafjörður', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Ísafjörður</title>
@@ -20669,7 +20681,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/vestmannaeyjar.html', 'Hotels in Vestmannaeyjar', 'Vestmannaeyjar', 'Iceland', 'Available Hotels in Vestmannaeyjar', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Vestmannaeyjar</title>
@@ -20998,7 +21010,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/iceland/sauðárkrókur.html', 'Hotels in Sauðárkrókur', 'Sauðárkrókur', 'Iceland', 'Available Hotels in Sauðárkrókur', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Sauðárkrókur</title>
@@ -21327,7 +21339,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/aviemore.html', 'Hotels in Aviemore', 'Aviemore', 'Scotland', 'Available Hotels in Aviemore', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Aviemore</title>
@@ -21656,7 +21668,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/pitlochry.html', 'Hotels in Pitlochry', 'Pitlochry', 'Scotland', 'Available Hotels in Pitlochry', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Pitlochry</title>
@@ -21985,7 +21997,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/st-andrews.html', 'Hotels in St Andrews', 'St Andrews', 'Scotland', 'Available Hotels in St Andrews', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in St Andrews</title>
@@ -22314,7 +22326,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/ullapool.html', 'Hotels in Ullapool', 'Ullapool', 'Scotland', 'Available Hotels in Ullapool', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Ullapool</title>
@@ -22643,7 +22655,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/northeast-england/alnwick.html', 'Hotels in Alnwick', 'Alnwick', 'Northeast England', 'Available Hotels in Alnwick', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Alnwick</title>
@@ -22972,7 +22984,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/northeast-england/northumberland-national-park.html', 'Hotels in Northumberland National Park', 'Northumberland National Park', 'Northeast England', 'Available Hotels in Northumberland National Park', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Northumberland National Park</title>
@@ -23301,7 +23313,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/benbecula.html', 'Hotels in Benbecula', 'Benbecula', 'Scotland', 'Available Hotels in Benbecula', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Benbecula</title>
@@ -23630,7 +23642,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/loch-lomond.html', 'Hotels in Loch Lomond National Park', 'Loch Lomond National Park', 'Scotland', 'Available Hotels in Loch Lomond National Park', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Loch Lomond National Park</title>
@@ -23959,7 +23971,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/geilo.html', 'Hotels in Geilo', 'Geilo', 'Norway', 'Available Hotels in Geilo', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Geilo</title>
@@ -24288,7 +24300,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/hemsedal.html', 'Hotels in Hemsedal', 'Hemsedal', 'Norway', 'Available Hotels in Hemsedal', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Hemsedal</title>
@@ -24617,7 +24629,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/levi.html', 'Hotels in Levi', 'Levi', 'Finland', 'Available Hotels in Levi', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Levi</title>
@@ -24946,7 +24958,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/sweden/salen.html', 'Hotels in Sälen', 'Sälen', 'Sweden', 'Available Hotels in Sälen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Sälen</title>
@@ -25275,7 +25287,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/denmark/skagen.html', 'Hotels in Skagen', 'Skagen', 'Denmark', 'Available Hotels in Skagen', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Skagen</title>
@@ -25604,7 +25616,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/norway/voss.html', 'Hotels in Voss', 'Voss', 'Norway', 'Available Hotels in Voss', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Voss</title>
@@ -25933,7 +25945,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/yllas.html', 'Hotels in Ylläs', 'Ylläs', 'Finland', 'Available Hotels in Ylläs', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Ylläs</title>
@@ -26262,7 +26274,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/finland/ruka-kuusamo.html', 'Hotels in Ruka-Kuusamo', 'Ruka-Kuusamo', 'Finland', 'Available Hotels in Ruka-Kuusamo', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Ruka-Kuusamo</title>
@@ -26591,7 +26603,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/northeast-england/durham.html', 'Hotels in Durham', 'Durham', 'Northeast England', 'Available Hotels in Durham', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Durham</title>
@@ -26920,7 +26932,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/northeast-england/hartlepool.html', 'Hotels in Hartlepool', 'Hartlepool', 'Northeast England', 'Available Hotels in Hartlepool', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Hartlepool</title>
@@ -27249,7 +27261,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/northeast-england/kielder-forest.html', 'Hotels in Kielder Forest', 'Kielder Forest', 'Northeast England', 'Available Hotels in Kielder Forest', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Kielder Forest</title>
@@ -27578,7 +27590,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/perth.html', 'Hotels in Perth', 'Perth', 'Scotland', 'Available Hotels in Perth', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Perth</title>
@@ -27907,7 +27919,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/arbroath.html', 'Hotels in Arbroath', 'Arbroath', 'Scotland', 'Available Hotels in Arbroath', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Arbroath</title>
@@ -28236,7 +28248,7 @@ INSERT INTO city_page_strings (page_url, lang, string_key, value) VALUES ('html/
 INSERT INTO city_pages (page_url, title, city_name, country, heading, header_title, header_description, back_href, placeholder_text, expected_path, currencies, html) VALUES ('html/cities/scotland/forfar.html', 'Hotels in Forfar', 'Forfar', 'Scotland', 'Available Hotels in Forfar', 'Boreal Horizons', 'Book your stay with secure crypto payments, and pay in fiat too.', 'index.html', NULL, NULL, 'en,ru,sv,de,ETH,BTC,USDT,LTC,BCH,DOGE,XRP,XMR,XNO,DASH,VET,UNI,SOL,ADA,TRN', '<!DOCTYPE html>
 <html lang="en">
 <head>
-  <base href="/">
+  <base href="../../../">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotels in Forfar</title>
