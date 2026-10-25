@@ -413,7 +413,7 @@
           (tour.price ? '<p class="search-card__price">' + escapeHtml(tour.price) + '</p>' : '') +
           (tour.description ? '<p class="search-card__desc">' + escapeHtml(tour.description) + '</p>' : '') +
           includes +
-          pageLink(tourSelectHref(tour), isPackage ? 'Choose a stay' : 'Add to stay') +
+          pageLink(tourSelectHref(tour), isPackage ? 'Select' : 'Add to stay') +
         '</div>' +
       '</article>'
     );
