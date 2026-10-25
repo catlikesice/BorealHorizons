@@ -7,6 +7,7 @@ const root = path.join(__dirname, '..');
 const html = fs.readFileSync(path.join(root, 'culture-blog.html'), 'utf8');
 
 const parents = [
+  'Culture',
   'Places',
   'Stay Picks',
   'Journey Currents',
@@ -16,6 +17,9 @@ const parents = [
 ];
 
 const children = [
+  'Seasonal Feasts',
+  'Streetscapes',
+  'Shared Rituals',
   'Nordic Cities',
   'Baltic Coast',
   'Highland Routes',
@@ -120,8 +124,12 @@ test('blog language menu uses the same compact menu as the topics', () => {
 });
 
 test('blog topics filter stories and keep every language label', () => {
-  assert.match(html, /data-topics="places baltic-coast"/);
-  assert.match(html, /data-topics="stay-picks offbeat-lodgings"/);
+  assert.match(html, /data-topics="culture seasonal-feasts places baltic-coast"/);
+  assert.match(html, /data-topics="culture shared-rituals stay-picks offbeat-lodgings"/);
+  assert.match(html, /id="culture-title">Culture</);
+  assert.match(html, /culture-title": "Культура"/);
+  assert.match(html, /topic-culture": "Kultur"/);
+  assert.match(html, /section\.hidden = Boolean\(activeBlogTopic\) && !anyVisible/);
   assert.match(html, /data-topics="journey-currents greener-getaways"/);
   assert.match(html, /data-topics="bulletin hospitality-wire"/);
   assert.match(html, /data-topics="getting-ready first-journey"/);
@@ -130,6 +138,7 @@ test('blog topics filter stories and keep every language label', () => {
   assert.match(html, /id="blog-filter-clear"/);
   assert.match(html, /id="blog-empty"/);
 
+  assert.match(html, /topic-culture": "Культура"/);
   assert.match(html, /topic-places": "Места"/);
   assert.match(html, /topic-stay-picks": "Boendeval"/);
   assert.match(html, /topic-token-payments": "Token-Zahlungen"/);

@@ -10,6 +10,14 @@
   <nav class="blog-topics" aria-label="Blog topics">
     <ul class="blog-topics__list">
       <li class="blog-topic">
+        <button type="button" class="blog-topic__label" id="topic-culture" data-topic="culture" aria-expanded="false" aria-controls="blog-menu-culture">Culture</button>
+        <div class="blog-topic__menu" id="blog-menu-culture" role="menu" hidden>
+          <button type="button" role="menuitem" id="topic-seasonal-feasts" data-topic="seasonal-feasts">Seasonal Feasts</button>
+          <button type="button" role="menuitem" id="topic-streetscapes" data-topic="streetscapes">Streetscapes</button>
+          <button type="button" role="menuitem" id="topic-shared-rituals" data-topic="shared-rituals">Shared Rituals</button>
+        </div>
+      </li>
+      <li class="blog-topic">
         <button type="button" class="blog-topic__label" id="topic-places" data-topic="places" aria-expanded="false" aria-controls="blog-menu-places">Places</button>
         <div class="blog-topic__menu" id="blog-menu-places" role="menu" hidden>
           <button type="button" role="menuitem" id="topic-nordic-cities" data-topic="nordic-cities">Nordic Cities</button>
@@ -97,31 +105,37 @@
     </p>
     <p class="blog-empty" id="blog-empty" hidden>Stories in this collection are on the way.</p>
 
+    <section class="blog-culture" id="culture" aria-labelledby="culture-title">
+      <h2 id="culture-title">Culture</h2>
+      <p id="culture-desc">Festivals, carved streets, and the rituals people keep across the north.</p>
+      <div class="blog-posts">
+        <article class="blog-post" data-topics="culture seasonal-feasts places baltic-coast">
+          <h3 id="post1-title">Midsummer Along the Baltic Coast</h3>
+          <p id="post1-desc">
+            From flower crowns to bonfires by the sea, Midsummer is one of the region’s most beloved celebrations.
+            Discover how Latvia, Estonia, and Lithuania welcome the longest days of the year.
+          </p>
+        </article>
+
+        <article class="blog-post" data-topics="culture streetscapes places baltic-coast">
+          <h3 id="post2-title">Art Nouveau Walks in Riga</h3>
+          <p id="post2-desc">
+            Alberta iela and the surrounding streets hold some of Europe’s finest Art Nouveau façades.
+            A slow walk through this district is an open-air museum of sculpture, symbolism, and city history.
+          </p>
+        </article>
+
+        <article class="blog-post" data-topics="culture shared-rituals stay-picks offbeat-lodgings">
+          <h3 id="post3-title">Sauna Culture from Finland to Estonia</h3>
+          <p id="post3-desc">
+            Heat, steam, and a plunge into cool water are more than a pastime—they are a shared Northern ritual.
+            Learn why the sauna remains central to hospitality and everyday life across the region.
+          </p>
+        </article>
+      </div>
+    </section>
+
     <section class="blog-posts" aria-label="Blog posts">
-      <article class="blog-post" data-topics="places baltic-coast">
-        <h3 id="post1-title">Midsummer Along the Baltic Coast</h3>
-        <p id="post1-desc">
-          From flower crowns to bonfires by the sea, Midsummer is one of the region’s most beloved celebrations.
-          Discover how Latvia, Estonia, and Lithuania welcome the longest days of the year.
-        </p>
-      </article>
-
-      <article class="blog-post" data-topics="places baltic-coast">
-        <h3 id="post2-title">Art Nouveau Walks in Riga</h3>
-        <p id="post2-desc">
-          Alberta iela and the surrounding streets hold some of Europe’s finest Art Nouveau façades.
-          A slow walk through this district is an open-air museum of sculpture, symbolism, and city history.
-        </p>
-      </article>
-
-      <article class="blog-post" data-topics="stay-picks offbeat-lodgings">
-        <h3 id="post3-title">Sauna Culture from Finland to Estonia</h3>
-        <p id="post3-desc">
-          Heat, steam, and a plunge into cool water are more than a pastime—they are a shared Northern ritual.
-          Learn why the sauna remains central to hospitality and everyday life across the region.
-        </p>
-      </article>
-
       <article class="blog-post" data-topics="journey-currents greener-getaways">
         <h3 id="post4-title">Quiet Routes through the North</h3>
         <p id="post4-desc">
@@ -183,6 +197,8 @@
         "blog-hero-desc": "Stories, traditions, and local insights from across Northern Europe to inspire your next trip.",
         "blog-intro-title": "Welcome to the Blog",
         "blog-intro-desc": "Explore the people, places, festivals, and everyday traditions that make Northern Europe special. New stories will appear here as we grow this collection—start with the features below.",
+        "culture-title": "Culture",
+        "culture-desc": "Festivals, carved streets, and the rituals people keep across the north.",
         "post1-title": "Midsummer Along the Baltic Coast",
         "post1-desc": "From flower crowns to bonfires by the sea, Midsummer is one of the region’s most beloved celebrations. Discover how Latvia, Estonia, and Lithuania welcome the longest days of the year.",
         "post2-title": "Art Nouveau Walks in Riga",
@@ -197,6 +213,10 @@
         "blog-filter-template": "Showing: {label}",
         "blog-filter-clear": "Show all stories",
         "blog-empty": "Stories in this collection are on the way.",
+        "topic-culture": "Culture",
+        "topic-seasonal-feasts": "Seasonal Feasts",
+        "topic-streetscapes": "Streetscapes",
+        "topic-shared-rituals": "Shared Rituals",
         "topic-places": "Places",
         "topic-nordic-cities": "Nordic Cities",
         "topic-baltic-coast": "Baltic Coast",
@@ -243,6 +263,8 @@
         "blog-hero-desc": "Истории, традиции и местные заметки из Северной Европы, которые вдохновят на следующую поездку.",
         "blog-intro-title": "Добро пожаловать в блог",
         "blog-intro-desc": "Откройте для себя людей, места, фестивали и повседневные традиции, которые делают Северную Европу особенной. Новые истории будут появляться здесь по мере роста коллекции — начните с материалов ниже.",
+        "culture-title": "Культура",
+        "culture-desc": "Праздники, резные улицы и ритуалы, которые люди на севере хранят.",
         "post1-title": "Иванов день на балтийском побережье",
         "post1-desc": "От венков из цветов до костров у моря — Иванов день одно из самых любимых празднований региона. Узнайте, как Латвия, Эстония и Литва встречают самые длинные дни года.",
         "post2-title": "Прогулки по югендстилю в Риге",
@@ -257,6 +279,10 @@
         "blog-filter-template": "Показано: {label}",
         "blog-filter-clear": "Все истории",
         "blog-empty": "Истории в этой подборке скоро появятся.",
+        "topic-culture": "Культура",
+        "topic-seasonal-feasts": "Сезонные праздники",
+        "topic-streetscapes": "Уличные фасады",
+        "topic-shared-rituals": "Общие ритуалы",
         "topic-places": "Места",
         "topic-nordic-cities": "Города Севера",
         "topic-baltic-coast": "Балтийское побережье",
@@ -303,6 +329,8 @@
         "blog-hero-desc": "Berättelser, traditioner och lokala inblickar från hela Nordeuropa som inspirerar till nästa resa.",
         "blog-intro-title": "Välkommen till bloggen",
         "blog-intro-desc": "Upptäck människorna, platserna, festivalerna och vardagstraditionerna som gör Nordeuropa unikt. Nya berättelser dyker upp här allteftersom samlingen växer — börja med inläggen nedan.",
+        "culture-title": "Kultur",
+        "culture-desc": "Högtider, utsirade gator och ritualer som människor i norr håller fast vid.",
         "post1-title": "Midsommar längs Östersjökusten",
         "post1-desc": "Från blomsterkransar till brasa vid havet är midsommar en av regionens mest älskade högtider. Upptäck hur Lettland, Estland och Litauen tar emot årets längsta dagar.",
         "post2-title": "Jugendpromenader i Riga",
@@ -317,6 +345,10 @@
         "blog-filter-template": "Visar: {label}",
         "blog-filter-clear": "Visa alla berättelser",
         "blog-empty": "Berättelser i den här samlingen är på väg.",
+        "topic-culture": "Kultur",
+        "topic-seasonal-feasts": "Årstidens fester",
+        "topic-streetscapes": "Gatubilder",
+        "topic-shared-rituals": "Gemensamma ritualer",
         "topic-places": "Platser",
         "topic-nordic-cities": "Nordiska städer",
         "topic-baltic-coast": "Östersjökusten",
@@ -363,6 +395,8 @@
         "blog-hero-desc": "Geschichten, Traditionen und lokale Einblicke aus Nordeuropa, die zu Ihrer nächsten Reise inspirieren.",
         "blog-intro-title": "Willkommen im Blog",
         "blog-intro-desc": "Entdecken Sie Menschen, Orte, Feste und Alltagstraditionen, die Nordeuropa besonders machen. Neue Geschichten erscheinen hier, während die Sammlung wächst — beginnen Sie mit den Beiträgen unten.",
+        "culture-title": "Kultur",
+        "culture-desc": "Feste, verzierte Straßen und Rituale, die Menschen im Norden bewahren.",
         "post1-title": "Mittsommer an der Ostseeküste",
         "post1-desc": "Von Blumenkränzen bis zu Lagerfeuern am Meer — Mittsommer gehört zu den beliebtesten Feiern der Region. Erfahren Sie, wie Lettland, Estland und Litauen die längsten Tage des Jahres begrüßen.",
         "post2-title": "Jugendstil-Spaziergänge in Riga",
@@ -377,6 +411,10 @@
         "blog-filter-template": "Angezeigt: {label}",
         "blog-filter-clear": "Alle Beiträge zeigen",
         "blog-empty": "Beiträge in dieser Sammlung folgen in Kürze.",
+        "topic-culture": "Kultur",
+        "topic-seasonal-feasts": "Feste der Jahreszeit",
+        "topic-streetscapes": "Straßenbilder",
+        "topic-shared-rituals": "Geteilte Rituale",
         "topic-places": "Orte",
         "topic-nordic-cities": "Nordische Städte",
         "topic-baltic-coast": "Ostseeküste",
@@ -451,6 +489,13 @@
       if (showing && template && activeBlogTopic) {
         showing.textContent = template.textContent.replace('{label}', blogTopicLabel(activeBlogTopic));
       }
+      document.querySelectorAll('.blog-culture').forEach(function(section) {
+        const sectionPosts = section.querySelectorAll('.blog-post');
+        const anyVisible = Array.prototype.some.call(sectionPosts, function(post) {
+          return !post.hidden;
+        });
+        section.hidden = Boolean(activeBlogTopic) && !anyVisible;
+      });
     }
 
     function applyTranslations(lang) {
