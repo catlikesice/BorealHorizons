@@ -103,6 +103,22 @@ test('blog topic bar uses original headings in the same groups', () => {
   });
 });
 
+test('blog language menu uses the same compact menu as the topics', () => {
+  const nav = topicNav(html);
+  assert.match(nav, /class="language-switcher blog-lang"/);
+  assert.match(nav, /class="blog-lang__button"/);
+  assert.match(nav, /id="blog-lang-menu"/);
+  assert.match(nav, /class="language-switcher__select" aria-hidden="true"/);
+  assert.match(html, /function initBlogLanguageMenu/);
+  assert.match(html, /select\.dispatchEvent\(new Event\('change'/);
+
+  const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(css, /\.blog-topics \.blog-lang__button\s*\{/);
+  assert.match(css, /\.blog-topics \.blog-lang__menu\s*\{/);
+  assert.match(css, /\.blog-topics \.blog-lang \.language-switcher__select[\s\S]*?clip:\s*rect\(0 0 0 0\)/);
+  assert.doesNotMatch(css, /\.blog-topics \.language-switcher select\s*\{[^}]*border-radius:\s*999px/s);
+});
+
 test('blog topics filter stories and keep every language label', () => {
   assert.match(html, /data-topics="places baltic-coast"/);
   assert.match(html, /data-topics="stay-picks offbeat-lodgings"/);
