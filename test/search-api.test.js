@@ -533,7 +533,7 @@ test('sample tour packages appear when searching tours', async () => {
   const script = fs.readFileSync(path.join(root, 'assets/search.js'), 'utf8');
   assert.match(script, /Sample package/);
   assert.match(script, /isPackage \? 'package'/);
-  assert.match(script, /Choose a stay/);
+  assert.match(script, /isPackage \? 'Select'/);
   assert.match(script, /TourPackages\.search/);
   const page = fs.readFileSync(path.join(root, 'search.html'), 'utf8');
   assert.match(page, /search-card--package/);
