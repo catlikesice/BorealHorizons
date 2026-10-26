@@ -3615,6 +3615,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
         <p id="footer-text">&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
     </footer>
 
+    <script src="assets/price-range-sidebar.js"></script>
     <script src="site-preferences.js"></script>
 <script>
 // Translation data for supported languages
@@ -14345,6 +14346,7 @@ INSERT INTO city_pages (page_url, title, city_name, country, heading, header_tit
     <footer>
         <p>&copy; 2026 Boreal Horizons. Blockchain solutions for the hospitality industry.</p>
     </footer>
+    <script src="assets/price-range-sidebar.js"></script>
     <script src="site-preferences.js"></script>
     <script>
         function updatePrices() {{
