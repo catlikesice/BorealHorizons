@@ -1,10 +1,10 @@
 /**
  * price-range-sidebar.js
  *
- * Sidebar for city hotel listings. Customers select nightly price ranges
- * and other stay factors (spa, waterfront, hotel group, ecolodge, and so on).
- * Stays that do not match drop out of the list. Tiers follow the currency
- * already chosen on the page.
+ * Sidebar for city hotel listings. Guests narrow the list by nightly price,
+ * amenities, stay features, and hotel group, and they choose the order the
+ * remaining stays appear in. Tiers follow the currency already chosen on
+ * the page.
  *
  * Ecolodge addresses stay aligned with assets/ecolodges.js.
  */
@@ -23,22 +23,38 @@
     "html/cities/norway/ny-alesund-polar-lodge.html",
   ];
   const STAY_FACTORS = [
-    { key: "spa", pattern: /\bspa\b/i },
-    { key: "pool", pattern: /\b(pool|swimming)\b/i },
     { key: "waterfront", pattern: /\b(sea|beach|waterfront|riverside|river|lake|harbour|harbor|ocean|fjord|coast|coastal)\b/i },
     { key: "centre", pattern: /\b(city centre|city center|old town|downtown|in the cent(?:re|er)|heart of)\b/i },
     { key: "historic", pattern: /\b(historic|historical|heritage)\b/i },
-    { key: "restaurant", pattern: /\b(restaurant|dining)\b/i },
     { key: "boutique", pattern: /\bboutique\b/i },
     { key: "ski", pattern: /\b(ski|skiing|slope|piste|gondola)\b/i },
     { key: "business", pattern: /\bbusiness\b/i },
-    { key: "breakfast", pattern: /\bbreakfast\b/i },
     { key: "family", pattern: /\bfamily\b/i },
     { key: "eco", pattern: /\b(eco-friendly|ecolodge|sustainable|organic)\b/i },
     { key: "airport", pattern: /\bairport\b/i },
-    { key: "wellness", pattern: /\bwellness\b/i },
     { key: "mountain", pattern: /\bmountain\b/i },
     { key: "conference", pattern: /\bconference\b/i },
+  ];
+  const AMENITIES = [
+    { key: "spa", pattern: /\bspa\b/i },
+    { key: "pool", pattern: /\b(pool|swimming)\b/i },
+    { key: "restaurant", pattern: /\b(restaurant|dining)\b/i },
+    { key: "breakfast", pattern: /\bbreakfast\b/i },
+    { key: "wellness", pattern: /\bwellness\b/i },
+    { key: "gym", pattern: /\b(gym|fitness)\b/i },
+    { key: "bar", pattern: /\bbar\b/i },
+    { key: "sauna", pattern: /\bsauna\b/i },
+    { key: "terrace", pattern: /\b(terrace|rooftop|balcony)\b/i },
+    { key: "garden", pattern: /\bgardens?\b/i },
+    { key: "golf", pattern: /\bgolf\b/i },
+    { key: "view", pattern: /\bviews?\b/i },
+  ];
+  const SORT_OPTIONS = [
+    { value: "", key: "recommended" },
+    { value: "little", key: "little" },
+    { value: "much", key: "much" },
+    { value: "name-asc", key: "nameAsc" },
+    { value: "name-desc", key: "nameDesc" },
   ];
   const currencyFormatter = new Intl.NumberFormat("en-US", {
     minimumFractionDigits: 0,
@@ -48,12 +64,19 @@
     en: {
       badge: "Stay filters",
       heading: "Choose your stay",
-      description: "Select one or more price ranges. Other stays leave the list.",
+      description: "Select price ranges, amenities, and stay details. Other stays leave the list.",
       ariaLabel: "Select hotels by nightly rate",
-      noteDefault: "Add a price range or a stay feature to narrow the list.",
+      noteDefault: "Add a price range, an amenity, or a stay feature to narrow the list.",
       boundsLabel: "Nightly budget",
       minLabel: "From",
       maxLabel: "Up to",
+      searchLabel: "Find a stay",
+      searchPlaceholder: "Name or word",
+      searchAria: "Find a stay by name or description",
+      sortLabel: "Arrange stays",
+      sortAria: "Choose how the stays are ordered",
+      amenitiesHeading: "Amenities",
+      amenitiesAria: "Filter by amenities",
       factorsHeading: "Stay features",
       factorsAria: "Filter by stay features",
       chainsHeading: "Hotel group",
@@ -81,6 +104,27 @@
         conference: "Conference",
         ecolodge: "Ecolodge",
       },
+      amenities: {
+        spa: "Spa",
+        pool: "Pool",
+        restaurant: "Restaurant",
+        breakfast: "Breakfast",
+        wellness: "Wellness",
+        gym: "Gym",
+        bar: "Bar",
+        sauna: "Sauna",
+        terrace: "Terrace",
+        garden: "Garden",
+        golf: "Golf",
+        view: "View",
+      },
+      sortOptions: {
+        recommended: "Recommended",
+        little: "Price: low to high",
+        much: "Price: high to low",
+        nameAsc: "Name: A to Z",
+        nameDesc: "Name: Z to A",
+      },
       noteUniform:
         "All listed rooms share a similar nightly rate. Compare amenities to find your fit.",
       noteDynamic:
@@ -96,30 +140,27 @@
         luxury: "Above {amount} {unit}",
         uniform: "{amount} {unit}",
       },
-      orderDescription:
-        "Order stays from much to little, or from little to much.",
-      orderAriaLabel: "Order hotels by nightly rate",
-      orderOptions: {
-        much: "Much",
-        little: "Little",
-      },
-      orderHints: {
-        much: "Highest price first",
-        little: "Lowest price first",
-      },
+      orderDescription: "Choose the order the stays appear in.",
       combinationSeparator: " • ",
     },
     ru: {
       badge: "Фильтры",
       heading: "Выберите проживание",
-      description: "Выберите один или несколько ценовых диапазонов. Остальные варианты скрываются.",
+      description: "Выберите ценовые диапазоны, удобства и особенности. Остальные варианты скрываются.",
       ariaLabel: "Выбрать отели по ночной цене",
-      noteDefault: "Добавьте ценовой диапазон или удобство, чтобы сократить список.",
+      noteDefault: "Добавьте ценовой диапазон, удобство или особенность, чтобы сократить список.",
       boundsLabel: "Бюджет за ночь",
       minLabel: "От",
       maxLabel: "До",
-      factorsHeading: "Удобства",
-      factorsAria: "Фильтр по удобствам",
+      searchLabel: "Найти вариант",
+      searchPlaceholder: "Название или слово",
+      searchAria: "Найти вариант по названию или описанию",
+      sortLabel: "Порядок",
+      sortAria: "Выберите порядок вариантов",
+      amenitiesHeading: "Удобства",
+      amenitiesAria: "Фильтр по удобствам",
+      factorsHeading: "Тип проживания",
+      factorsAria: "Фильтр по типу проживания",
       chainsHeading: "Сеть отелей",
       chainsAria: "Фильтр по сети отелей",
       clearLabel: "Сбросить фильтры",
@@ -145,6 +186,27 @@
         conference: "Конференц-зал",
         ecolodge: "Эко-лодж",
       },
+      amenities: {
+        spa: "Спа",
+        pool: "Бассейн",
+        restaurant: "Ресторан",
+        breakfast: "Завтрак",
+        wellness: "Велнес",
+        gym: "Тренажёрный зал",
+        bar: "Бар",
+        sauna: "Сауна",
+        terrace: "Терраса",
+        garden: "Сад",
+        golf: "Гольф",
+        view: "Вид",
+      },
+      sortOptions: {
+        recommended: "Рекомендуемые",
+        little: "Цена: по возрастанию",
+        much: "Цена: по убыванию",
+        nameAsc: "Название: А–Я",
+        nameDesc: "Название: Я–А",
+      },
       noteUniform:
         "Все номера имеют схожую стоимость за ночь. Сравните удобства, чтобы выбрать свой вариант.",
       noteDynamic:
@@ -160,27 +222,24 @@
         luxury: "Выше {amount} {unit}",
         uniform: "{amount} {unit}",
       },
-      orderDescription:
-        "Отсортируйте варианты от большего к меньшему или от меньшего к большему.",
-      orderAriaLabel: "Упорядочить отели по ночной цене",
-      orderOptions: {
-        much: "Больше",
-        little: "Меньше",
-      },
-      orderHints: {
-        much: "Сначала дороже",
-        little: "Сначала дешевле",
-      },
+      orderDescription: "Выберите, в каком порядке показывать варианты.",
     },
     sv: {
       badge: "Filter",
       heading: "Välj boende",
-      description: "Välj ett eller flera prisintervall. Övriga boenden lämnar listan.",
+      description: "Välj prisintervall, bekvämligheter och boendefaktorer. Övriga boenden lämnar listan.",
       ariaLabel: "Välj hotell efter nattpris",
-      noteDefault: "Lägg till ett prisintervall eller en boendefaktor för att korta listan.",
+      noteDefault: "Lägg till ett prisintervall, en bekvämlighet eller en boendefaktor för att korta listan.",
       boundsLabel: "Nattbudget",
       minLabel: "Från",
       maxLabel: "Upp till",
+      searchLabel: "Hitta ett boende",
+      searchPlaceholder: "Namn eller ord",
+      searchAria: "Hitta ett boende efter namn eller beskrivning",
+      sortLabel: "Ordna boenden",
+      sortAria: "Välj i vilken ordning boendena visas",
+      amenitiesHeading: "Bekvämligheter",
+      amenitiesAria: "Filtrera efter bekvämligheter",
       factorsHeading: "Boendefaktorer",
       factorsAria: "Filtrera efter boendefaktorer",
       chainsHeading: "Hotellkedja",
@@ -208,6 +267,27 @@
         conference: "Konferens",
         ecolodge: "Ekolodge",
       },
+      amenities: {
+        spa: "Spa",
+        pool: "Pool",
+        restaurant: "Restaurang",
+        breakfast: "Frukost",
+        wellness: "Wellness",
+        gym: "Gym",
+        bar: "Bar",
+        sauna: "Bastu",
+        terrace: "Terrass",
+        garden: "Trädgård",
+        golf: "Golf",
+        view: "Utsikt",
+      },
+      sortOptions: {
+        recommended: "Rekommenderat",
+        little: "Pris: lägst först",
+        much: "Pris: högst först",
+        nameAsc: "Namn: A till Ö",
+        nameDesc: "Namn: Ö till A",
+      },
       noteUniform:
         "Alla listade rum har ett liknande nattpris. Jämför bekvämligheter för att hitta rätt.",
       noteDynamic:
@@ -223,31 +303,28 @@
         luxury: "Över {amount} {unit}",
         uniform: "{amount} {unit}",
       },
-      orderDescription:
-        "Sortera boenden från mycket till lite, eller från lite till mycket.",
-      orderAriaLabel: "Sortera hotell efter nattpris",
-      orderOptions: {
-        much: "Mycket",
-        little: "Lite",
-      },
-      orderHints: {
-        much: "Högsta pris först",
-        little: "Lägsta pris först",
-      },
+      orderDescription: "Välj i vilken ordning boendena visas.",
       combinationSeparator: " • ",
     },
     de: {
       badge: "Filter",
       heading: "Aufenthalt wählen",
       description:
-        "Wählen Sie eine oder mehrere Preisspannen. Andere Angebote verlassen die Liste.",
+        "Wählen Sie Preisspannen, Ausstattung und Aufenthaltsart. Andere Angebote verlassen die Liste.",
       ariaLabel: "Hotels nach Übernachtungspreis auswählen",
-      noteDefault: "Wählen Sie eine Preisspanne oder eine Ausstattung, um die Liste einzugrenzen.",
+      noteDefault: "Wählen Sie eine Preisspanne, eine Ausstattung oder eine Aufenthaltsart, um die Liste einzugrenzen.",
       boundsLabel: "Nachtbudget",
       minLabel: "Von",
       maxLabel: "Bis",
-      factorsHeading: "Ausstattung",
-      factorsAria: "Nach Ausstattung filtern",
+      searchLabel: "Aufenthalt finden",
+      searchPlaceholder: "Name oder Wort",
+      searchAria: "Aufenthalt nach Name oder Beschreibung finden",
+      sortLabel: "Reihenfolge",
+      sortAria: "Wählen Sie die Reihenfolge der Aufenthalte",
+      amenitiesHeading: "Ausstattung",
+      amenitiesAria: "Nach Ausstattung filtern",
+      factorsHeading: "Art des Aufenthalts",
+      factorsAria: "Nach Art des Aufenthalts filtern",
       chainsHeading: "Hotelgruppe",
       chainsAria: "Nach Hotelgruppe filtern",
       clearLabel: "Filter löschen",
@@ -273,6 +350,27 @@
         conference: "Konferenz",
         ecolodge: "Ökolodge",
       },
+      amenities: {
+        spa: "Spa",
+        pool: "Pool",
+        restaurant: "Restaurant",
+        breakfast: "Frühstück",
+        wellness: "Wellness",
+        gym: "Fitnessraum",
+        bar: "Bar",
+        sauna: "Sauna",
+        terrace: "Terrasse",
+        garden: "Garten",
+        golf: "Golf",
+        view: "Aussicht",
+      },
+      sortOptions: {
+        recommended: "Empfohlen",
+        little: "Preis: aufsteigend",
+        much: "Preis: absteigend",
+        nameAsc: "Name: A bis Z",
+        nameDesc: "Name: Z bis A",
+      },
       noteUniform:
         "Alle Zimmer haben einen ähnlichen Übernachtungspreis. Vergleichen Sie die Ausstattung, um das Richtige zu finden.",
       noteDynamic:
@@ -288,17 +386,7 @@
         luxury: "Über {amount} {unit}",
         uniform: "{amount} {unit}",
       },
-      orderDescription:
-        "Sortieren Sie die Aufenthalte von viel nach wenig oder von wenig nach viel.",
-      orderAriaLabel: "Hotels nach Übernachtungspreis sortieren",
-      orderOptions: {
-        much: "Viel",
-        little: "Wenig",
-      },
-      orderHints: {
-        much: "Höchster Preis zuerst",
-        little: "Niedrigster Preis zuerst",
-      },
+      orderDescription: "Wählen Sie die Reihenfolge der Aufenthalte.",
     },
   };
 
@@ -686,17 +774,62 @@
     return false;
   }
 
-  function factorsForText(text, href) {
+  function matchesCatalog(catalog, text) {
     const found = [];
-    STAY_FACTORS.forEach(function (factor) {
-      if (factor.pattern.test(text || "")) {
-        found.push(factor.key);
+    catalog.forEach(function (item) {
+      if (item.pattern.test(text || "")) {
+        found.push(item.key);
       }
     });
+    return found;
+  }
+
+  function factorsForText(text, href) {
+    const found = matchesCatalog(STAY_FACTORS, text);
     if (isEcolodgeHref(href)) {
       found.push("ecolodge");
     }
     return found;
+  }
+
+  function amenitiesForText(text) {
+    return matchesCatalog(AMENITIES, text);
+  }
+
+  function keysFromAttribute(card, name) {
+    return String((card && card.getAttribute && card.getAttribute(name)) || "")
+      .split(/\s+/)
+      .filter(Boolean);
+  }
+
+  function clearChildren(node) {
+    if (!node || !node.children) {
+      return;
+    }
+    while (node.children.length) {
+      const child = node.children[0];
+      node.children.splice(0, 1);
+      if (child) {
+        child.parentNode = null;
+      }
+    }
+  }
+
+  function fillSortOptions(select, strings) {
+    if (!select || typeof document === "undefined") {
+      return;
+    }
+    const current = select.value || "";
+    clearChildren(select);
+    SORT_OPTIONS.forEach(function (option) {
+      const node = document.createElement("option");
+      node.value = option.value;
+      node.textContent =
+        (strings && strings.sortOptions && strings.sortOptions[option.key]) ||
+        option.key;
+      select.appendChild(node);
+    });
+    select.value = current;
   }
 
   function chainName(card) {
@@ -715,10 +848,14 @@
     if (!card || typeof card.setAttribute !== "function") {
       return;
     }
+    const blob = cardBlob(card);
+    const amenities = amenitiesForText(blob);
     card.setAttribute(
       "data-stay-factors",
-      factorsForText(cardBlob(card), bookHref(card)).join(" ")
+      factorsForText(blob, bookHref(card)).join(" ")
     );
+    card.setAttribute("data-stay-amenities", amenities.join(" "));
+    renderAmenityChips(card, amenities, composeTranslation(currentLanguage));
     const chain = chainName(card);
     if (chain) {
       card.setAttribute("data-stay-chain", chain);
@@ -732,6 +869,99 @@
       return strings.factors[key];
     }
     return key;
+  }
+
+  function amenityLabel(strings, key) {
+    if (strings && strings.amenities && strings.amenities[key]) {
+      return strings.amenities[key];
+    }
+    return factorLabel(strings, key);
+  }
+
+  function renderAmenityChips(card, keys, strings) {
+    if (!card || typeof card.querySelector !== "function" || typeof document === "undefined") {
+      return;
+    }
+    let list = card.querySelector(".hotel-amenities");
+    if (!keys.length) {
+      if (list && list.parentNode && list.parentNode.children) {
+        const index = list.parentNode.children.indexOf(list);
+        if (index >= 0) {
+          list.parentNode.children.splice(index, 1);
+        }
+        list.parentNode = null;
+      }
+      return;
+    }
+    if (!list) {
+      list = document.createElement("ul");
+      list.className = "hotel-amenities";
+      const link = card.querySelector(".book-link");
+      if (link && typeof card.insertBefore === "function") {
+        card.insertBefore(list, link);
+      } else if (typeof card.appendChild === "function") {
+        card.appendChild(list);
+      }
+    }
+    if (!list) {
+      return;
+    }
+    if (strings && strings.amenitiesHeading) {
+      list.setAttribute("aria-label", strings.amenitiesHeading);
+    }
+    clearChildren(list);
+    keys.forEach(function (key) {
+      const item = document.createElement("li");
+      item.setAttribute("data-amenity-chip", key);
+      item.textContent = amenityLabel(strings, key);
+      list.appendChild(item);
+    });
+  }
+
+  function relabelAmenityChips(cards, strings) {
+    (cards || []).forEach(function (card) {
+      if (!card || typeof card.querySelectorAll !== "function") {
+        return;
+      }
+      const list = typeof card.querySelector === "function"
+        ? card.querySelector(".hotel-amenities")
+        : null;
+      if (list && strings && strings.amenitiesHeading) {
+        list.setAttribute("aria-label", strings.amenitiesHeading);
+      }
+      Array.prototype.forEach.call(
+        card.querySelectorAll("[data-amenity-chip]"),
+        function (chip) {
+          const key = chip.getAttribute("data-amenity-chip");
+          if (key) {
+            chip.textContent = amenityLabel(strings, key);
+          }
+        }
+      );
+    });
+  }
+
+  function foldText(value) {
+    return String(value || "")
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .toLowerCase();
+  }
+
+  function cardTitle(card) {
+    if (!card || typeof card.querySelector !== "function") {
+      return "";
+    }
+    const heading = card.querySelector("h3");
+    return heading && heading.textContent
+      ? String(heading.textContent).replace(/\s+/g, " ").trim()
+      : "";
+  }
+
+  function cardSearchText(card) {
+    return foldText([cardTitle(card), cardBlob(card), chainName(card)].join(" "));
   }
 
   function setBlockHidden(block, hidden) {
@@ -947,7 +1177,7 @@
       heading.textContent = strings.heading;
     }
 
-    const desc = sidebar.querySelector(".price-range-desc");
+    const desc = sidebar.querySelector("[data-sidebar-desc]");
     if (desc && strings.description) {
       desc.textContent = strings.description;
     }
@@ -975,27 +1205,38 @@
       orderDesc.textContent = strings.orderDescription;
     }
 
-    const orderGroup = sidebar.querySelector("[data-price-order]");
-    if (orderGroup && strings.orderAriaLabel) {
-      orderGroup.setAttribute("aria-label", strings.orderAriaLabel);
+    const sortLabel = sidebar.querySelector("[data-sort-label]");
+    if (sortLabel && strings.sortLabel) {
+      sortLabel.textContent = strings.sortLabel;
     }
-
-    ["much", "little"].forEach(function (key) {
-      const button = sidebar.querySelector(
-        '.price-range-option[data-order="' + key + '"]'
-      );
-      if (!button) {
-        return;
+    const sortSelect = sidebar.querySelector("[data-stay-sort]");
+    if (sortSelect) {
+      if (strings.sortAria) {
+        sortSelect.setAttribute("aria-label", strings.sortAria);
       }
-      const label = button.querySelector(".range-label");
-      if (label && strings.orderOptions && strings.orderOptions[key]) {
-        label.textContent = strings.orderOptions[key];
+      fillSortOptions(sortSelect, strings);
+    }
+    const searchLabel = sidebar.querySelector("[data-search-label]");
+    if (searchLabel && strings.searchLabel) {
+      searchLabel.textContent = strings.searchLabel;
+    }
+    const searchInput = sidebar.querySelector("[data-stay-search]");
+    if (searchInput) {
+      if (strings.searchPlaceholder) {
+        searchInput.setAttribute("placeholder", strings.searchPlaceholder);
       }
-      const hint = button.querySelector("[data-order-hint]");
-      if (hint && strings.orderHints && strings.orderHints[key]) {
-        hint.textContent = strings.orderHints[key];
+      if (strings.searchAria) {
+        searchInput.setAttribute("aria-label", strings.searchAria);
       }
-    });
+    }
+    const amenitiesHeading = sidebar.querySelector("[data-amenities-heading]");
+    if (amenitiesHeading && strings.amenitiesHeading) {
+      amenitiesHeading.textContent = strings.amenitiesHeading;
+    }
+    const amenitiesGroup = sidebar.querySelector("[data-stay-amenities]");
+    if (amenitiesGroup && strings.amenitiesAria) {
+      amenitiesGroup.setAttribute("aria-label", strings.amenitiesAria);
+    }
 
     const boundsLabel = sidebar.querySelector("[data-bounds-label]");
     if (boundsLabel && strings.boundsLabel) {
@@ -1036,6 +1277,16 @@
         const key = button.getAttribute("data-factor");
         if (label && key) {
           label.textContent = factorLabel(strings, key);
+        }
+      }
+    );
+    Array.prototype.forEach.call(
+      sidebar.querySelectorAll("[data-amenity]"),
+      function (button) {
+        const label = button.querySelector(".range-label");
+        const key = button.getAttribute("data-amenity");
+        if (label && key) {
+          label.textContent = amenityLabel(strings, key);
         }
       }
     );
@@ -1135,6 +1386,7 @@
     const strings = composeTranslation(currentLanguage);
     contexts.forEach(function (context) {
       renderSidebar(context, strings);
+      relabelAmenityChips(context.hotelCards, strings);
       if (typeof context.applyFilter === "function") {
         context.applyFilter();
       }
@@ -1239,13 +1491,37 @@
         card: card,
         index: index,
         amount: nightlyAmount(card, currency),
+        title: cardTitle(card),
       };
     });
     const normalized =
-      direction === "little" || direction === "much" ? direction : null;
+      direction === "little" ||
+      direction === "much" ||
+      direction === "name-asc" ||
+      direction === "name-desc"
+        ? direction
+        : null;
     decorated.sort(function (a, b) {
       if (!normalized) {
         return a.index - b.index;
+      }
+      if (normalized === "name-asc" || normalized === "name-desc") {
+        const aMissing = !a.title;
+        const bMissing = !b.title;
+        if (aMissing || bMissing) {
+          if (aMissing && bMissing) {
+            return a.index - b.index;
+          }
+          return aMissing ? 1 : -1;
+        }
+        const compared = a.title.localeCompare(b.title, undefined, {
+          sensitivity: "base",
+          numeric: true,
+        });
+        if (compared === 0) {
+          return a.index - b.index;
+        }
+        return normalized === "name-asc" ? compared : -compared;
       }
       const aMissing = !Number.isFinite(a.amount);
       const bMissing = !Number.isFinite(b.amount);
@@ -1282,46 +1558,31 @@
     return "ETH";
   }
 
-  function wirePriceOrder(context, sidebar, hotelCards) {
-    const buttons = Array.prototype.slice.call(
-      sidebar.querySelectorAll('.price-range-option[data-order]')
-    );
-    if (!buttons.length || !hotelCards.length) {
+  function wireStaySort(context, sidebar, hotelCards) {
+    const select = sidebar.querySelector("[data-stay-sort]");
+    context.sortSelect = select;
+    if (!select || !hotelCards.length) {
       return;
     }
 
     const hotelList = hotelCards[0].parentNode;
-    let activeOrder = null;
-
-    function updateOrderButtons() {
-      buttons.forEach(function (btn) {
-        const isActive = btn.dataset.order === activeOrder;
-        btn.setAttribute("aria-pressed", isActive ? "true" : "false");
-      });
-    }
 
     function applyOrder() {
       if (!hotelList) {
         return;
       }
-      const ordered = orderStayCards(hotelCards, activeOrder, activeCurrency());
+      const ordered = orderStayCards(
+        hotelCards,
+        select.value || null,
+        activeCurrency()
+      );
       ordered.forEach(function (card) {
         hotelList.appendChild(card);
       });
     }
 
     context.applyOrder = applyOrder;
-
-    buttons.forEach(function (button) {
-      button.addEventListener("click", function () {
-        const order = button.dataset.order;
-        activeOrder = activeOrder === order ? null : order;
-        updateOrderButtons();
-        applyOrder();
-      });
-    });
-
-    updateOrderButtons();
+    select.addEventListener("change", applyOrder);
   }
 
   let currencyHookBound = false;
@@ -1382,8 +1643,83 @@
 
     const desc = document.createElement("p");
     desc.className = "price-range-desc";
+    desc.setAttribute("data-sidebar-desc", "");
     desc.textContent = strings.description;
     aside.appendChild(desc);
+
+    const sortWrap = document.createElement("label");
+    sortWrap.className = "stay-sort";
+    const sortCaption = document.createElement("span");
+    sortCaption.className = "stay-filter-heading";
+    sortCaption.setAttribute("data-sort-label", "");
+    sortCaption.textContent = strings.sortLabel || "Arrange stays";
+    const sortSelect = document.createElement("select");
+    sortSelect.setAttribute("data-stay-sort", "");
+    sortSelect.setAttribute(
+      "aria-label",
+      strings.sortAria || "Choose how the stays are ordered"
+    );
+    sortWrap.appendChild(sortCaption);
+    sortWrap.appendChild(sortSelect);
+    aside.appendChild(sortWrap);
+    fillSortOptions(sortSelect, strings);
+
+    const searchWrap = document.createElement("label");
+    searchWrap.className = "stay-search";
+    const searchCaption = document.createElement("span");
+    searchCaption.className = "stay-filter-heading";
+    searchCaption.setAttribute("data-search-label", "");
+    searchCaption.textContent = strings.searchLabel || "Find a stay";
+    const searchInput = document.createElement("input");
+    searchInput.type = "search";
+    searchInput.setAttribute("data-stay-search", "");
+    searchInput.setAttribute("autocomplete", "off");
+    searchInput.setAttribute(
+      "placeholder",
+      strings.searchPlaceholder || "Name or word"
+    );
+    searchInput.setAttribute(
+      "aria-label",
+      strings.searchAria || "Find a stay by name or description"
+    );
+    searchWrap.appendChild(searchCaption);
+    searchWrap.appendChild(searchInput);
+    aside.appendChild(searchWrap);
+
+    const amenityBlock = document.createElement("div");
+    amenityBlock.className = "stay-filter-block is-hidden";
+    amenityBlock.setAttribute("data-amenities-block", "");
+    const amenityHeading = document.createElement("p");
+    amenityHeading.className = "stay-filter-heading";
+    amenityHeading.setAttribute("data-amenities-heading", "");
+    amenityHeading.textContent = strings.amenitiesHeading || "Amenities";
+    const amenityHost = document.createElement("div");
+    amenityHost.className = "stay-factor-options";
+    amenityHost.setAttribute("data-stay-amenities", "");
+    amenityHost.setAttribute("role", "group");
+    amenityHost.setAttribute(
+      "aria-label",
+      strings.amenitiesAria || "Filter by amenities"
+    );
+    amenityBlock.appendChild(amenityHeading);
+    amenityBlock.appendChild(amenityHost);
+    aside.appendChild(amenityBlock);
+
+    const factorBlock = document.createElement("div");
+    factorBlock.className = "stay-filter-block is-hidden";
+    factorBlock.setAttribute("data-factors-block", "");
+    const factorHeading = document.createElement("p");
+    factorHeading.className = "stay-filter-heading";
+    factorHeading.setAttribute("data-factors-heading", "");
+    factorHeading.textContent = strings.factorsHeading || "Stay features";
+    const factorHost = document.createElement("div");
+    factorHost.className = "stay-factor-options";
+    factorHost.setAttribute("data-stay-factors", "");
+    factorHost.setAttribute("role", "group");
+    factorHost.setAttribute("aria-label", strings.factorsAria || "Filter by stay features");
+    factorBlock.appendChild(factorHeading);
+    factorBlock.appendChild(factorHost);
+    aside.appendChild(factorBlock);
 
     const options = document.createElement("div");
     options.className = "price-range-options";
@@ -1455,22 +1791,6 @@
     bounds.appendChild(unit);
     aside.appendChild(bounds);
 
-    const factorBlock = document.createElement("div");
-    factorBlock.className = "stay-filter-block is-hidden";
-    factorBlock.setAttribute("data-factors-block", "");
-    const factorHeading = document.createElement("p");
-    factorHeading.className = "stay-filter-heading";
-    factorHeading.setAttribute("data-factors-heading", "");
-    factorHeading.textContent = strings.factorsHeading || "Stay features";
-    const factorHost = document.createElement("div");
-    factorHost.className = "stay-factor-options";
-    factorHost.setAttribute("data-stay-factors", "");
-    factorHost.setAttribute("role", "group");
-    factorHost.setAttribute("aria-label", strings.factorsAria || "Filter by stay features");
-    factorBlock.appendChild(factorHeading);
-    factorBlock.appendChild(factorHost);
-    aside.appendChild(factorBlock);
-
     const chainBlock = document.createElement("div");
     chainBlock.className = "stay-filter-block is-hidden";
     chainBlock.setAttribute("data-chains-block", "");
@@ -1486,46 +1806,6 @@
     chainBlock.appendChild(chainHeading);
     chainBlock.appendChild(chainHost);
     aside.appendChild(chainBlock);
-
-    const orderDesc = document.createElement("p");
-    orderDesc.className = "price-range-desc";
-    orderDesc.setAttribute("data-order-desc", "");
-    orderDesc.textContent = strings.orderDescription || "";
-    aside.appendChild(orderDesc);
-
-    const orderOptions = document.createElement("div");
-    orderOptions.className = "price-range-options price-range-options--order";
-    orderOptions.setAttribute("data-price-order", "");
-    orderOptions.setAttribute("role", "group");
-    orderOptions.setAttribute(
-      "aria-label",
-      strings.orderAriaLabel || "Order hotels by nightly rate"
-    );
-
-    ["much", "little"].forEach(function (key) {
-      const button = document.createElement("button");
-      button.type = "button";
-      button.className = "price-range-option";
-      button.dataset.order = key;
-      button.setAttribute("aria-pressed", "false");
-
-      const label = document.createElement("span");
-      label.className = "range-label";
-      label.textContent =
-        (strings.orderOptions && strings.orderOptions[key]) || key;
-
-      const value = document.createElement("span");
-      value.className = "range-value";
-      value.setAttribute("data-order-hint", key);
-      value.textContent =
-        (strings.orderHints && strings.orderHints[key]) || "";
-
-      button.appendChild(label);
-      button.appendChild(value);
-      orderOptions.appendChild(button);
-    });
-
-    aside.appendChild(orderOptions);
 
     const note = document.createElement("p");
     note.className = "price-range-footnote";
@@ -1597,29 +1877,49 @@
     const strings = composeTranslation(currentLanguage);
     const factorHost = sidebar.querySelector("[data-stay-factors]");
     const chainHost = sidebar.querySelector("[data-stay-chains]");
+    const amenityHost = sidebar.querySelector("[data-stay-amenities]");
     const factorBlock = sidebar.querySelector("[data-factors-block]");
     const chainBlock = sidebar.querySelector("[data-chains-block]");
-    if (!factorHost || !chainHost) {
+    const amenityBlock = sidebar.querySelector("[data-amenities-block]");
+    if (!factorHost || !chainHost || !amenityHost) {
       return;
     }
 
     const present = {};
+    const amenitiesPresent = {};
     const chains = {};
     let labeled = 0;
     cards.forEach(function (card) {
       annotateCard(card);
-      String(card.getAttribute("data-stay-factors") || "")
-        .split(/\s+/)
-        .filter(Boolean)
-        .forEach(function (key) {
-          present[key] = true;
-        });
+      keysFromAttribute(card, "data-stay-factors").forEach(function (key) {
+        present[key] = true;
+      });
+      keysFromAttribute(card, "data-stay-amenities").forEach(function (key) {
+        amenitiesPresent[key] = true;
+      });
       const chain = card.getAttribute("data-stay-chain") || "";
       if (chain) {
         chains[chain] = true;
         labeled += 1;
       }
     });
+
+    AMENITIES.forEach(function (amenity) {
+      if (!amenitiesPresent[amenity.key]) {
+        return;
+      }
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "stay-factor-option";
+      button.setAttribute("data-amenity", amenity.key);
+      button.setAttribute("aria-pressed", "false");
+      const label = document.createElement("span");
+      label.className = "range-label";
+      label.textContent = amenityLabel(strings, amenity.key);
+      button.appendChild(label);
+      amenityHost.appendChild(button);
+    });
+    setBlockHidden(amenityBlock, !amenityHost.querySelector("[data-amenity]"));
 
     const factorKeys = STAY_FACTORS.map(function (factor) {
       return factor.key;
@@ -1673,9 +1973,11 @@
     context.stayList = list;
     context.selectedRanges = {};
     context.selectedFactors = {};
+    context.selectedAmenities = {};
     context.selectedChains = {};
     context.minInput = sidebar.querySelector("[data-price-min]");
     context.maxInput = sidebar.querySelector("[data-price-max]");
+    context.searchInput = sidebar.querySelector("[data-stay-search]");
     if (list && list.parentNode && !context.emptyNote) {
       const note = document.createElement("p");
       note.className = "stay-filter-empty";
@@ -1684,13 +1986,16 @@
       context.emptyNote = note;
     }
     buildStayControls(context, hotelCards);
-    wirePriceOrder(context, sidebar, hotelCards);
+    wireStaySort(context, sidebar, hotelCards);
 
     const rangeButtons = Array.prototype.slice.call(
       sidebar.querySelectorAll('.price-range-option[data-filter]')
     );
     const factorButtons = Array.prototype.slice.call(
       sidebar.querySelectorAll("[data-factor]")
+    );
+    const amenityButtons = Array.prototype.slice.call(
+      sidebar.querySelectorAll("[data-amenity]")
     );
     const chainButtons = Array.prototype.slice.call(
       sidebar.querySelectorAll("[data-chain]")
@@ -1711,7 +2016,9 @@
       const strings = composeTranslation(currentLanguage);
       const ranges = selectedKeys(context.selectedRanges);
       const factors = selectedKeys(context.selectedFactors);
+      const amenities = selectedKeys(context.selectedAmenities);
       const chains = selectedKeys(context.selectedChains);
+      const query = foldText(context.searchInput && context.searchInput.value);
       let low = readBound(context.minInput);
       let high = readBound(context.maxInput);
       if (low != null && high != null && low > high) {
@@ -1723,7 +2030,9 @@
       const filtering =
         ranges.length > 0 ||
         factors.length > 0 ||
+        amenities.length > 0 ||
         chains.length > 0 ||
+        !!query ||
         low != null ||
         high != null;
       let shown = 0;
@@ -1751,15 +2060,19 @@
             }
           }
         }
-        const cardFactors = String(card.getAttribute("data-stay-factors") || "")
-          .split(/\s+/)
-          .filter(Boolean);
+        const cardFactors = keysFromAttribute(card, "data-stay-factors");
         const factorsOk = factors.every(function (key) {
           return cardFactors.indexOf(key) !== -1;
         });
+        const cardAmenities = keysFromAttribute(card, "data-stay-amenities");
+        const amenitiesOk = amenities.every(function (key) {
+          return cardAmenities.indexOf(key) !== -1;
+        });
         const chain = card.getAttribute("data-stay-chain") || "";
         const chainOk = !chains.length || chains.indexOf(chain) !== -1;
-        const matches = rangeOk && boundsOk && factorsOk && chainOk;
+        const searchOk = !query || cardSearchText(card).indexOf(query) !== -1;
+        const matches =
+          rangeOk && boundsOk && factorsOk && amenitiesOk && chainOk && searchOk;
         if (matches) {
           shown += 1;
         }
@@ -1784,6 +2097,13 @@
         button.setAttribute(
           "aria-pressed",
           context.selectedFactors[key] ? "true" : "false"
+        );
+      });
+      amenityButtons.forEach(function (button) {
+        const key = button.getAttribute("data-amenity");
+        button.setAttribute(
+          "aria-pressed",
+          context.selectedAmenities[key] ? "true" : "false"
         );
       });
       chainButtons.forEach(function (button) {
@@ -1829,13 +2149,19 @@
         applyFilter();
       });
     });
+    amenityButtons.forEach(function (button) {
+      button.addEventListener("click", function () {
+        toggleMap(context.selectedAmenities, button.getAttribute("data-amenity"));
+        applyFilter();
+      });
+    });
     chainButtons.forEach(function (button) {
       button.addEventListener("click", function () {
         toggleMap(context.selectedChains, button.getAttribute("data-chain"));
         applyFilter();
       });
     });
-    [context.minInput, context.maxInput].forEach(function (input) {
+    [context.minInput, context.maxInput, context.searchInput].forEach(function (input) {
       if (!input || typeof input.addEventListener !== "function") {
         return;
       }
@@ -1848,12 +2174,16 @@
       clearButton.addEventListener("click", function () {
         context.selectedRanges = {};
         context.selectedFactors = {};
+        context.selectedAmenities = {};
         context.selectedChains = {};
         if (context.minInput) {
           context.minInput.value = "";
         }
         if (context.maxInput) {
           context.maxInput.value = "";
+        }
+        if (context.searchInput) {
+          context.searchInput.value = "";
         }
         applyFilter();
       });
@@ -1892,6 +2222,9 @@
   api.nightlyAmount = nightlyAmount;
   api.factorsForCard = function (card) {
     return factorsForText(cardBlob(card), bookHref(card));
+  };
+  api.amenitiesForCard = function (card) {
+    return amenitiesForText(cardBlob(card));
   };
   api.chainForCard = chainName;
   api.isEcolodgeHref = isEcolodgeHref;

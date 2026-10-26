@@ -106,11 +106,44 @@ test('puts stays without a price after priced stays', () => {
   assert.equal(much[1], unpriced);
 });
 
-test('city listings expose much and little without treating them as budget tiers', () => {
-  assert.match(source, /data-price-order/);
-  assert.match(source, /dataset\.order = key/);
+test('orders stays by name without losing the original order when names match', () => {
+  const api = loadSidebar();
+  function titled(title, amounts) {
+    return {
+      querySelector(selector) {
+        if (selector === 'h3') return { textContent: title };
+        if (selector === '.price') return { dataset: amounts || {}, textContent: '' };
+        return null;
+      },
+    };
+  }
+  const stays = [
+    titled('Cedar House', { eth: '0.04' }),
+    titled('cedar house', { eth: '0.09' }),
+    titled('Birch Inn', { eth: '0.02' }),
+    titled('', { eth: '0.01' }),
+  ];
+
+  function titles(direction) {
+    return api.orderStayCards(stays, direction, 'ETH').map((stay) => stay.querySelector('h3').textContent).join('|');
+  }
+
+  assert.equal(titles('name-asc'), 'Birch Inn|Cedar House|cedar house|');
+  assert.equal(titles('name-desc'), 'Cedar House|cedar house|Birch Inn|');
+  assert.equal(titles(null) , 'Cedar House|cedar house|Birch Inn|');
+});
+
+test('city listings let a guest arrange stays without treating order as a budget tier', () => {
+  assert.match(source, /data-stay-sort/);
+  assert.match(source, /name-asc/);
+  assert.match(source, /name-desc/);
+  assert.match(source, /data-amenity/);
+  assert.match(source, /data-stay-search/);
   assert.match(source, /querySelectorAll\('\.price-range-option\[data-filter\]'\)/);
-  assert.match(source, /orderOptions:\s*\{\s*much: "Much",\s*little: "Little",/s);
+  assert.doesNotMatch(source, /data-filter="much"/);
+  assert.doesNotMatch(source, /data-filter="little"/);
+  assert.doesNotMatch(source, /dataset\.order = key/);
   const css = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
-  assert.match(css, /\.price-range-options--order\s*\{[^}]*flex-direction:\s*row/s);
+  assert.match(css, /\.stay-sort select/);
+  assert.match(css, /\.hotel-amenities/);
 });
