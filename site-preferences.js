@@ -172,9 +172,9 @@
     initLanguagePreference();
   }
 
-  // City booking pages render a full-width language bar and no site navbar.
-  // Seat the existing language control in the shared navbar before the
-  // following inline translation script looks up #lang-select.
+  // City and hotel booking pages ship a language control and no site navbar.
+  // Seat that control in the shared navbar before the following inline
+  // translation script looks up #lang-select.
   if (document.body) {
     mountBookingNavbar();
   }
@@ -185,10 +185,10 @@
     autoInit();
   }
 
-  function isInsideSiteNav(node) {
+  function isInsideClass(node, className) {
     let current = node;
     while (current) {
-      if (current.classList && current.classList.contains('site-nav')) {
+      if (current.classList && current.classList.contains(className)) {
         return true;
       }
       current = current.parentElement || current.parentNode;
@@ -199,7 +199,8 @@
   function findLooseLanguageSwitcher(doc) {
     const nodes = doc.querySelectorAll('.language-switcher');
     for (let i = 0; i < nodes.length; i += 1) {
-      if (!isInsideSiteNav(nodes[i])) {
+      // The blog keeps its own language control in the topic bar.
+      if (!isInsideClass(nodes[i], 'site-nav') && !isInsideClass(nodes[i], 'blog-topics')) {
         return nodes[i];
       }
     }
@@ -210,8 +211,8 @@
     if (doc.querySelector('[data-booking-nav], header .site-nav .nav-inner, .site-nav .nav-inner')) {
       return false;
     }
-    if (!doc.querySelector('.booking-container, .booking-header')) {
-      return false;
+    if (doc.querySelector('.booking-container, .booking-header, .hotel-detail')) {
+      return true;
     }
     return Boolean(findLooseLanguageSwitcher(doc));
   }

@@ -1396,17 +1396,19 @@ header a { position: static !important; left: auto !important; right: auto !impo
 }
 
 .price-range-sidebar {
-  flex: 0 0 260px;
+  flex: 0 0 280px;
   background: var(--accent);
   color: #fff;
   border-radius: 20px;
-  padding: 1.9rem 1.6rem;
+  padding: 1.6rem 1.35rem;
   box-shadow: 0 18px 38px rgba(46, 125, 50, 0.2);
   display: flex;
   flex-direction: column;
-  gap: 1.8rem;
+  gap: 1.05rem;
   position: sticky;
-  top: 2.5rem;
+  top: 5.5rem;
+  max-height: calc(100vh - 6.5rem);
+  overflow-y: auto;
 }
 
 .price-range-sidebar .price-range-tag {
@@ -1512,6 +1514,8 @@ header a { position: static !important; left: auto !important; right: auto !impo
   .price-range-sidebar {
     position: static;
     width: 100%;
+    max-height: none;
+    overflow: visible;
   }
 
   .price-range-options {
@@ -1544,6 +1548,161 @@ header a { position: static !important; left: auto !important; right: auto !impo
 
 .price-range-options--order .price-range-option {
   flex: 1 1 0;
+}
+
+.price-bounds__row {
+  display: flex;
+  gap: 0.55rem;
+  margin-top: 0.7rem;
+}
+
+.price-bound {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+}
+
+.price-bound .range-label {
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  opacity: 0.82;
+}
+
+.price-bound input {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  padding: 0.5rem 0.65rem;
+}
+
+.price-bound input:focus {
+  background: #fff;
+  color: var(--accent);
+  outline: 2px solid #fff;
+  outline-offset: 1px;
+}
+
+.stay-filter-heading {
+  margin: 0 0 0.55rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.stay-filter-block.is-hidden,
+.price-bounds.is-hidden {
+  display: none;
+}
+
+.stay-factor-options {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.stay-factor-option {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  border-radius: 12px;
+  padding: 0.55rem 0.75rem;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: inherit;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.stay-factor-option .range-label {
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 0.92rem;
+  opacity: 1;
+}
+
+.stay-factor-option:hover,
+.stay-factor-option:focus-visible {
+  background: rgba(255, 255, 255, 0.24);
+  outline: none;
+}
+
+.stay-factor-option[aria-pressed="true"] {
+  background: #fff;
+  color: var(--accent);
+}
+
+.stay-filter-count {
+  margin: 0;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.stay-filter-clear {
+  align-self: flex-start;
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  padding: 0.4rem 0.85rem;
+  font: inherit;
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.stay-filter-clear:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.stay-filter-empty {
+  display: none;
+  margin: 0 0 1rem;
+  padding: 0.9rem 1rem;
+  border-radius: 12px;
+  background: #fff;
+  color: #23441a;
+  font-weight: 650;
+}
+
+.stay-filter-empty.is-shown {
+  display: block;
+}
+
+.hotel-list .hotel-card.is-filtered-out,
+.hotel-grid .hotel-card.is-filtered-out {
+  display: none;
+}
+
+@media (max-width: 1100px) {
+  .stay-factor-options {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .stay-factor-option {
+    flex: 1 1 140px;
+    width: auto;
+  }
+}
+
+@media (max-width: 640px) {
+  .stay-factor-options {
+    flex-direction: column;
+  }
+
+  .stay-factor-option {
+    flex: 1 1 auto;
+    width: 100%;
+  }
 }
 
 /* Restore the lime footer color you requested (no other footer changes) */
