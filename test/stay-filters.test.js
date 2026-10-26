@@ -307,7 +307,8 @@ test('stay features come from the description, and ecolodge links stay in step',
     }
   };
 
-  assert.deepEqual([...api.factorsForCard(card)].sort(), ['historic', 'spa', 'waterfront']);
+  assert.deepEqual([...api.factorsForCard(card)].sort(), ['historic', 'waterfront']);
+  assert.deepEqual([...api.amenitiesForCard(card)].sort(), ['spa']);
   assert.equal(api.chainForCard(card), 'Scandic Hotels');
   assert.equal(api.isEcolodgeHref('html/cities/norway/funken-lodge.html'), false);
   ecolodges.urls.forEach((url) => {
@@ -359,7 +360,7 @@ test('price ranges, budgets, features, and hotel groups select the stays', () =>
   click(button(body, '[data-stay-clear]'));
   assert.deepEqual(visibleTitles(body), ['Sea Spa', 'Old Town Boutique', 'Slope Lodge']);
 
-  click(button(body, '[data-factor="spa"]'));
+  click(button(body, '[data-amenity="spa"]'));
   click(button(body, '[data-factor="boutique"]'));
   assert.deepEqual(visibleTitles(body), []);
   assert.equal(hasClass(body.querySelector('[data-stay-empty]'), 'is-shown'), true);
@@ -378,8 +379,74 @@ test('price ranges, budgets, features, and hotel groups select the stays', () =>
   assert.equal(body.querySelector('[data-price-min]').value, '');
   context.PriceRangeSidebar.setLanguage('sv');
   assert.equal(button(body, '[data-factor="waterfront"]').querySelector('.range-label').textContent, 'Vid vatten');
+  assert.equal(button(body, '[data-amenity="spa"]').querySelector('.range-label').textContent, 'Spa');
   assert.equal(button(body, '[data-bounds-label]').textContent, 'Nattbudget');
+  assert.equal(button(body, '[data-sort-label]').textContent, 'Ordna boenden');
   assert.equal(button(body, '[data-stay-count]').textContent, 'Visar alla 3 boenden');
+  assert.equal(body.querySelector('[data-amenity-chip="spa"]').textContent, 'Spa');
+});
+
+function choose(el, value) {
+  el.value = value;
+  (el.listeners.change || []).forEach((fn) => fn({ target: el }));
+}
+
+test('amenities, a word search, and the guest’s chosen order narrow the list', () => {
+  const { body, context } = boot('hotel-list', [
+    (Element) => stayCard(Element, { eth: '0.05' }, {
+      title: 'Waldorf Astoria',
+      text: 'Grand landmark hotel with a spa and castle views.'
+    }),
+    (Element) => stayCard(Element, { eth: '0.12' }, {
+      title: 'Hôtel du Vin',
+      text: 'Boutique townhouse in the Old Town.'
+    }),
+    (Element) => stayCard(Element, { eth: '0.08' }, {
+      title: 'Elite Academia',
+      text: 'Contemporary stay with a restaurant and gym.',
+      chain: 'Elite Hotels'
+    })
+  ]);
+
+  assert.equal(hasClass(button(body, '[data-amenities-block]'), 'is-hidden'), false);
+  assert.deepEqual(
+    body.querySelector('[data-stay-sort]').children.map((option) => option.textContent),
+    ['Recommended', 'Price: low to high', 'Price: high to low', 'Name: A to Z', 'Name: Z to A']
+  );
+  assert.equal(body.querySelector('[data-amenity-chip="view"]').textContent, 'View');
+  assert.equal(body.querySelector('[data-amenity-chip="gym"]').textContent, 'Gym');
+
+  click(button(body, '[data-amenity="view"]'));
+  click(button(body, '[data-amenity="spa"]'));
+  assert.deepEqual(visibleTitles(body), ['Waldorf Astoria']);
+  assert.equal(button(body, '[data-amenity="view"]').getAttribute('aria-pressed'), 'true');
+
+  click(button(body, '[data-stay-clear]'));
+  typeIn(body.querySelector('[data-stay-search]'), 'elite hotels');
+  assert.deepEqual(visibleTitles(body), ['Elite Academia']);
+
+  click(button(body, '[data-stay-clear]'));
+  typeIn(body.querySelector('[data-stay-search]'), 'old town');
+  assert.deepEqual(visibleTitles(body), ['Hôtel du Vin']);
+
+  click(button(body, '[data-stay-clear]'));
+  choose(body.querySelector('[data-stay-sort]'), 'name-asc');
+  assert.deepEqual(visibleTitles(body), ['Elite Academia', 'Hôtel du Vin', 'Waldorf Astoria']);
+  choose(body.querySelector('[data-stay-sort]'), 'little');
+  assert.deepEqual(visibleTitles(body), ['Waldorf Astoria', 'Elite Academia', 'Hôtel du Vin']);
+  choose(body.querySelector('[data-stay-sort]'), 'much');
+  assert.deepEqual(visibleTitles(body), ['Hôtel du Vin', 'Elite Academia', 'Waldorf Astoria']);
+  choose(body.querySelector('[data-stay-sort]'), '');
+  assert.deepEqual(visibleTitles(body), ['Waldorf Astoria', 'Hôtel du Vin', 'Elite Academia']);
+
+  context.PriceRangeSidebar.setLanguage('sv');
+  assert.equal(body.querySelector('[data-amenity-chip="view"]').textContent, 'Utsikt');
+  assert.equal(button(body, '[data-amenity="gym"]').querySelector('.range-label').textContent, 'Gym');
+  assert.equal(
+    body.querySelector('[data-stay-sort]').children.map((option) => option.textContent)[1],
+    'Pris: lägst först'
+  );
+  assert.equal(body.querySelector('[data-stay-sort]').value, '');
 });
 
 test('a hotel grid can be filtered by hotel group', () => {

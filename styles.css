@@ -1542,14 +1542,6 @@ header a { position: static !important; left: auto !important; right: auto !impo
   }
 }
 
-.price-range-options--order {
-  flex-direction: row;
-}
-
-.price-range-options--order .price-range-option {
-  flex: 1 1 0;
-}
-
 .price-bounds__row {
   display: flex;
   gap: 0.55rem;
@@ -1594,6 +1586,49 @@ header a { position: static !important; left: auto !important; right: auto !impo
   margin: 0 0 0.55rem;
   font-size: 0.95rem;
   font-weight: 700;
+}
+
+.stay-sort,
+.stay-search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.stay-sort .stay-filter-heading,
+.stay-search .stay-filter-heading {
+  display: block;
+  margin: 0;
+}
+
+.stay-search input,
+.stay-sort select {
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font: inherit;
+  font-weight: 650;
+  padding: 0.55rem 0.65rem;
+}
+
+.stay-sort select option {
+  color: #23441a;
+  background: #fff;
+}
+
+.stay-search input::placeholder {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.stay-search input:focus,
+.stay-sort select:focus {
+  background: #fff;
+  color: var(--accent);
+  outline: 2px solid #fff;
+  outline-offset: 1px;
 }
 
 .stay-filter-block.is-hidden,
@@ -1680,6 +1715,26 @@ header a { position: static !important; left: auto !important; right: auto !impo
 .hotel-list .hotel-card.is-filtered-out,
 .hotel-grid .hotel-card.is-filtered-out {
   display: none;
+}
+
+.hotel-amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+  list-style: none;
+  margin: 0.55rem 0 0;
+  padding: 0;
+}
+
+.hotel-amenities li {
+  background: #e7f5e4;
+  color: #23441a;
+  border-radius: 999px;
+  padding: 0.15rem 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 @media (max-width: 1100px) {
