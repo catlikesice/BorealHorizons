@@ -140,6 +140,8 @@ test('scotland, lithuania, and finland towns without pages are searchable', asyn
     { q: 'Armadale', city: 'Armadale', country: 'Scotland', hotel: 'Armadale Pier Hotel', file: 'armadale.html' },
     { q: 'Lochmaddy', city: 'Lochmaddy', country: 'Scotland', hotel: 'Lochmaddy Harbour Hotel', file: 'lochmaddy.html' },
     { q: 'Brodick', city: 'Brodick', country: 'Scotland', hotel: 'Brodick Ferry Hotel', file: 'brodick.html' },
+    { q: 'Islay', city: 'Islay', country: 'Scotland', hotel: 'Bowmore Harbour Hotel', file: 'islay.html' },
+    { q: 'Jura', city: 'Jura', country: 'Scotland', hotel: 'Craighouse Bay Hotel', file: 'jura.html' },
     { q: 'Palanga', city: 'Palanga', country: 'Lithuania', hotel: 'Palanga Dune Hotel', file: 'palanga.html' },
     { q: 'Druskininkai', city: 'Druskininkai', country: 'Lithuania', hotel: 'Druskininkai Spa House', file: 'druskininkai.html' },
     { q: 'Trakai', city: 'Trakai', country: 'Lithuania', hotel: 'Trakai Lake House', file: 'trakai.html' },
@@ -174,6 +176,32 @@ test('Lochmaddy is returned with a Uist search', async () => {
   assert.equal(hotel.country, 'Scotland');
   assert.equal(hotel.url, 'html/cities/scotland/lochmaddy-harbour-hotel.html');
   assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+});
+
+test('Bowmore is returned with an Isle of Islay search', async () => {
+  const body = await searchFor('Isle of Islay');
+  const hotel = body.hotels.find((item) => item.name === 'Bowmore Harbour Hotel');
+  assert.ok(hotel, 'Bowmore Harbour Hotel should match Isle of Islay');
+  assert.equal(hotel.city, 'Islay');
+  assert.equal(hotel.country, 'Scotland');
+  assert.equal(hotel.url, 'html/cities/scotland/bowmore-harbour-hotel.html');
+  assert.equal(hotel.cityUrl, null);
+  assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+  assert.equal(fs.existsSync(path.join(root, 'islay.html')), false);
+  assert.equal(fs.existsSync(path.join(root, 'isle-of-islay.html')), false);
+});
+
+test('Craighouse is returned with an Isle of Jura search', async () => {
+  const body = await searchFor('Isle of Jura');
+  const hotel = body.hotels.find((item) => item.name === 'Craighouse Bay Hotel');
+  assert.ok(hotel, 'Craighouse Bay Hotel should match Isle of Jura');
+  assert.equal(hotel.city, 'Jura');
+  assert.equal(hotel.country, 'Scotland');
+  assert.equal(hotel.url, 'html/cities/scotland/craighouse-bay-hotel.html');
+  assert.equal(hotel.cityUrl, null);
+  assert.equal(fs.existsSync(path.join(root, hotel.url)), true);
+  assert.equal(fs.existsSync(path.join(root, 'jura.html')), false);
+  assert.equal(fs.existsSync(path.join(root, 'isle-of-jura.html')), false);
 });
 
 test('Brodick is returned with an Isle of Arran search', async () => {
@@ -585,6 +613,10 @@ test('destination labels include places that have no page', async () => {
   assert.ok(body.labels.includes('Lochmaddy Harbour Hotel — Lochmaddy'));
   assert.ok(body.labels.includes('Brodick'));
   assert.ok(body.labels.includes('Brodick Ferry Hotel — Brodick'));
+  assert.ok(body.labels.includes('Islay'));
+  assert.ok(body.labels.includes('Bowmore Harbour Hotel — Islay'));
+  assert.ok(body.labels.includes('Jura'));
+  assert.ok(body.labels.includes('Craighouse Bay Hotel — Jura'));
   assert.ok(body.labels.includes('Šiauliai'));
   assert.ok(body.labels.includes('Hotel d’Angleterre — Copenhagen'));
   assert.ok(body.labels.includes('Bauska'));
