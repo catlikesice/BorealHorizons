@@ -4,7 +4,7 @@
 
 The statements live in [`hotel-search.sql`](hotel-search.sql). Dialect is SQLite 3. `instr()` is the substring test; on PostgreSQL use `strpos(haystack, needle) > 0` in its place. `lib/search-db.js` loads that file, the same way `lib/city-pages.js` loads `city-pages.sql`.
 
-The static catalog is 90 cities and 253 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Norway (including Svalbard), and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (123 cities, 286 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
+The static catalog is 95 cities and 268 hotels. `lib/places-without-pages.js` adds Nida, Barentsburg, Pyramiden, and further towns in Scotland, Lithuania, Finland, Sweden, the Faroe Islands, Norway (including Svalbard), and the Åland Islands. Those places have no city HTML file. Every hotel has its own HTML page, with the shared navbar mounted at the top. The SQL file contains every catalog row and then those pageless places (128 cities, 301 hotels), so `sqlite3` can search the same list the API returns. `lib/search-sql.js` rebuilds the file from those two sources.
 
 City listing files and hotel pages are grouped by region under `html/cities/`. Aarhus is `html/cities/denmark/aarhus.html`, and Comwell Aarhus is `html/cities/denmark/comwell-aarhus.html`. The region folder is the country name in lowercase, with accents removed and spaces turned into hyphens (`northeast-england`, `aland-islands`, `faroe-islands`). Search result links use that path. A request for an old root filename, such as `/aarhus.html` or `/comwell-aarhus.html`, redirects to the file in its region folder.
 
@@ -24,6 +24,8 @@ Durham is a catalog city in Northeast England. Its listing file is `durham.html`
 
 Hartlepool and Kielder Forest are catalog places in Northeast England. Their listing files are `html/cities/northeast-england/hartlepool.html` and `html/cities/northeast-england/kielder-forest.html`, and the same documents are stored in `city-pages.sql`.
 
+Windermere, Keswick, Lake District National Park, Lancaster, and Forest of Bowland are catalog places in Northwest England. Their listing files are under `html/cities/northwest-england/`, and the same documents are stored in `city-pages.sql`.
+
 Loch Lomond National Park is a catalog destination. Its listing file is `loch-lomond.html`, and the same document is stored in `city-pages.sql`.
 
 ## What a search is
@@ -39,7 +41,7 @@ Accommodation and tours are separate lookups:
 
 `checkIn`, `checkOut`, `adults`, and `children` travel with both forms. They are stay details for pricing and booking. They do not filter these queries. `what` chooses the catalog: omit it, or pass `accommodation`, for cities and hotels. Pass `tours` to search experiences only.
 
-A blank `q` returns no rows when `country` is omitted. `search.js` treats an empty accommodation query as `{ "cities": [], "hotels": [] }` and an empty tour query with no `country` parameter as `{ "tours": [] }`. Passing `country` with a blank `q` lists the tours in that country. `country=` lists every tour. United Kingdom includes Scotland and Northeast England.
+A blank `q` returns no rows when `country` is omitted. `search.js` treats an empty accommodation query as `{ "cities": [], "hotels": [] }` and an empty tour query with no `country` parameter as `{ "tours": [] }`. Passing `country` with a blank `q` lists the tours in that country. `country=` lists every tour. United Kingdom includes Scotland, Northeast England, and Northwest England.
 
 `ecolodges=1` (also `true`, `yes`, or `on`) keeps accommodation results to the nature lodges and mountain stations listed in `assets/ecolodges.js`. Cities are omitted. A blank `q` with `ecolodges=1` lists every ecolodge. The same flag on `GET /api/search/destinations` returns those stays and the places they are in. `ecolodges` is ignored when `what=tours`. The homepage and results-page checkbox send the flag. With it checked, an empty destination still opens the ecolodge list, an exact ecolodge name opens that page, and any other destination stays on the filtered results.
 
@@ -50,7 +52,7 @@ A blank `q` returns no rows when `country` is omitted. `search.js` treats an emp
 | Column | Catalog field | Notes |
 | --- | --- | --- |
 | `name` | `name` and `city` | Same string on a city row |
-| `country` | `country` | Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Åland Islands, Greenland, Faroe Islands |
+| `country` | `country` | Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Northwest England, Åland Islands, Greenland, Faroe Islands |
 | `page_url` | `url` | Path under `html/cities/<region>/`, for example `html/cities/denmark/aarhus.html`. That document is stored in `city-pages.sql` as well. NULL when the place has no city page |
 | `description` | `description` | |
 | `sort_order` | array order | `Array.filter` keeps catalog order; `ORDER BY sort_order` does the same |

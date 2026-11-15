@@ -13,7 +13,7 @@ function wantsTours(query) {
 
 // Homepage datalist. Accommodation labels include places with no HTML page.
 // what=tours lists experiences instead of cities and hotels.
-// country limits that list to one destination. United Kingdom includes Scotland and Northeast England.
+// country limits that list to one destination. United Kingdom includes Scotland, Northeast England, and Northwest England.
 // ecolodges=1 limits accommodation labels to nature lodges, mountain stations, and their places.
 router.get('/destinations', (req, res) => {
   if (wantsTours(req.query)) {
@@ -31,7 +31,7 @@ router.get('/destinations', (req, res) => {
 // what=tours searches experiences and sample packages. country keeps tours from that country.
 // A blank q with country lists that country; country= lists every tour.
 // A blank q with no country parameter still returns no tours.
-// United Kingdom covers Scotland and Northeast England.
+// United Kingdom covers Scotland, Northeast England, and Northwest England.
 // Any other value of what stays on accommodation.
 // ecolodges=1 (also true, yes, or on) keeps hotels that are nature lodges or mountain
 // stations and drops cities. A blank q with ecolodges=1 lists every ecolodge.

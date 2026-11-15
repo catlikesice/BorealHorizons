@@ -1,6 +1,6 @@
 /**
  * Rural tours grouped by the countries used in tour search.
- * Scotland and Northeast England share the United Kingdom page.
+ * Scotland, Northeast England, and Northwest England share the United Kingdom page.
  * Shared by the tour HTML pages and POST /api/tour-interest.
  */
 (function (root, factory) {
@@ -446,8 +446,8 @@
       id: 'united-kingdom',
       name: 'United Kingdom',
       page: 'html/tours/united-kingdom.html',
-      summary: 'Highland forests, loch villages, Kielder, and the Northumberland hills. Scotland and Northeast England are listed together.',
-      intro: 'United Kingdom rural tours cover the Scottish Highlands and Northeast England: Cairngorm forest, Loch Lomond’s conservation village, Skye, Ullapool, Kielder Forest, and the Northumberland hills.',
+      summary: 'Highland forests, Lake District fells, Kielder, and Lancashire hills. Scotland, Northeast England, and Northwest England are listed together.',
+      intro: 'United Kingdom rural tours cover the Scottish Highlands, Northeast England, and Northwest England: Cairngorm forest, Loch Lomond’s conservation village, Skye, Ullapool, Kielder Forest, the Northumberland hills, the Lake District, and the Forest of Bowland.',
       tours: [
         {
           id: 'uk-aviemore',
@@ -508,6 +508,36 @@
           description: 'Follow farm valleys and open moor in Northumberland National Park, with Hadrian’s Wall country nearby.',
           stayUrl: 'html/cities/northeast-england/northumberland-national-park.html',
           stayLabel: 'Stays in the national park'
+        },
+        {
+          id: 'uk-windermere',
+          name: 'Windermere shore and steamer',
+          place: 'Windermere',
+          rural: true,
+          detail: 'Half day · lake shore',
+          description: 'Walk the Windermere shore from Bowness toward the steamer piers, with the fells across the water.',
+          stayUrl: 'html/cities/northwest-england/windermere.html',
+          stayLabel: 'Stays in Windermere'
+        },
+        {
+          id: 'uk-keswick',
+          name: 'Keswick and Derwentwater',
+          place: 'Keswick',
+          rural: true,
+          detail: 'Full day · lake and fells',
+          description: 'Start in Keswick market square and follow the path around Derwentwater toward the Borrowdale fells.',
+          stayUrl: 'html/cities/northwest-england/keswick.html',
+          stayLabel: 'Stays in Keswick'
+        },
+        {
+          id: 'uk-bowland',
+          name: 'Forest of Bowland fells',
+          place: 'Forest of Bowland',
+          rural: true,
+          detail: 'Full day · fell and river valleys',
+          description: 'Walk the Hodder Valley and open fell in the Forest of Bowland, with Pendle Hill on the southern edge.',
+          stayUrl: 'html/cities/northwest-england/forest-of-bowland.html',
+          stayLabel: 'Stays in the Forest of Bowland'
         }
       ]
     }

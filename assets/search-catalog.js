@@ -1,7 +1,3 @@
-/* Offline fallback catalog. GET /api/search reads docs/sql/hotel-search.sql,
- * which is this list plus places with no page (lib/places-without-pages.js).
- * Schema: docs/sql/hotel-search.md.
- */
 window.SEARCH_CATALOG = {
   "cities": [
     {
@@ -158,6 +154,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Forest of Bowland",
+      "city": "Forest of Bowland",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/forest-of-bowland.html",
+      "description": "Browse hotels in Forest of Bowland, Northwest England."
+    },
+    {
+      "type": "city",
       "name": "Forfar",
       "city": "Forfar",
       "country": "Scotland",
@@ -286,6 +290,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Keswick",
+      "city": "Keswick",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/keswick.html",
+      "description": "Browse hotels in Keswick, Northwest England."
+    },
+    {
+      "type": "city",
       "name": "Kielder Forest",
       "city": "Kielder Forest",
       "country": "Northeast England",
@@ -323,6 +335,22 @@ window.SEARCH_CATALOG = {
       "country": "Norway",
       "url": "html/cities/norway/kristiansand.html",
       "description": "Browse hotels in Kristiansand, Norway."
+    },
+    {
+      "type": "city",
+      "name": "Lake District National Park",
+      "city": "Lake District National Park",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/lake-district-national-park.html",
+      "description": "Browse hotels in Lake District National Park, Northwest England."
+    },
+    {
+      "type": "city",
+      "name": "Lancaster",
+      "city": "Lancaster",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/lancaster.html",
+      "description": "Browse hotels in Lancaster, Northwest England."
     },
     {
       "type": "city",
@@ -718,6 +746,14 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "city",
+      "name": "Windermere",
+      "city": "Windermere",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/windermere.html",
+      "description": "Browse hotels in Windermere, Northwest England."
+    },
+    {
+      "type": "city",
       "name": "Ylläs",
       "city": "Ylläs",
       "country": "Finland",
@@ -849,61 +885,6 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
-      "name": "Hotel Bauska",
-      "city": "Bauska",
-      "country": "Latvia",
-      "url": "html/cities/latvia/hotel-bauska.html",
-      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
-      "price": "0.05 ETH / night",
-      "priceEth": 0.05,
-      "description": "Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade."
-    },
-    {
-      "type": "hotel",
-      "name": "Bauska Castle Hotel",
-      "city": "Bauska",
-      "country": "Latvia",
-      "url": "html/cities/latvia/bauska-castle-hotel.html",
-      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
-      "price": "0.06 ETH / night",
-      "priceEth": 0.06,
-      "description": "Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence."
-    },
-    {
-      "type": "hotel",
-      "name": "Dark Island Hotel",
-      "city": "Benbecula",
-      "country": "Scotland",
-      "url": "html/cities/scotland/dark-island-hotel.html",
-      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
-      "price": "0.08 ETH / night",
-      "priceEth": 0.08,
-      "description": "Roadside hotel in Liniclate on Benbecula, between the machair and the road south."
-    },
-    {
-      "type": "hotel",
-      "name": "Balivanich Airport House",
-      "city": "Benbecula",
-      "country": "Scotland",
-      "url": "html/cities/scotland/balivanich-airport-house.html",
-      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
-      "price": "0.06 ETH / night",
-      "priceEth": 0.06,
-      "description": "House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore."
-    },
-    {
-      "type": "hotel",
-      "name": "Culla Bay Hotel",
-      "city": "Benbecula",
-      "country": "Scotland",
-      "url": "html/cities/scotland/culla-bay-hotel.html",
-      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
-      "price": "0.07 ETH / night",
-      "priceEth": 0.07,
-      "description": "Shore hotel on Benbecula, facing the white sand of Culla Bay."
-    },
-    {
-      "type": "hotel",
       "name": "Icelandair Hotel Akureyri",
       "city": "Akureyri",
       "country": "Iceland",
@@ -1011,6 +992,61 @@ window.SEARCH_CATALOG = {
       "price": "0.06 ETH / night",
       "priceEth": 0.06,
       "description": "Riverside hotel in Aviemore, looking toward the Spey and the mountain railway."
+    },
+    {
+      "type": "hotel",
+      "name": "Hotel Bauska",
+      "city": "Bauska",
+      "country": "Latvia",
+      "url": "html/cities/latvia/hotel-bauska.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Town-centre hotel a short walk from Bauska Castle and the Mēmele river promenade."
+    },
+    {
+      "type": "hotel",
+      "name": "Bauska Castle Hotel",
+      "city": "Bauska",
+      "country": "Latvia",
+      "url": "html/cities/latvia/bauska-castle-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Stay beside the castle ruins, with views over the Mūsa and Mēmele confluence."
+    },
+    {
+      "type": "hotel",
+      "name": "Dark Island Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "html/cities/scotland/dark-island-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Roadside hotel in Liniclate on Benbecula, between the machair and the road south."
+    },
+    {
+      "type": "hotel",
+      "name": "Balivanich Airport House",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "html/cities/scotland/balivanich-airport-house.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "House beside Benbecula Airport in Balivanich, a short walk from the shops and the shore."
+    },
+    {
+      "type": "hotel",
+      "name": "Culla Bay Hotel",
+      "city": "Benbecula",
+      "country": "Scotland",
+      "url": "html/cities/scotland/culla-bay-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Shore hotel on Benbecula, facing the white sand of Culla Bay."
     },
     {
       "type": "hotel",
@@ -1355,6 +1391,39 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
+      "name": "Inn at Whitewell",
+      "city": "Forest of Bowland",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/inn-at-whitewell.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Riverside inn in the Hodder Valley, inside the Forest of Bowland."
+    },
+    {
+      "type": "hotel",
+      "name": "The Parkers Arms",
+      "city": "Forest of Bowland",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/the-parkers-arms.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Village inn at Newton-in-Bowland, a base for the fells and the Trough of Bowland."
+    },
+    {
+      "type": "hotel",
+      "name": "The Assheton Arms",
+      "city": "Forest of Bowland",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/the-assheton-arms.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Stone inn in Downham, below Pendle Hill on the edge of the Forest of Bowland."
+    },
+    {
+      "type": "hotel",
       "name": "The Royal Hotel",
       "city": "Forfar",
       "country": "Scotland",
@@ -1652,39 +1721,6 @@ window.SEARCH_CATALOG = {
     },
     {
       "type": "hotel",
-      "name": "Glen Mhor Hotel",
-      "city": "Inverness",
-      "country": "Scotland",
-      "url": "html/cities/scotland/glen-mhor-hotel.html",
-      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
-      "price": "0.05 ETH / night",
-      "priceEth": 0.05,
-      "description": "Riverside hotel with restaurant, close to Inverness Castle."
-    },
-    {
-      "type": "hotel",
-      "name": "Kingsmills Hotel",
-      "city": "Inverness",
-      "country": "Scotland",
-      "url": "html/cities/scotland/kingsmills-hotel.html",
-      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
-      "price": "0.08 ETH / night",
-      "priceEth": 0.08,
-      "description": "Highland hotel with gardens and golf, a short walk from Inverness city centre."
-    },
-    {
-      "type": "hotel",
-      "name": "Rocpool Reserve Hotel",
-      "city": "Inverness",
-      "country": "Scotland",
-      "url": "html/cities/scotland/rocpool-reserve-hotel.html",
-      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
-      "price": "0.09 ETH / night",
-      "priceEth": 0.09,
-      "description": "Boutique luxury stay overlooking the River Ness."
-    },
-    {
-      "type": "hotel",
       "name": "Hotel Arctic",
       "city": "Ilulissat",
       "country": "Greenland",
@@ -1715,6 +1751,39 @@ window.SEARCH_CATALOG = {
       "price": "0.09 ETH / night",
       "priceEth": 0.09,
       "description": "Town-centre base for dogsled trips, whale watching, and walks to the Sermermiut valley."
+    },
+    {
+      "type": "hotel",
+      "name": "Glen Mhor Hotel",
+      "city": "Inverness",
+      "country": "Scotland",
+      "url": "html/cities/scotland/glen-mhor-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "Riverside hotel with restaurant, close to Inverness Castle."
+    },
+    {
+      "type": "hotel",
+      "name": "Kingsmills Hotel",
+      "city": "Inverness",
+      "country": "Scotland",
+      "url": "html/cities/scotland/kingsmills-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Highland hotel with gardens and golf, a short walk from Inverness city centre."
+    },
+    {
+      "type": "hotel",
+      "name": "Rocpool Reserve Hotel",
+      "city": "Inverness",
+      "country": "Scotland",
+      "url": "html/cities/scotland/rocpool-reserve-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.09 ETH / night",
+      "priceEth": 0.09,
+      "description": "Boutique luxury stay overlooking the River Ness."
     },
     {
       "type": "hotel",
@@ -1847,6 +1916,39 @@ window.SEARCH_CATALOG = {
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
       "description": "Airport hotel beside Keflavík International Airport, convenient for early flights and the Reykjanes coast."
+    },
+    {
+      "type": "hotel",
+      "name": "Inn on the Square",
+      "city": "Keswick",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/inn-on-the-square.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Town-square hotel in Keswick, a short walk from Derwentwater and the fells."
+    },
+    {
+      "type": "hotel",
+      "name": "Skiddaw Hotel",
+      "city": "Keswick",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/skiddaw-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Market-square hotel under Skiddaw, in the centre of Keswick."
+    },
+    {
+      "type": "hotel",
+      "name": "The Keswick Country House Hotel",
+      "city": "Keswick",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/the-keswick-country-house-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Victorian house hotel on the edge of Keswick, looking toward Derwentwater."
     },
     {
       "type": "hotel",
@@ -2001,6 +2103,72 @@ window.SEARCH_CATALOG = {
       "price": "0.05 ETH / night",
       "priceEth": 0.05,
       "description": "Compact city hotel beside Wergeland’s park, handy for the Posebyen old town."
+    },
+    {
+      "type": "hotel",
+      "name": "Langdale Chase Hotel",
+      "city": "Lake District National Park",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/langdale-chase-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Lakeside house hotel on Windermere, inside the Lake District National Park."
+    },
+    {
+      "type": "hotel",
+      "name": "The Borrowdale Hotel",
+      "city": "Lake District National Park",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/the-borrowdale-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Valley hotel in Borrowdale, beneath the fells south of Derwentwater."
+    },
+    {
+      "type": "hotel",
+      "name": "Wasdale Head Inn",
+      "city": "Lake District National Park",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/wasdale-head-inn.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Mountain inn at the head of Wasdale, under Scafell Pike."
+    },
+    {
+      "type": "hotel",
+      "name": "Lancaster House Hotel",
+      "city": "Lancaster",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/lancaster-house-hotel.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Parkland hotel beside Lancaster University, a short ride from the castle and the quay."
+    },
+    {
+      "type": "hotel",
+      "name": "The Borough",
+      "city": "Lancaster",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/the-borough.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Townhouse hotel on Dalton Square in Lancaster, below the castle hill."
+    },
+    {
+      "type": "hotel",
+      "name": "Premier Inn Lancaster Central",
+      "city": "Lancaster",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/premier-inn-lancaster-central.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.05 ETH / night",
+      "priceEth": 0.05,
+      "description": "City hotel near Lancaster station, a short walk from the canal and the castle."
     },
     {
       "type": "hotel",
@@ -3475,6 +3643,39 @@ window.SEARCH_CATALOG = {
       "price": "0.08 ETH / night",
       "priceEth": 0.08,
       "description": "Modern hotel in Voss, a short walk from the lake and the gondola."
+    },
+    {
+      "type": "hotel",
+      "name": "Lakeside Hotel Windermere",
+      "city": "Windermere",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/lakeside-hotel-windermere.html",
+      "image": "https://images.unsplash.com/photo-1506744038136-46273834b3fb?fit=crop&w=400&q=80",
+      "price": "0.08 ETH / night",
+      "priceEth": 0.08,
+      "description": "Lakeside hotel on the southern shore of Windermere, looking over the water toward the fells."
+    },
+    {
+      "type": "hotel",
+      "name": "The Old England Hotel",
+      "city": "Windermere",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/the-old-england-hotel.html",
+      "image": "https://images.unsplash.com/photo-1464983953574-0892a716854b?fit=crop&w=400&q=80",
+      "price": "0.07 ETH / night",
+      "priceEth": 0.07,
+      "description": "Lakeland hotel on the Bowness waterfront, a short walk from the Windermere steamer piers."
+    },
+    {
+      "type": "hotel",
+      "name": "Burnside Hotel",
+      "city": "Windermere",
+      "country": "Northwest England",
+      "url": "html/cities/northwest-england/burnside-hotel.html",
+      "image": "https://images.unsplash.com/photo-1519125323398-675f0ddb6308?fit=crop&w=400&q=80",
+      "price": "0.06 ETH / night",
+      "priceEth": 0.06,
+      "description": "Hillside hotel above Bowness, looking down toward Windermere and the marina."
     },
     {
       "type": "hotel",

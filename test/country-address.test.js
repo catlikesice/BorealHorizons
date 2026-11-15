@@ -7,6 +7,7 @@ test('country list uses Scotland and Northeast England instead of the United Kin
   assert.deepEqual(ids.filter((id) => id === 'United Kingdom'), []);
   assert.ok(ids.includes('Scotland'));
   assert.ok(ids.includes('Northeast England'));
+  assert.ok(ids.includes('Northwest England'));
 });
 
 test('country list includes Åland Islands, the Faroe Islands, and Greenland', () => {
@@ -93,6 +94,19 @@ test('formats Scotland and Northeast England in Royal Mail order', () => {
   assert.equal(
     northeast,
     '12 Grey Street\nNewcastle upon Tyne\nNE1 6AE\nNortheast England'
+  );
+
+  const northwest = CountryAddress.validateAddress('Northwest England', {
+    streetNumber: '1',
+    streetName: 'Lake Road',
+    city: 'Windermere',
+    postalCode: 'la231ay'
+  });
+  assert.equal(northwest.ok, true);
+  assert.equal(northwest.values.postalCode, 'LA23 1AY');
+  assert.equal(
+    northwest.formatted,
+    '1 Lake Road\nWindermere\nLA23 1AY\nNorthwest England'
   );
 });
 

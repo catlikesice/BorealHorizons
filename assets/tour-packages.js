@@ -69,6 +69,17 @@
     description: 'Sample coast itinerary from Alnwick, with a garden morning, a coastal village, and supper by the harbour. The room is booked separately.'
   },
   {
+    id: 'pkg-england-lake-district',
+    name: 'Lake District fells package',
+    city: 'Keswick',
+    country: 'Northwest England',
+    pageUrl: 'html/cities/northwest-england/keswick.html',
+    detail: '4 days · 3 nights · per person',
+    priceEth: 0.36,
+    includes: ['Derwentwater shore', 'Borrowdale valley', 'Market square morning', 'Fell viewpoint'],
+    description: 'Sample Lake District itinerary from Keswick, with Derwentwater, Borrowdale, and a fell viewpoint. The room is booked separately.'
+  },
+  {
     id: 'pkg-denmark-skagen-light',
     name: 'Skagen light package',
     city: 'Skagen',
