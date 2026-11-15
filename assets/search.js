@@ -388,7 +388,7 @@
 
   function tourCountryLabel(country) {
     var folded = normalize(country).replace(/\s+/g, ' ').trim();
-    if (folded === 'scotland' || folded === 'northeast england') {
+    if (folded === 'scotland' || folded === 'northeast england' || folded === 'northwest england') {
       return 'United Kingdom';
     }
     return country || '';
@@ -465,7 +465,7 @@
     if (intro) {
       intro.textContent = tours
         ? 'Find a guided tour, boat trip, museum visit, or a sample package such as the Golden Circle or an aurora cabin.'
-        : 'Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, the Åland Islands, Greenland, and the Faroe Islands.';
+        : 'Find a destination or stay across Denmark, Estonia, Finland, Iceland, Latvia, Lithuania, Norway, Scotland, Sweden, Northeast England, Northwest England, the Åland Islands, Greenland, and the Faroe Islands.';
     }
     if (emptyCopy) {
       emptyCopy.innerHTML = tours

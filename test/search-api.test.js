@@ -407,7 +407,12 @@ test('United Kingdom tour search includes Scotland and Northeast England', async
   const body = await response.json();
   assert.ok(body.tours.some((tour) => tour.city === 'Kirkwall' && tour.country === 'Scotland'));
   assert.ok(body.tours.some((tour) => tour.city === 'Durham' && tour.country === 'Northeast England'));
-  assert.ok(body.tours.every((tour) => tour.country === 'Scotland' || tour.country === 'Northeast England'));
+  assert.ok(body.tours.some((tour) => tour.city === 'Keswick' && tour.country === 'Northwest England'));
+  assert.ok(body.tours.every((tour) => (
+    tour.country === 'Scotland' ||
+    tour.country === 'Northeast England' ||
+    tour.country === 'Northwest England'
+  )));
   assert.equal(body.tours.some((tour) => tour.country === 'Iceland'), false);
 
   const labelsResponse = await fetch(base + '/api/search/destinations?what=tours&country=' + encodeURIComponent('United Kingdom'));
@@ -415,6 +420,7 @@ test('United Kingdom tour search includes Scotland and Northeast England', async
   const labels = await labelsResponse.json();
   assert.ok(labels.labels.includes('Kirkwall walking tour — Kirkwall'));
   assert.ok(labels.labels.includes('Durham walking tour — Durham'));
+  assert.ok(labels.labels.includes('Keswick walking tour — Keswick'));
   assert.equal(labels.labels.includes('Faxaflói whale watching — Reykjavík'), false);
 });
 
@@ -441,6 +447,7 @@ test('homepage tour search puts the country dropdown in Where are you going', ()
   assert.match(html, /value="United Kingdom"/);
   assert.doesNotMatch(html, /value="Scotland"/);
   assert.doesNotMatch(html, /value="Northeast England"/);
+  assert.doesNotMatch(html, /value="Northwest England"/);
   assert.match(hero, /Please select a country\./);
   assert.match(hero, /hero-search--tours/);
   assert.match(hero, /setControl\(countrySelect, tours\)/);
@@ -472,6 +479,7 @@ test('a country with no tour text lists that country', async () => {
   const uk = await unitedKingdom.json();
   assert.ok(uk.tours.some((tour) => tour.city === 'Kirkwall' && tour.country === 'Scotland'));
   assert.ok(uk.tours.some((tour) => tour.city === 'Durham' && tour.country === 'Northeast England'));
+  assert.ok(uk.tours.some((tour) => tour.city === 'Keswick' && tour.country === 'Northwest England'));
   assert.equal(uk.tours.some((tour) => tour.country === 'Iceland'), false);
 });
 
@@ -490,7 +498,7 @@ test('tour destination labels are experiences, not hotels', async () => {
 
 test('sample tour packages appear when searching tours', async () => {
   const packages = listPackages();
-  assert.equal(packages.length, 13);
+  assert.equal(packages.length, 14);
   const ids = new Set();
   packages.forEach((pkg) => {
     assert.equal(ids.has(pkg.id), false, pkg.id + ' is used twice');
@@ -543,7 +551,12 @@ test('sample tour packages appear when searching tours', async () => {
   const uk = await ukResponse.json();
   assert.ok(uk.tours.some((tour) => tour.id === 'pkg-scotland-highland-rail' && tour.country === 'Scotland'));
   assert.ok(uk.tours.some((tour) => tour.id === 'pkg-england-northumberland' && tour.country === 'Northeast England'));
-  assert.ok(uk.tours.every((tour) => tour.country === 'Scotland' || tour.country === 'Northeast England'));
+  assert.ok(uk.tours.some((tour) => tour.id === 'pkg-england-lake-district' && tour.country === 'Northwest England'));
+  assert.ok(uk.tours.every((tour) => (
+    tour.country === 'Scotland' ||
+    tour.country === 'Northeast England' ||
+    tour.country === 'Northwest England'
+  )));
 
   const labelsResponse = await fetch(base + '/api/search/destinations?what=tours&country=' + encodeURIComponent('Iceland'));
   const labels = await labelsResponse.json();

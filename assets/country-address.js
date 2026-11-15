@@ -18,6 +18,7 @@
     { id: 'Latvia', name: 'Latvia' },
     { id: 'Lithuania', name: 'Lithuania' },
     { id: 'Northeast England', name: 'Northeast England' },
+    { id: 'Northwest England', name: 'Northwest England' },
     { id: 'Norway', name: 'Norway' },
     { id: 'Scotland', name: 'Scotland' },
     { id: 'Sweden', name: 'Sweden' },
@@ -221,6 +222,21 @@
       hint: 'Northeast England addresses follow Royal Mail order: optional flat and building, number and street, optional locality, post town, then postcode.',
       fields: UK_FIELDS
     },
+    'Northwest England': {
+      hint: 'Northwest England addresses follow Royal Mail order: optional flat and building, number and street, optional locality, post town, then postcode.',
+      fields: UK_FIELDS.map(function (item) {
+        if (item.id === 'city') {
+          return Object.assign({}, item, { placeholder: 'Kendal' });
+        }
+        if (item.id === 'streetName') {
+          return Object.assign({}, item, { placeholder: 'Lake Road' });
+        }
+        if (item.id === 'postalCode') {
+          return Object.assign({}, item, { placeholder: 'LA23 1AY' });
+        }
+        return item;
+      })
+    },
     Other: {
       hint: 'Enter the address in the order it is written on local post, including the country name.',
       fields: [
@@ -344,7 +360,7 @@
       next.postalCode = formatLatvianPostcode(next.postalCode);
     } else if (countryId === 'Lithuania') {
       next.postalCode = formatLithuanianPostcode(next.postalCode);
-    } else if (countryId === 'Scotland' || countryId === 'Northeast England') {
+    } else if (countryId === 'Scotland' || countryId === 'Northeast England' || countryId === 'Northwest England') {
       next.postalCode = formatUkPostcode(next.postalCode);
     }
     return next;
@@ -384,8 +400,8 @@
     if (countryId === 'Lithuania' && !/^\d{5}$/.test(postalCode)) {
       return 'Lithuanian postcodes are 5 digits, for example 01103.';
     }
-    if ((countryId === 'Scotland' || countryId === 'Northeast England') && !UK_POSTCODE.test(postalCode)) {
-      return 'Enter a valid postcode, for example EH2 2AN or NE1 6AE.';
+    if ((countryId === 'Scotland' || countryId === 'Northeast England' || countryId === 'Northwest England') && !UK_POSTCODE.test(postalCode)) {
+      return 'Enter a valid postcode, for example EH2 2AN, NE1 6AE, or LA23 1AY.';
     }
     return '';
   }
@@ -429,7 +445,7 @@
         joinLine([data.postalCode, data.city], ', '),
         regionLabel
       ];
-    } else if (countryId === 'Scotland' || countryId === 'Northeast England') {
+    } else if (countryId === 'Scotland' || countryId === 'Northeast England' || countryId === 'Northwest England') {
       lines = [
         companyName,
         data.subBuilding,
