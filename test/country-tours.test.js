@@ -96,6 +96,7 @@ test('the tours index emphasises rural locations and can register interest', () 
   assert.match(html, /images\/Cuillin_Hills\.png/);
   assert.match(html, /background-image:\s*url\("images\/Cuillin_Hills\.png"\)/);
   assert.match(html, /\.tours-header-banner > \.hero h2[\s\S]*color:\s*#fff/);
+  assert.doesNotMatch(html, /tour-switcher-wrap/, 'index should not show the top country hyperlink row');
   assert.match(html, /id="tour-interest-form"/);
   assert.match(html, /<select id="tour-interest-country" name="country" required>/);
   CountryTours.countries.forEach((country) => {
