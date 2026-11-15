@@ -91,8 +91,10 @@ test('the tours index emphasises rural locations and can register interest', () 
   const html = fs.readFileSync(path.join(root, 'html/tours/index.html'), 'utf8');
   assert.match(html, /Rural tours by country/);
   assert.match(html, /nav-rural-tours" aria-current="page"/);
+  assert.match(html, /<base href="\.\.\/\.\.\/">/, 'tours pages should resolve assets from the site root');
   assert.match(html, /tours-header-banner/);
   assert.match(html, /images\/Cuillin_Hills\.png/);
+  assert.match(html, /background-image:\s*url\("images\/Cuillin_Hills\.png"\)/);
   assert.match(html, /\.tours-header-banner > \.hero h2[\s\S]*color:\s*#fff/);
   assert.match(html, /id="tour-interest-form"/);
   assert.match(html, /<select id="tour-interest-country" name="country" required>/);
