@@ -215,7 +215,79 @@ function tourCard(tour) {
   ].join('\n');
 }
 
+function photoHeroStyles() {
+  return [
+    '  <style>',
+    '    /* Rural Tours index: Cuillin Hills photo replaces the lime hero fill.',
+    '       Title, description, and CTA sit on the image in white, matching the homepage. */',
+    '    .tours-header-banner {',
+    '      position: relative;',
+    '      margin: 0;',
+    '      background: #07140f;',
+    '      min-height: 28.54vw;',
+    '    }',
+    '',
+    '    .tours-header-banner img {',
+    '      position: absolute;',
+    '      inset: 0;',
+    '      width: 100%;',
+    '      height: 100%;',
+    '      object-fit: cover;',
+    '      object-position: center center;',
+    '    }',
+    '',
+    '    .tours-header-banner > .hero {',
+    '      position: relative;',
+    '      z-index: 1;',
+    '      display: flex;',
+    '      flex-direction: column;',
+    '      align-items: center;',
+    '      justify-content: center;',
+    '      box-sizing: border-box;',
+    '      min-height: 28.54vw;',
+    '      margin: 0;',
+    '      padding: 2.4rem var(--gutter) 3.6rem;',
+    '      background: transparent !important;',
+    '      line-height: normal;',
+    '    }',
+    '',
+    '    .tours-header-banner > .hero h2,',
+    '    .tours-header-banner > .hero p {',
+    '      color: #fff;',
+    '      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85), 0 8px 22px rgba(0, 0, 0, 0.45);',
+    '    }',
+    '',
+    '    .tours-header-banner > .hero .btn {',
+    '      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);',
+    '    }',
+    '  </style>'
+  ].join('\n');
+}
+
+function heroSection(options) {
+  if (!options.photoHero) {
+    return [
+      '  <section class="hero">',
+      '    <h2>' + escapeHtml(options.heading) + '</h2>',
+      '    <p>' + escapeHtml(options.lead) + '</p>',
+      '    <a class="btn" href="' + escapeHtml(options.currentHref) + '#register-interest">Register interest</a>',
+      '  </section>'
+    ].join('\n');
+  }
+  return [
+    '  <div class="tours-header-banner">',
+    '    <img src="images/Cuillin_Hills.png" alt="" width="330" height="117">',
+    '    <section class="hero">',
+    '      <h2>' + escapeHtml(options.heading) + '</h2>',
+    '      <p>' + escapeHtml(options.lead) + '</p>',
+    '      <a class="btn" href="' + escapeHtml(options.currentHref) + '#register-interest">Register interest</a>',
+    '    </section>',
+    '  </div>'
+  ].join('\n');
+}
+
 function pageShell(options) {
+  const headExtras = options.photoHero ? [photoHeroStyles()] : [];
   return [
     '<!DOCTYPE html>',
     '<html lang="en">',
@@ -226,14 +298,11 @@ function pageShell(options) {
     '  <title>' + escapeHtml(options.title) + '</title>',
     '  <meta name="description" content="' + escapeHtml(options.description) + '">',
     '  <link rel="stylesheet" href="styles.css">',
+    ...headExtras,
     '</head>',
     '<body>',
     navbar(options.currentHref),
-    '  <section class="hero">',
-    '    <h2>' + escapeHtml(options.heading) + '</h2>',
-    '    <p>' + escapeHtml(options.lead) + '</p>',
-    '    <a class="btn" href="' + escapeHtml(options.currentHref) + '#register-interest">Register interest</a>',
-    '  </section>',
+    heroSection(options),
     '  <main class="content">',
     options.main,
     '  </main>',
@@ -283,6 +352,7 @@ function renderIndex() {
     heading: 'Rural tours by country',
     lead: 'Choose a country and register your interest in a village, forest, fell, or coastal tour.',
     currentHref: 'html/tours/index.html',
+    photoHero: true,
     main: main
   });
 }
