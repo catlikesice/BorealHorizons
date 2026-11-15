@@ -350,7 +350,6 @@ function renderIndex() {
   }).join('\n');
 
   const main = [
-    countryLinks(''),
     '      <section aria-labelledby="rural-index-title">',
     '        <h2 id="rural-index-title">Rural locations by country</h2>',
     '        <p>Each country page lists tours in villages, forests, fells, island settlements, and quiet coasts. Register your interest and the team will write when a date is open.</p>',
