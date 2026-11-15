@@ -37,6 +37,9 @@ test('About EcoTourism page explains the EcoTourism commitment', () => {
   const html = fs.readFileSync(path.join(root, 'about-ecotourism.html'), 'utf8');
   assert.match(html, /committed to promoting EcoTourism/i);
   assert.match(html, /nav-about-ecotourism" aria-current="page"/);
+  assert.match(html, /eco-header-banner/);
+  assert.match(html, /images\/Cuillin_Hills\.png/);
+  assert.match(html, /\.eco-header-banner > \.hero h2[\s\S]*color:\s*#fff/);
 });
 
 test('navbar account control has a dropdown under the accounts portal', () => {
