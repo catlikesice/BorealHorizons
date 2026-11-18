@@ -38,7 +38,8 @@ test('About EcoTourism page explains the EcoTourism commitment', () => {
   assert.match(html, /committed to promoting EcoTourism/i);
   assert.match(html, /nav-about-ecotourism" aria-current="page"/);
   assert.doesNotMatch(html, /Cuillin_Hills/);
-  assert.doesNotMatch(html, /eco-header-banner/);
+  assert.match(html, /eco-header-banner/);
+  assert.match(html, /images\/EstonianLake\.png/);
 });
 
 test('navbar account control has a dropdown under the accounts portal', () => {
