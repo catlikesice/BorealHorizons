@@ -1,7 +1,7 @@
 {
-  "name": "hotel-crypto-payments",
+  "name": "boreal-horizons",
   "version": "1.0.0",
-  "description": "Accept USDT crypto payments"
+  "description": "Boreal Horizons travel site and booking API",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -10,8 +10,6 @@
   "dependencies": {
     "dotenv": "^16.2.0",
     "express": "^4.21.2",
-    "qrcode": "^1.5.3",
-    "tronweb": "^5.3.4",
     "express-rate-limit": "^7.0.0"
   }
 }
