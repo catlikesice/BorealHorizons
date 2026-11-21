@@ -1,7 +1,7 @@
 {
   "name": "hotel-crypto-payments",
   "version": "1.0.0",
-  "description": "Accept USDT (TRC-20) crypto payments for hotels in Dominica using TRON.",
+  "description": "Accept USDT crypto payments"
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
