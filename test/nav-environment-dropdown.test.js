@@ -42,6 +42,13 @@ test('About EcoTourism page explains the EcoTourism commitment', () => {
   assert.match(html, /images\/EstonianLake\.png/);
 });
 
+test('Hotel Chains page uses Copenhagenbysea as the hero banner', () => {
+  const html = fs.readFileSync(path.join(root, 'hotel-chains.html'), 'utf8');
+  assert.match(html, /hotel-chains-header-banner/);
+  assert.match(html, /images\/Copenhagenbysea\.jpeg/);
+  assert.match(html, /hotel-chains-hero-title/);
+});
+
 test('navbar account control has a dropdown under the accounts portal', () => {
   navPages.concat(['checkout.html']).forEach((fileName) => {
     const html = fs.readFileSync(path.join(root, fileName), 'utf8');

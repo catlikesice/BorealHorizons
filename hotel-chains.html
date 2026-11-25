@@ -6,6 +6,46 @@
   <title>Tailored for Hotel Chains – Boreal Horizons</title>
   <meta name="description" content="How Boreal Horizons matches hotel-chain operations with API or dashboard onboarding for properties of any size.">
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Hotel Chains page: Copenhagen-by-sea photo replaces the lime hero fill.
+       Title and description sit on the image in white, matching the homepage. */
+    .hotel-chains-header-banner {
+      position: relative;
+      margin: 0;
+      background: #07140f;
+      min-height: 28.54vw;
+    }
+
+    .hotel-chains-header-banner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .hotel-chains-header-banner > .hero {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      min-height: 28.54vw;
+      margin: 0;
+      padding: 2.4rem var(--gutter) 3.6rem;
+      background: transparent !important;
+      line-height: normal;
+    }
+
+    .hotel-chains-header-banner > .hero h2,
+    .hotel-chains-header-banner > .hero p {
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85), 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -73,6 +113,14 @@
       </div>
     </nav>
   </header>
+
+  <div class="hotel-chains-header-banner">
+    <img src="images/Copenhagenbysea.jpeg" alt="" width="1280" height="827">
+    <section class="hero">
+      <h2 id="hotel-chains-hero-title">Tailored for Hotel Chains</h2>
+      <p id="hotel-chains-hero-desc">API or dashboard onboarding that matches multi-property operations—so payments post cleanly beside every guest stay.</p>
+    </section>
+  </div>
 
   <main class="content" id="page">
         <section>
