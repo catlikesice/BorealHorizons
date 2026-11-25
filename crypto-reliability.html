@@ -5,6 +5,46 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Is Cryptocurrency Reliable?</title>
   <link rel="stylesheet" href="styles.css" />
+  <style>
+    /* Reliable Blockchain page: CryptoCoins photo replaces the lime hero fill.
+       Title and description sit on the image in white, matching the homepage. */
+    .reliability-header-banner {
+      position: relative;
+      margin: 0;
+      background: #07140f;
+      min-height: 28.54vw;
+    }
+
+    .reliability-header-banner img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
+
+    .reliability-header-banner > .hero {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      min-height: 28.54vw;
+      margin: 0;
+      padding: 2.4rem var(--gutter) 3.6rem;
+      background: transparent !important;
+      line-height: normal;
+    }
+
+    .reliability-header-banner > .hero h2,
+    .reliability-header-banner > .hero p {
+      color: #fff;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.85), 0 8px 22px rgba(0, 0, 0, 0.45);
+    }
+  </style>
 </head>
 <body>
   <header>
@@ -73,10 +113,16 @@
     </nav>
   </header>
 
+  <div class="reliability-header-banner">
+    <img src="images/CryptoCoins.jpeg" alt="" width="4000" height="2667">
+    <section class="hero">
+      <h2 id="reliability-hero-title">How Reliable Is Cryptocurrency?</h2>
+      <p id="reliability-hero-desc">Decentralization, cryptography, and public ledgers give major networks strong operational integrity—with volatility and regulation still in the mix.</p>
+    </section>
+  </div>
+
   <main class="content" id="page">
     <section>
-      <h2>How Reliable Is Cryptocurrency?</h2>
-
       <p>
         1. <strong>Decentralization Guards Against Single Point of Failure.</strong> The distributed nature of popular cryptocurrencies ensures that no single entity controls the ledger or can arbitrarily change account balances, making catastrophic loss or manipulation less likely.<sup><a href="#ref-nakamoto">1</a></sup>
       </p>
